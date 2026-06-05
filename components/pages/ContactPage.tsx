@@ -76,12 +76,13 @@ export default function ContactPage() {
                         <span className="w-8 h-[2px] bg-[#e8391d]" />
                     </motion.div>
 
-                    <motion.h1 variants={maskReveal} initial="hidden" animate="visible" className="font-black text-white uppercase leading-[0.95] mb-8" style={{ fontSize: "clamp(3rem, 8vw, 7rem)" }}>
-                        START YOUR <br /><span className="text-[#e8391d]">STORY.</span>
+                    <motion.h1 variants={maskReveal} initial="hidden" animate="visible" className="font-black text-white uppercase leading-[0.95] mb-8" style={{ fontSize: "clamp(2.5rem, 6vw, 4rem)" }}>
+                        HAVE A STORY TO TELL? <br /><span className="text-[#e8391d]">LET'S TALK.</span>
                     </motion.h1>
 
                     <motion.p variants={fadeUp} initial="hidden" animate="visible" className="text-white/60 leading-[1.85] max-w-2xl mx-auto mb-10" style={{ fontSize: "clamp(0.9rem, 1.1vw, 1.05rem)" }}>
-                        Have a manuscript or just an idea? Let’s talk. We promise to respond faster than you can write your next chapter.
+                        Your story deserves to be told. Let's bring it to life with professional publishing solutions
+                        designed to captivate readers and maximize its potential.
                     </motion.p>
 
                     {/* Live Response Time Indicator */}
@@ -107,10 +108,11 @@ export default function ContactPage() {
                         {/* Left: Info */}
                         <motion.div variants={staggerContainer} initial="hidden" animate={formInView ? "visible" : "hidden"} className="sticky top-32">
                             <motion.h2 variants={fadeUp} className="font-black text-white uppercase leading-tight mb-6" style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}>
-                                LET'S BUILD <br /><span className="text-[#e8391d]">SOMETHING GREAT.</span>
+                                TAKE THE FIRST STEP TOWARD PUBLISHING <br /> <span className="text-[#e8391d]"> SUCCESS TODAY.</span>
                             </motion.h2>
                             <motion.p variants={fadeUp} className="text-white/50 leading-[1.85] mb-12" style={{ fontSize: "0.95rem" }}>
-                                Reach out to us for a free consultation. No upfront fees, no obligations—just a conversation about your book.
+                                Call or email us to connect with our team to discuss your book, explore your options, and take
+                                the next step toward publishing success.
                             </motion.p>
 
                             <motion.div variants={staggerContainer} className="flex flex-col gap-6 mb-16">
@@ -152,8 +154,9 @@ export default function ContactPage() {
                             {/* Top Red Gradient Line */}
                             <div className="absolute top-0 left-10 right-10 h-[1px] bg-gradient-to-r from-transparent via-[#e8391d] to-transparent" />
 
-                            <h3 className="font-black text-white uppercase text-2xl mb-2">Request a Free Proposal</h3>
-                            <p className="text-white/40 text-[13px] mb-10">Fill out the form and our team will get back to you within 24 hours.</p>
+                            <h3 className="font-black text-white uppercase text-2xl mb-2">GET YOUR FREE PROPOSAL</h3>
+                            <p className="text-white/40 text-[13px] mb-10">Complete this form for a customized plan for your project. Our team will contact you within 24
+                                hours</p>
 
                             <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-6">
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -279,10 +282,12 @@ export default function ContactPage() {
 
                 <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="max-w-4xl mx-auto text-center px-8 relative z-10">
                     <h2 className="font-black text-white uppercase leading-tight mb-6" style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)" }}>
-                        DON'T LET YOUR STORY WAIT.
+                        TODAY IS YOUR TIME.
+                        MAKE IT COUNT.
                     </h2>
                     <p className="text-white/80 text-lg max-w-xl mx-auto mb-10 leading-relaxed">
-                        Every day you wait is a day your book isn't reaching its readers. Let’s change that today.
+                        Having a story to tell means nothing if it never reaches your readers. A great story deserves to be
+                        shared. Let us get your story into readers' hands.
                     </p>
                     <motion.a href="tel:18884440110" whileHover={{ backgroundColor: "#fff", color: "#e8391d", gap: "14px", boxShadow: "0 20px 60px rgba(0,0,0,0.2)" }} whileTap={{ scale: 0.95 }} className="inline-flex items-center gap-3 bg-black text-white font-black uppercase tracking-widest px-10 py-5 rounded-xl text-[14px] cursor-pointer transition-all duration-300">
                         Call Us Now <Phone size={18} />

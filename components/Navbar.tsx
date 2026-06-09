@@ -99,7 +99,7 @@ export default function Navbar() {
         servicesCloseTimer.current = setTimeout(() => setServicesOpen(false), 100);
     };
 
-    // ── Color logic (Locked to Night/Dark state) ──
+    // ── Color logic ──
     const navTextColor = scrolled ? "text-white" : "text-white";
     const navHoverColor = scrolled ? "hover:text-black/80" : "hover:text-[#e8391d]";
     const contactColor = scrolled ? "text-white/90" : "text-white";
@@ -117,40 +117,40 @@ export default function Navbar() {
             }}
         >
             {/* ── Top bar ── */}
-            <div className="flex items-center justify-end gap-8 px-8 h-[34px]">
+            <div className="flex items-center justify-end gap-4 sm:gap-8 px-4 sm:px-8 h-[34px]">
                 <a
-                    href="tel:18884440110"
+                    href="tel:2797770380"
                     className={`flex items-center gap-1.5 text-[13px] ${contactColor} ${scrolled ? "hover:text-black/60" : "hover:text-[#e8391d]"} transition-colors group`}
                     style={{ fontFamily: "'Raleway', Arial, sans-serif" }}
                 >
                     <span className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 transition-colors ${scrolled ? "bg-white/20 group-hover:bg-black/20" : "bg-[#e8391d]"}`}>
                         <Phone size={9} className="text-white" />
                     </span>
-                    1-888-444-0110
+                    <span className="hidden sm:inline">(279) 777-0380</span>
                 </a>
                 <a
-                    href="mailto:sales@bexleypublications.com"
+                    href="mailto:info@bexleypublishing.com"
                     className={`flex items-center gap-1.5 text-[13px] ${contactColor} ${scrolled ? "hover:text-black/60" : "hover:text-[#e8391d]"} transition-colors group`}
                     style={{ fontFamily: "'Raleway', Arial, sans-serif" }}
                 >
                     <span className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 transition-colors ${scrolled ? "bg-white/20 group-hover:bg-black/20" : "bg-[#e8391d]"}`}>
                         <Mail size={9} className="text-white" />
                     </span>
-                    sales@bexleypublications.com
+                    <span className="hidden sm:inline">info@bexleypublishing.com</span>
                 </a>
             </div>
 
             {/* ── Main nav row ── */}
-            <nav className="flex items-center justify-between px-8 h-[72px]">
+            <nav className="flex items-center justify-between px-4 sm:px-8 h-[72px]">
 
                 {/* Logo */}
                 <a href="/" className="shrink-0 flex items-center h-full">
                     <Image
                         src="/images/Bexley-Publishing-02.png"
                         alt="Bexley Publications"
-                        width={350}
-                        height={50}
-                        className="object-contain pt-1 pb-8 px-8"
+                        width={260}
+                        height={44}
+                        className="object-contain py-3 max-w-[180px] sm:max-w-[260px] lg:max-w-[320px]"
                         priority
                     />
                 </a>
@@ -259,7 +259,7 @@ export default function Navbar() {
                             );
                         }
 
-                        // Regular nav item with dynamic href
+                        // Regular nav item
                         return (
                             <li key={item.label}>
                                 <a
@@ -278,6 +278,7 @@ export default function Navbar() {
                 <button
                     className="lg:hidden p-2 transition-colors text-white"
                     onClick={() => setMobileOpen((v) => !v)}
+                    aria-label="Toggle menu"
                 >
                     {mobileOpen ? <X size={22} /> : <Menu size={22} />}
                 </button>
@@ -291,7 +292,11 @@ export default function Navbar() {
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
                         className="lg:hidden overflow-hidden"
-                        style={{ background: "rgba(15, 15, 20, 0.97)", backdropFilter: "blur(20px)" }}
+                        style={{
+                            background: "rgba(15, 15, 20, 0.97)",
+                            backdropFilter: "blur(20px)",
+                            WebkitBackdropFilter: "blur(20px)",
+                        }}
                     >
                         <ul className="px-6 py-4 flex flex-col gap-1">
                             {navItems.map((item) => {
@@ -310,6 +315,7 @@ export default function Navbar() {
                                                 <button
                                                     className="p-3 text-white/40 hover:text-[#e8391d] transition-colors"
                                                     onClick={() => setMobileServicesOpen((v) => !v)}
+                                                    aria-label="Toggle services submenu"
                                                 >
                                                     <ChevronDown size={14} className={`transition-transform ${mobileServicesOpen ? "rotate-180" : ""}`} />
                                                 </button>
@@ -343,7 +349,6 @@ export default function Navbar() {
                                                                         >
                                                                             {srv.links.map((link) => (
                                                                                 <li key={link}>
-                                                                                    {/* FIXED: Made Mobile Links Workable */}
                                                                                     <Link
                                                                                         href={`/InnerServices/${slugify(link)}`}
                                                                                         className="block px-3 py-2 text-[12px] text-white/50 hover:text-[#e8391d] transition-colors"

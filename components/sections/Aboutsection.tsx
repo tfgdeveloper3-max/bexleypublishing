@@ -468,10 +468,10 @@ export default function AboutSection() {
                             </motion.p>
 
                             <motion.div variants={fadeUp} className="about-ctas">
-                                <a href="#" className="btn-primary">
+                                <a href="/contact" className="btn-primary">
                                     Start Your Journey <ArrowRight size={15} />
                                 </a>
-                                <a href="#" className="btn-ghost">
+                                <a href="/portfolio" className="btn-ghost">
                                     View Portfolio <ArrowRight size={14} />
                                 </a>
                             </motion.div>

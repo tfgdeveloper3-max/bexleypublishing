@@ -127,7 +127,7 @@ export default function AuthorWebsiteDesignPage() {
 
                     <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={overviewInView ? { opacity: 1, scale: 1 } : {}} transition={{ duration: 0.8, ease: smoothEase }} className="relative hidden lg:block">
                         <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-black/20" style={{ aspectRatio: "4/5" }}>
-                            <Image src="/images/services-website-design.webp" alt="Author Website Design Service" fill className="object-cover" />
+                            <Image src="/images/Services/DesignMarketing/author-website-design/01.jpg" alt="Author Website Design Service" fill className="object-cover" />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                         </div>
                         <div className="absolute -bottom-5 -left-5 w-full h-full rounded-3xl border-[3px] border-[#e8391d]/20 -z-10" />
@@ -212,7 +212,7 @@ export default function AuthorWebsiteDesignPage() {
 
                         <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="relative hidden lg:block">
                             <div className="rounded-3xl overflow-hidden shadow-2xl" style={{ aspectRatio: "1/1" }}>
-                                <Image src="/images/about-us-bg.webp" alt="Website Conversion Strategy" fill className="object-cover" />
+                                <Image src="/images/Services/DesignMarketing/author-website-design/02.jpg" alt="Website Conversion Strategy" fill className="object-cover" />
                                 <div className="absolute inset-0 bg-[#e8391d]/20 mix-blend-multiply" />
                             </div>
                             <div className="absolute -bottom-5 -left-5 w-full h-full rounded-3xl border-[3px] border-[#e8391d]/25 -z-0" />
@@ -252,7 +252,7 @@ export default function AuthorWebsiteDesignPage() {
                 <div className="max-w-[1200px] mx-auto px-8 lg:px-16 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                     <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="relative">
                         <div className="rounded-3xl overflow-hidden shadow-2xl" style={{ aspectRatio: "1/1" }}>
-                            <Image src="/images/about-us-bg.webp" alt="Author Website Team" fill className="object-cover" />
+                            <Image src="/images/Services/DesignMarketing/author-website-design/03.webp" alt="Author Website Team" fill className="object-cover" />
                             <div className="absolute inset-0 bg-[#e8391d]/20 mix-blend-multiply" />
                         </div>
                         <div className="absolute -bottom-5 -right-5 w-full h-full rounded-3xl border-[3px] border-[#e8391d]/25 -z-0" />
@@ -338,7 +338,7 @@ export default function AuthorWebsiteDesignPage() {
                         <motion.a href="/contact" whileHover={{ backgroundColor: "#fff", color: "#e8391d", gap: "14px", boxShadow: "0 20px 60px rgba(0,0,0,0.2)" }} whileTap={{ scale: 0.95 }} className="inline-flex items-center gap-3 bg-black text-white font-black uppercase tracking-widest px-10 py-5 rounded-xl text-[14px] cursor-pointer transition-all duration-300">
                             Start Your Website <ArrowRight size={18} />
                         </motion.a>
-                        <motion.a href="tel:18884440110" whileHover={{ gap: "14px" }} whileTap={{ scale: 0.95 }} className="inline-flex items-center gap-3 border-2 border-white text-white font-black uppercase tracking-widest px-10 py-5 rounded-xl text-[14px] cursor-pointer transition-all duration-300">
+                        <motion.a href="tel:2797770380" whileHover={{ gap: "14px" }} whileTap={{ scale: 0.95 }} className="inline-flex items-center gap-3 border-2 border-white text-white font-black uppercase tracking-widest px-10 py-5 rounded-xl text-[14px] cursor-pointer transition-all duration-300">
                             <Phone size={16} /> Call Us Now
                         </motion.a>
                     </div>

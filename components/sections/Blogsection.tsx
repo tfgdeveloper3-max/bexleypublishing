@@ -636,7 +636,7 @@ export default function BlogSection() {
 
                             {/* Browse All CTA */}
                             <motion.a
-                                href="#"
+                                href="/Blogs"
                                 initial={{ opacity: 0, scale: 0.9 }}
                                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                                 transition={{ delay: 1, type: "spring", stiffness: 200, damping: 20 }}

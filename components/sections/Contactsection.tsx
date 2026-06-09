@@ -72,7 +72,8 @@ export default function ContactSection() {
                 }
             );
 
-            if (!res.ok) throw new Error(`Server responded with ${res.status}`);
+            // 409 = duplicate entry, treat as success and redirect
+            if (!res.ok && res.status !== 409) throw new Error(`Server responded with ${res.status}`);
 
             router.push("/thank-you");
         } catch (err: unknown) {
@@ -748,4 +749,4 @@ export default function ContactSection() {
             </section>
         </>
     );
-} 
+}

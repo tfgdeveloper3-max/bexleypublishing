@@ -8,69 +8,34 @@ import {
     Baby, GraduationCap, Minus, Plus
 } from "lucide-react";
 
-// Safe TS Easing
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
-// --- Animation Variants ---
 const maskReveal: Variants = {
     hidden: { clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)", y: 40 },
     visible: { clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)", y: 0, transition: { duration: 1, ease: smoothEase } },
 };
-
 const fadeUp: Variants = {
     hidden: { opacity: 0, y: 30, filter: "blur(4px)" },
     visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.7, ease: smoothEase } },
 };
-
 const staggerContainer: Variants = {
     hidden: {},
     visible: { transition: { staggerChildren: 0.12, delayChildren: 0.2 } },
 };
 
-// --- Data ---
 const coreServices = [
-    { icon: PenTool, title: "Writing & Ghostwriting", desc: "Transform your ideas into a captivating manuscript with our expert ghostwriters.", color: "#e8391d" },
-    { icon: FileText, title: "Editing & Proofreading", desc: "Polish your prose to perfection with developmental, line, and copy editing.", color: "#1a6e3c" },
-    { icon: Palette, title: "Cover Design & Formatting", desc: "Stunning visuals and pixel-perfect interior layouts that sell.", color: "#1a3a6e" },
+    { icon: PenTool, title: "Writing & Ghostwriting", desc: "Writing that transforms your ideas into a captivating manuscript.", color: "#e8391d" },
+    { icon: FileText, title: "Editing & Proofreading", desc: "Preparing with developmental, line, and copy editing for seamless publication.", color: "#1a6e3c" },
+    { icon: Palette, title: "Cover Design & Formatting", desc: "Designing stunning visuals and pixel-perfect interior layouts that sell.", color: "#1a3a6e" },
     { icon: Rocket, title: "Publishing & Distribution", desc: "Global reach across Amazon, B&N, Ingram, and 40+ platforms.", color: "#7c3aed" },
 ];
 
 const detailedServices = [
-    {
-        id: "writing", label: "Book Writing", icon: PenTool,
-        title: "CRAFTING YOUR MASTERPIECE",
-        desc: "Whether you have a rough outline or just a spark of an idea, our elite ghostwriters breathe life into your vision. We match your voice, tone, and style perfectly.",
-        features: ["Ghostwriting (Fiction & Non-Fiction)", "Memoir & Biography Writing", "Children's Book Writing", "Story Development & Outlining", "Character & World Building"],
-        image: "/images/services-writing.webp"
-    },
-    {
-        id: "editing", label: "Editing", icon: FileText,
-        title: "PERFECTION IN EVERY WORD",
-        desc: "A good book is edited by a great team. We refine your manuscript through multiple rounds, ensuring flawless grammar, pacing, and narrative flow.",
-        features: ["Developmental Editing", "Line & Copy Editing", "Proofreading", "Beta Reading Feedback", "Manuscript Critique"],
-        image: "/images/services-editing.webp"
-    },
-    {
-        id: "design", label: "Design", icon: Palette,
-        title: "JUDGED BY THE COVER",
-        desc: "Readers absolutely judge a book by its cover. Our award-winning designers create covers that stop the scroll and interiors that are a joy to read.",
-        features: ["Custom Book Cover Design", "Interior Layout & Formatting", "eBook Conversion (ePub/Mobi)", "Illustrations for Children's Books", "Author Branding"],
-        image: "/images/services-design.webp"
-    },
-    {
-        id: "publishing", label: "Publishing", icon: Rocket,
-        title: "FROM MANUSCRIPT TO MARKET",
-        desc: "We navigate the complex publishing landscape so you don't have to. From ISBN registration to global distribution, we handle it all.",
-        features: ["Self-Publishing Guidance", "Print & eBook Distribution", "Audiobook Production", "ISBN & Copyright Registration", "Royalty Management Setup"],
-        image: "/images/services-publishing.webp"
-    },
-    {
-        id: "marketing", label: "Marketing", icon: BarChart,
-        title: "AMPLIFY YOUR REACH",
-        desc: "A great book deserves a massive audience. Our data-driven marketing strategies ensure your book reaches the right readers and climbs the charts.",
-        features: ["Amazon Listing Optimization (SEO)", "Author Website Design", "Social Media Campaigns", "Book Launch Strategy", "Press Releases & PR"],
-        image: "/images/services-marketing.webp"
-    },
+    { id: "writing", label: "Book Writing", icon: PenTool, title: "CRAFTING YOUR MASTERPIECE", desc: "Whether you have a rough outline or just a spark of an idea, our elite ghostwriters breathe life into your vision. We match your voice, tone, and style perfectly.", features: ["Ghostwriting (Fiction & Non-Fiction)", "Memoir & Biography Writing", "Children's Book Writing", "Story Development & Outlining", "Character & World Building"], image: "/images/Services/Book-Writing.jpg" },
+    { id: "editing", label: "Editing", icon: FileText, title: "PERFECTION IN EVERY WORD", desc: "A good book is edited by a great team. We refine your manuscript through multiple rounds, ensuring flawless grammar, pacing, and narrative flow.", features: ["Developmental Editing", "Line & Copy Editing", "Proofreading", "Beta Reading Feedback", "Manuscript Critique"], image: "/images/Services/Book-Editing.jpg" },
+    { id: "design", label: "Design", icon: Palette, title: "JUDGED BY THE COVER", desc: "Readers absolutely judge a book by its cover. Our award-winning designers create covers that stop the scroll and interiors that are a joy to read.", features: ["Custom Book Cover Design", "Interior Layout & Formatting", "eBook Conversion (ePub/Mobi)", "Illustrations for Children's Books", "Author Branding"], image: "/images/Services/Design.webp" },
+    { id: "publishing", label: "Publishing", icon: Rocket, title: "FROM MANUSCRIPT TO MARKET", desc: "We navigate the complex publishing landscape so you don't have to. From ISBN registration to global distribution, we handle it all.", features: ["Self-Publishing Guidance", "Print & eBook Distribution", "Audiobook Production", "ISBN & Copyright Registration", "Royalty Management Setup"], image: "/images/Services/Publishing.jpg" },
+    { id: "marketing", label: "Marketing", icon: BarChart, title: "AMPLIFY YOUR REACH", desc: "A great book deserves a massive audience. Our data-driven marketing strategies ensure your book reaches the right readers and climbs the charts.", features: ["Amazon Listing Optimization (SEO)", "Author Website Design", "Social Media Campaigns", "Book Launch Strategy", "Press Releases & PR"], image: "/images/Services/Marketing.jpg" },
 ];
 
 const genres = [
@@ -98,329 +63,668 @@ const faqs = [
 ];
 
 const packages = [
-    {
-        title: "Starter", price: "$499", desc: "Perfect for first-time authors needing foundational publishing services.",
-        features: ["Custom Cover Design", "Interior Formatting", "eBook Conversion", "Amazon Upload"], highlight: false,
-    },
-    {
-        title: "Professional", price: "$1,499", desc: "Our most popular package for authors who want a polished, market-ready book.",
-        features: ["Everything in Starter", "Developmental Editing", "Proofreading", "ISBN Registration", "Author Website"], highlight: true,
-    },
-    {
-        title: "Elite", price: "Custom", desc: "End-to-end ghostwriting, publishing, and aggressive marketing for bestsellers.",
-        features: ["Everything in Professional", "Full Ghostwriting", "Book Marketing Campaign", "Audiobook Narration", "PR & Launch Strategy"], highlight: false,
-    },
+    { title: "Starter", price: "$499", desc: "Perfect for first-time authors needing foundational publishing services.", features: ["Custom Cover Design", "Interior Formatting", "eBook Conversion", "Amazon Upload"], highlight: false },
+    { title: "Professional", price: "$1,499", desc: "Our most popular package for authors who want a polished, market-ready book.", features: ["Everything in Starter", "Developmental Editing", "Proofreading", "ISBN Registration", "Author Website"], highlight: true },
+    { title: "Elite", price: "Custom", desc: "End-to-end ghostwriting, publishing, and aggressive marketing for bestsellers.", features: ["Everything in Professional", "Full Ghostwriting", "Book Marketing Campaign", "Audiobook Narration", "PR & Launch Strategy"], highlight: false },
 ];
 
 export default function ServicesPage() {
     const [activeService, setActiveService] = useState("writing");
     const [openFaq, setOpenFaq] = useState<number | null>(0);
-
     const gridRef = useRef<HTMLDivElement>(null);
     const gridInView = useInView(gridRef, { once: true, margin: "-100px" });
-
     const currentService = detailedServices.find(s => s.id === activeService) || detailedServices[0];
 
     return (
-        <main className="w-full overflow-hidden" style={{ fontFamily: "'Raleway', Arial, sans-serif" }}>
+        <>
+            <style>{`
+                @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;900&display=swap');
 
-            {/* ════════════════════════════════════════════
-                SECTION 1: CINEMATIC SERVICES HERO
-            ════════════════════════════════════════════ */}
-            <section className="relative w-full h-screen flex items-center justify-center bg-[#05070f] overflow-hidden">
-                <div className="absolute inset-0 opacity-[0.04] pointer-events-none" style={{ backgroundImage: `url('/images/Left-Section_bg.webp')`, backgroundSize: "40px 40px" }} />
-                <div className="absolute top-1/3 right-1/4 w-[600px] h-[600px] bg-[#e8391d] opacity-10 rounded-full blur-[150px] pointer-events-none" />
+                .sp-main { width: 100%; overflow: hidden; font-family: 'Raleway', Arial, sans-serif; }
 
-                <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
-                    <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.5 }} className="flex items-center justify-center gap-3 mb-6">
-                        <span className="w-8 h-[2px] bg-[#e8391d]" />
-                        <span className="text-[#e8391d] font-black uppercase tracking-[0.28em] text-[11px]">What We Do</span>
-                        <span className="w-8 h-[2px] bg-[#e8391d]" />
-                    </motion.div>
+                /* ── Shared helpers ── */
+                .sp-eyebrow { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 16px; }
+                .sp-eyebrow-left { justify-content: flex-start; }
+                .sp-eyebrow-line { display: block; width: 32px; height: 2px; background: #e8391d; flex-shrink: 0; }
+                .sp-eyebrow-text { color: #e8391d; font-weight: 900; font-size: 11px; text-transform: uppercase; letter-spacing: 0.28em; }
 
-                    <motion.h1 variants={maskReveal} initial="hidden" animate="visible" className="font-black text-white uppercase leading-[0.95] mb-8" style={{ fontSize: "clamp(3rem, 8vw, 7rem)" }}>
-                        FROM CONCEPT TO <br /><span className="text-[#e8391d]">BESTSELLER.</span>
-                    </motion.h1>
+                /* ══ S1 HERO ══ */
+                .sp-hero { position: relative; width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; background: #05070f; overflow: hidden; }
+                .sp-hero-inner { position: relative; z-index: 10; text-align: center; padding: 0 24px; max-width: 1000px; margin: 0 auto; }
+                .sp-hero-h1 { font-weight: 900; color: white; text-transform: uppercase; line-height: 0.95; margin-bottom: 32px; font-size: clamp(2.5rem, 6vw, 4rem); }
+                .sp-hero-h1 .accent { color: #e8391d; }
+                .sp-hero-sub { color: rgba(255,255,255,0.6); line-height: 1.85; max-width: 680px; margin: 0 auto; font-size: clamp(0.9rem, 1.1vw, 1.05rem); }
 
-                    <motion.p variants={fadeUp} initial="hidden" animate="visible" className="text-white/60 leading-[1.85] max-w-2xl mx-auto" style={{ fontSize: "clamp(0.9rem, 1.1vw, 1.05rem)" }}>
-                        End-to-end book publishing services tailored to your vision. We handle the heavy lifting so you can focus on what matters most — your story.
-                    </motion.p>
-                </div>
-            </section>
+                /* ══ S2 CORE GRID ══ */
+                .sp-core { position: relative; width: 100%; background: #faf9f7; padding: 128px 0; overflow: hidden; }
+                .sp-core-inner { max-width: 1200px; margin: 0 auto; padding: 0 64px; }
+                .sp-core-h2 { font-weight: 900; color: black; text-transform: uppercase; line-height: 1; font-size: clamp(2.5rem, 5vw, 4rem); }
+                .sp-core-h2 .accent { color: #e8391d; }
+                .sp-core-header { text-align: center; margin-bottom: 80px; overflow: hidden; }
+                .sp-core-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+                .sp-core-card { position: relative; background: white; border-radius: 24px; padding: 32px; border: 1px solid #f3f4f6; box-shadow: 0 2px 8px rgba(0,0,0,0.04); overflow: hidden; cursor: default; transition: box-shadow 0.5s ease; }
+                .sp-core-card:hover { box-shadow: 0 20px 48px rgba(0,0,0,0.1); }
+                .sp-core-card-bar { position: absolute; top: 0; left: 0; width: 100%; height: 4px; transform-origin: left; transform: scaleX(0); transition: transform 0.5s ease; }
+                .sp-core-card:hover .sp-core-card-bar { transform: scaleX(1); }
+                .sp-core-icon { width: 56px; height: 56px; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; transition: transform 0.3s ease; }
+                .sp-core-card:hover .sp-core-icon svg { transform: scale(1.1); }
+                .sp-core-title { font-weight: 900; color: black; text-transform: uppercase; font-size: 17px; margin-bottom: 12px; letter-spacing: 0.04em; }
+                .sp-core-desc { color: #6b7280; font-size: 14px; line-height: 1.65; }
 
-            {/* ════════════════════════════════════════════
-                SECTION 2: CORE SERVICES GRID
-            ════════════════════════════════════════════ */}
-            <section ref={gridRef} className="relative w-full bg-[#faf9f7] py-32 overflow-hidden">
-                <motion.div initial={{ width: "0%" }} animate={gridInView ? { width: "100%" } : {}} transition={{ duration: 1.5, ease: smoothEase }} className="absolute top-0 left-0 h-1 bg-[#e8391d] origin-left" />
+                /* ══ S3 SHOWCASE ══ */
+                .sp-showcase { position: relative; width: 100%; background: #05070f; padding: 128px 0; overflow: hidden; }
+                .sp-showcase-inner { max-width: 1200px; margin: 0 auto; padding: 0 64px; position: relative; z-index: 10; }
+                .sp-showcase-layout { display: grid; grid-template-columns: 280px 1fr; gap: 64px; align-items: start; }
+                .sp-showcase-nav { display: flex; flex-direction: column; gap: 12px; position: sticky; top: 128px; }
+                .sp-showcase-btn { width: 100%; display: flex; align-items: center; gap: 16px; padding: 16px 20px; border-radius: 12px; text-align: left; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; cursor: pointer; border: 1px solid; transition: all 0.3s ease; background: none; font-family: 'Raleway', Arial, sans-serif; }
+                .sp-showcase-btn.active { background: #e8391d; border-color: #e8391d; color: white; box-shadow: 0 8px 24px rgba(232,57,29,0.3); }
+                .sp-showcase-btn.inactive { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); color: rgba(255,255,255,0.6); }
+                .sp-showcase-btn.inactive:hover { background: rgba(255,255,255,0.1); color: white; }
+                .sp-showcase-content { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+                .sp-showcase-img { position: relative; border-radius: 24px; overflow: hidden; aspect-ratio: 3/4; box-shadow: 0 32px 80px rgba(0,0,0,0.5); }
+                .sp-showcase-img-caption { position: absolute; bottom: 0; left: 0; right: 0; padding: 32px; background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.2), transparent); }
+                .sp-showcase-title { font-weight: 900; color: white; font-size: 22px; text-transform: uppercase; line-height: 1.2; }
+                .sp-showcase-desc { color: rgba(255,255,255,0.7); line-height: 1.85; margin-bottom: 32px; font-size: 15px; }
+                .sp-showcase-features { display: flex; flex-direction: column; gap: 16px; margin-bottom: 40px; }
+                .sp-showcase-feat { display: flex; align-items: center; gap: 12px; }
+                .sp-showcase-feat span { color: rgba(255,255,255,0.9); font-size: 14px; font-weight: 500; }
+                .sp-showcase-cta { display: inline-flex; align-items: center; gap: 12px; background: #e8391d; color: white; font-weight: 900; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; padding: 16px 32px; border-radius: 12px; text-decoration: none; cursor: pointer; transition: gap 0.2s ease, box-shadow 0.2s ease; }
+                .sp-showcase-cta:hover { gap: 16px; box-shadow: 0 10px 30px rgba(232,57,29,0.4); }
 
-                <div className="max-w-[1200px] mx-auto px-8 lg:px-16">
-                    <div className="text-center mb-20 overflow-hidden">
-                        <motion.h2 variants={maskReveal} initial="hidden" animate={gridInView ? "visible" : "hidden"} className="font-black text-black uppercase leading-none" style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)" }}>
-                            OUR CORE <span className="text-[#e8391d]">EXPERTISE</span>
-                        </motion.h2>
+                /* ══ S4 GENRES ══ */
+                .sp-genres { position: relative; width: 100%; background: #faf9f7; padding: 128px 0; overflow: hidden; }
+                .sp-genres-inner { max-width: 1200px; margin: 0 auto; padding: 0 64px; }
+                .sp-genres-h2 { font-weight: 900; color: black; text-transform: uppercase; line-height: 1; font-size: clamp(2.5rem, 5vw, 4rem); }
+                .sp-genres-h2 .accent { color: #e8391d; }
+                .sp-genres-header { text-align: center; margin-bottom: 64px; overflow: hidden; }
+                .sp-genres-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 20px; }
+                .sp-genre-card { background: white; border-radius: 16px; padding: 24px; border: 1px solid #f3f4f6; text-align: center; cursor: default; transition: border-color 0.5s ease, box-shadow 0.5s ease; }
+                .sp-genre-card:hover { border-color: rgba(232,57,29,0.5); box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
+                .sp-genre-icon { width: 48px; height: 48px; border-radius: 50%; background: rgba(232,57,29,0.1); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; transition: background 0.3s ease; }
+                .sp-genre-card:hover .sp-genre-icon { background: #e8391d; }
+                .sp-genre-card:hover .sp-genre-icon svg { color: white !important; }
+                .sp-genre-title { font-weight: 900; color: black; text-transform: uppercase; font-size: 12px; letter-spacing: 0.06em; margin-bottom: 4px; }
+                .sp-genre-desc { color: #9ca3af; font-size: 11px; line-height: 1.5; }
+
+                /* ══ S5 JOURNEY ══ */
+                .sp-journey { position: relative; width: 100%; background: #111; padding: 128px 0; overflow: hidden; }
+                .sp-journey-inner { max-width: 1200px; margin: 0 auto; padding: 0 64px; position: relative; z-index: 10; }
+                .sp-journey-h2 { font-weight: 900; color: white; text-transform: uppercase; line-height: 1; font-size: clamp(2.5rem, 5vw, 4rem); }
+                .sp-journey-h2 .accent { color: #e8391d; }
+                .sp-journey-header { text-align: center; margin-bottom: 80px; overflow: hidden; }
+                .sp-journey-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; position: relative; }
+                .sp-journey-line { display: none; position: absolute; top: 32px; left: 12%; right: 12%; height: 2px; background: rgba(255,255,255,0.1); z-index: 0; }
+                .sp-journey-card { position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; text-align: center; }
+                .sp-journey-circle { width: 64px; height: 64px; border-radius: 50%; background: #e8391d; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; box-shadow: 0 8px 24px rgba(232,57,29,0.3); }
+                .sp-journey-num { font-weight: 900; color: white; font-size: 20px; }
+                .sp-journey-title { font-weight: 900; color: white; text-transform: uppercase; font-size: 17px; margin-bottom: 12px; letter-spacing: 0.05em; }
+                .sp-journey-desc { color: rgba(255,255,255,0.5); font-size: 14px; line-height: 1.65; max-width: 220px; }
+
+                /* ══ S6 WHY CHOOSE ══ */
+                .sp-why { position: relative; width: 100%; background: #05070f; padding: 128px 0; overflow: hidden; }
+                .sp-why-inner { max-width: 1200px; margin: 0 auto; padding: 0 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; position: relative; z-index: 10; }
+                .sp-why-h2 { font-weight: 900; color: white; text-transform: uppercase; line-height: 1.05; margin-bottom: 40px; font-size: clamp(2rem, 3.5vw, 3rem); }
+                .sp-why-h2 .accent { color: #e8391d; }
+                .sp-why-list { display: flex; flex-direction: column; gap: 20px; }
+                .sp-why-item { display: flex; align-items: flex-start; gap: 16px; }
+                .sp-why-icon { margin-top: 4px; width: 24px; height: 24px; border-radius: 50%; background: rgba(232,57,29,0.1); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.3s ease; }
+                .sp-why-item:hover .sp-why-icon { background: #e8391d; }
+                .sp-why-item:hover .sp-why-icon svg { color: white !important; }
+                .sp-why-text { color: rgba(255,255,255,0.6); font-size: 15px; line-height: 1.65; }
+                .sp-why-img-wrap { position: relative; border-radius: 24px; overflow: hidden; box-shadow: 0 24px 64px rgba(0,0,0,0.4); aspect-ratio: 1/1; }
+
+                /* ══ S7 PACKAGES ══ */
+                .sp-packages { position: relative; width: 100%; background: #faf9f7; padding: 128px 0; overflow: hidden; }
+                .sp-packages-inner { max-width: 1200px; margin: 0 auto; padding: 0 64px; }
+                .sp-packages-h2 { font-weight: 900; color: black; text-transform: uppercase; line-height: 1; font-size: clamp(2.5rem, 5vw, 4rem); }
+                .sp-packages-h2 .accent { color: #e8391d; }
+                .sp-packages-header { text-align: center; margin-bottom: 80px; overflow: hidden; }
+                .sp-packages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; align-items: center; }
+                .sp-pkg-card { position: relative; border-radius: 24px; padding: 40px; transition: all 0.5s ease; }
+                .sp-pkg-card.normal { background: white; color: black; border: 1px solid #e5e7eb; }
+                .sp-pkg-card.normal:hover { border-color: rgba(232,57,29,0.3); box-shadow: 0 20px 48px rgba(0,0,0,0.08); }
+                .sp-pkg-card.featured { background: #05070f; color: white; border: 2px solid #e8391d; transform: scale(1.05); box-shadow: 0 32px 80px rgba(0,0,0,0.3); z-index: 10; }
+                .sp-pkg-badge { position: absolute; top: -16px; left: 50%; transform: translateX(-50%); background: #e8391d; color: white; font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; padding: 6px 16px; border-radius: 999px; white-space: nowrap; }
+                .sp-pkg-title { font-weight: 900; text-transform: uppercase; letter-spacing: 0.06em; font-size: 20px; margin-bottom: 8px; }
+                .sp-pkg-desc { font-size: 13px; margin-bottom: 24px; }
+                .sp-pkg-price { font-weight: 900; font-size: 48px; line-height: 1; margin-bottom: 32px; }
+                .sp-pkg-price span { font-size: 13px; font-weight: 400; opacity: 0.5; }
+                .sp-pkg-features { display: flex; flex-direction: column; gap: 16px; margin-bottom: 40px; }
+                .sp-pkg-feat { display: flex; align-items: center; gap: 12px; font-size: 13px; }
+                .sp-pkg-btn { width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 16px; border-radius: 12px; font-weight: 900; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; text-decoration: none; cursor: pointer; border: 2px solid; transition: all 0.3s ease; font-family: 'Raleway', Arial, sans-serif; }
+                .sp-pkg-btn.normal { background: transparent; border-color: black; color: black; }
+                .sp-pkg-btn.normal:hover { background: #e8391d; border-color: #e8391d; color: white; }
+                .sp-pkg-btn.featured { background: #e8391d; border-color: #e8391d; color: white; }
+                .sp-pkg-btn.featured:hover { background: white; color: #e8391d; }
+
+                /* ══ S8 FAQS ══ */
+                .sp-faqs { position: relative; width: 100%; background: #faf9f7; padding: 128px 0; overflow: hidden; }
+                .sp-faqs-inner { max-width: 900px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 10; }
+                .sp-faqs-h2 { font-weight: 900; color: black; text-transform: uppercase; line-height: 1; font-size: clamp(2rem, 4vw, 3rem); }
+                .sp-faqs-h2 .accent { color: #e8391d; }
+                .sp-faq-item:hover { border-color: rgba(232,57,29,0.3); }
+                .sp-faqs-header { text-align: center; margin-bottom: 64px; }
+                .sp-faq-item { background: white; border: 1px solid #e5e7eb; border-radius: 16px; overflow: hidden; transition: border-color 0.3s ease; }
+                .sp-faq-trigger { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 24px; text-align: left; background: none; border: none; cursor: pointer; font-family: 'Raleway', Arial, sans-serif; }
+                .sp-faq-q { font-weight: 700; color: black; font-size: 15px; padding-right: 16px; line-height: 1.4; }
+                .sp-faq-icon { flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: background 0.3s ease; }
+                .sp-faq-icon.open { background: #e8391d; color: white; }
+                .sp-faq-icon.closed { background: #f3f4f6; color: rgba(0,0,0,0.5); }
+                .sp-faq-answer { padding: 0 24px 24px; color: #6b7280; font-size: 14px; line-height: 1.75; }
+                .sp-faqs-list { display: flex; flex-direction: column; gap: 16px; }
+
+                /* ══ S9 CTA ══ */
+                .sp-cta { position: relative; width: 100%; background: #e8391d; padding: 112px 0; overflow: hidden; }
+                .sp-cta-inner { max-width: 900px; margin: 0 auto; text-align: center; padding: 0 32px; position: relative; z-index: 10; }
+                .sp-cta-h2 { font-weight: 900; color: white; text-transform: uppercase; line-height: 1.1; margin-bottom: 24px; font-size: clamp(2.5rem, 5vw, 4rem); }
+                .sp-cta-sub { color: rgba(255,255,255,0.8); font-size: 18px; max-width: 560px; margin: 0 auto 40px; line-height: 1.65; }
+                .sp-cta-btn { display: inline-flex; align-items: center; gap: 12px; background: black; color: white; font-weight: 900; font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em; padding: 20px 40px; border-radius: 12px; text-decoration: none; cursor: pointer; transition: all 0.3s ease; }
+                .sp-cta-btn:hover { background: white; color: #e8391d; gap: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
+
+
+                /* ══════════════════════════════════════
+                   2560px — 4K
+                ══════════════════════════════════════ */
+                @media (min-width: 2400px) {
+                    .sp-hero-inner { max-width: 1800px; }
+                    .sp-hero-h1 { font-size: clamp(4.5rem, 5.5vw, 8rem); margin-bottom: 52px; }
+                    .sp-hero-sub { font-size: clamp(1.2rem, 1.1vw, 1.6rem); max-width: 1100px; }
+
+                    .sp-core-inner, .sp-genres-inner, .sp-packages-inner { max-width: 2200px; padding: 0 160px; }
+                    .sp-showcase-inner, .sp-journey-inner, .sp-why-inner, .sp-faqs-inner { max-width: 2200px; padding: 0 160px; }
+                    .sp-core, .sp-showcase, .sp-genres, .sp-journey, .sp-why, .sp-packages, .sp-faqs, .sp-cta { padding: 200px 0; }
+
+                    .sp-core-h2, .sp-genres-h2, .sp-journey-h2, .sp-packages-h2 { font-size: clamp(4rem, 5vw, 7rem); }
+                    .sp-core-header, .sp-genres-header, .sp-journey-header, .sp-packages-header { margin-bottom: 120px; }
+                    .sp-core-grid { gap: 40px; }
+                    .sp-core-card { padding: 52px; border-radius: 36px; }
+                    .sp-core-icon { width: 72px; height: 72px; border-radius: 22px; margin-bottom: 36px; }
+                    .sp-core-title { font-size: 22px; margin-bottom: 16px; }
+                    .sp-core-desc { font-size: 18px; }
+
+                    .sp-showcase-layout { grid-template-columns: 360px 1fr; gap: 100px; }
+                    .sp-showcase-nav { gap: 18px; }
+                    .sp-showcase-btn { padding: 22px 28px; font-size: 16px; border-radius: 18px; }
+                    .sp-showcase-content { gap: 60px; }
+                    .sp-showcase-title { font-size: 30px; }
+                    .sp-showcase-desc { font-size: 19px; margin-bottom: 48px; }
+                    .sp-showcase-feat span { font-size: 18px; }
+                    .sp-showcase-features { gap: 22px; margin-bottom: 56px; }
+                    .sp-showcase-cta { font-size: 16px; padding: 22px 52px; border-radius: 18px; }
+
+                    .sp-genres-grid { gap: 32px; }
+                    .sp-genre-card { padding: 36px; border-radius: 24px; }
+                    .sp-genre-icon { width: 68px; height: 68px; margin-bottom: 24px; }
+                    .sp-genre-title { font-size: 15px; }
+                    .sp-genre-desc { font-size: 14px; }
+
+                    .sp-journey-grid { gap: 48px; }
+                    .sp-journey-circle { width: 88px; height: 88px; margin-bottom: 32px; }
+                    .sp-journey-num { font-size: 28px; }
+                    .sp-journey-title { font-size: 22px; margin-bottom: 16px; }
+                    .sp-journey-desc { font-size: 18px; max-width: 320px; }
+
+                    .sp-why-inner { gap: 120px; }
+                    .sp-why-h2 { font-size: clamp(3rem, 3.5vw, 5rem); margin-bottom: 60px; }
+                    .sp-why-list { gap: 28px; }
+                    .sp-why-text { font-size: 19px; }
+                    .sp-why-icon { width: 32px; height: 32px; }
+
+                    .sp-packages-grid { gap: 52px; }
+                    .sp-pkg-card { padding: 60px; border-radius: 36px; }
+                    .sp-pkg-title { font-size: 26px; }
+                    .sp-pkg-desc { font-size: 17px; }
+                    .sp-pkg-price { font-size: 68px; }
+                    .sp-pkg-feat { font-size: 17px; gap: 16px; }
+                    .sp-pkg-features { gap: 22px; }
+                    .sp-pkg-btn { font-size: 15px; padding: 20px; border-radius: 16px; }
+
+                    .sp-faqs-inner { max-width: 1600px; padding: 0 160px; }
+                    .sp-faq-q { font-size: 19px; }
+                    .sp-faq-answer { font-size: 17px; padding: 0 32px 32px; }
+                    .sp-faq-trigger { padding: 32px; }
+                    .sp-faq-icon { width: 44px; height: 44px; }
+                    .sp-faqs-list { gap: 24px; }
+
+                    .sp-cta-inner { max-width: 1400px; }
+                    .sp-cta-h2 { font-size: clamp(3.5rem, 5vw, 7rem); }
+                    .sp-cta-sub { font-size: 24px; max-width: 800px; }
+                    .sp-cta-btn { font-size: 18px; padding: 26px 60px; border-radius: 18px; }
+                }
+
+                /* ══════════════════════════════════════
+                   1920px — Full HD
+                ══════════════════════════════════════ */
+                @media (min-width: 1800px) and (max-width: 2399px) {
+                    .sp-hero-inner { max-width: 1400px; }
+                    .sp-hero-h1 { font-size: clamp(3.5rem, 5vw, 6.5rem); }
+                    .sp-hero-sub { font-size: clamp(1.05rem, 1.1vw, 1.35rem); max-width: 900px; }
+
+                    .sp-core-inner, .sp-genres-inner, .sp-packages-inner { max-width: 1700px; padding: 0 130px; }
+                    .sp-showcase-inner, .sp-journey-inner, .sp-why-inner { max-width: 1700px; padding: 0 130px; }
+                    .sp-faqs-inner { max-width: 1200px; padding: 0 64px; }
+                    .sp-core, .sp-showcase, .sp-genres, .sp-journey, .sp-why, .sp-packages, .sp-faqs, .sp-cta { padding: 160px 0; }
+
+                    .sp-core-h2, .sp-genres-h2, .sp-journey-h2, .sp-packages-h2 { font-size: clamp(3rem, 4.5vw, 6rem); }
+                    .sp-core-grid { gap: 32px; }
+                    .sp-core-card { padding: 44px; }
+                    .sp-core-icon { width: 64px; height: 64px; }
+                    .sp-core-title { font-size: 20px; }
+                    .sp-core-desc { font-size: 16px; }
+
+                    .sp-showcase-layout { grid-template-columns: 320px 1fr; gap: 80px; }
+                    .sp-showcase-btn { font-size: 14px; padding: 18px 24px; }
+                    .sp-showcase-title { font-size: 26px; }
+                    .sp-showcase-desc { font-size: 17px; }
+                    .sp-showcase-feat span { font-size: 16px; }
+                    .sp-showcase-cta { font-size: 14px; padding: 20px 44px; }
+
+                    .sp-genres-grid { gap: 28px; }
+                    .sp-genre-card { padding: 28px; }
+                    .sp-genre-title { font-size: 13px; }
+                    .sp-genre-desc { font-size: 12px; }
+
+                    .sp-journey-grid { gap: 40px; }
+                    .sp-journey-circle { width: 72px; height: 72px; }
+                    .sp-journey-title { font-size: 20px; }
+                    .sp-journey-desc { font-size: 16px; max-width: 280px; }
+
+                    .sp-why-h2 { font-size: clamp(2.5rem, 3.2vw, 4.2rem); }
+                    .sp-why-text { font-size: 17px; }
+                    .sp-why-inner { gap: 100px; }
+
+                    .sp-packages-grid { gap: 40px; }
+                    .sp-pkg-card { padding: 52px; }
+                    .sp-pkg-title { font-size: 23px; }
+                    .sp-pkg-price { font-size: 58px; }
+                    .sp-pkg-feat { font-size: 15px; }
+
+                    .sp-faq-q { font-size: 17px; }
+                    .sp-faq-answer { font-size: 15px; }
+
+                    .sp-cta-h2 { font-size: clamp(3rem, 4.5vw, 6rem); }
+                    .sp-cta-sub { font-size: 21px; }
+                    .sp-cta-btn { font-size: 16px; padding: 22px 52px; }
+                }
+
+                /* ══════════════════════════════════════
+                   1440px — Large Laptop
+                ══════════════════════════════════════ */
+                @media (min-width: 1400px) and (max-width: 1799px) {
+                    .sp-core-inner, .sp-genres-inner, .sp-packages-inner { max-width: 1360px; padding: 0 96px; }
+                    .sp-showcase-inner, .sp-journey-inner, .sp-why-inner { max-width: 1360px; padding: 0 96px; }
+                    .sp-core, .sp-showcase, .sp-genres, .sp-journey, .sp-why, .sp-packages, .sp-faqs, .sp-cta { padding: 140px 0; }
+                    .sp-core-h2, .sp-genres-h2, .sp-journey-h2, .sp-packages-h2 { font-size: clamp(2.8rem, 4.5vw, 4.8rem); }
+                    .sp-showcase-layout { gap: 72px; }
+                    .sp-why-h2 { font-size: clamp(2.2rem, 3.2vw, 3.6rem); }
+                }
+
+                /* ══════════════════════════════════════
+                   1280px — Standard Laptop
+                ══════════════════════════════════════ */
+                @media (min-width: 1200px) and (max-width: 1399px) {
+                    .sp-core-inner, .sp-genres-inner, .sp-packages-inner { max-width: 1160px; padding: 0 64px; }
+                    .sp-showcase-inner, .sp-journey-inner, .sp-why-inner { max-width: 1160px; padding: 0 64px; }
+                }
+
+                /* ══════════════════════════════════════
+                   1024px — Small Laptop
+                ══════════════════════════════════════ */
+                @media (min-width: 901px) and (max-width: 1199px) {
+                    .sp-core-inner, .sp-genres-inner, .sp-packages-inner { padding: 0 48px; }
+                    .sp-showcase-inner, .sp-journey-inner, .sp-why-inner { padding: 0 48px; }
+                    .sp-faqs-inner { padding: 0 48px; }
+                    .sp-core, .sp-showcase, .sp-genres, .sp-journey, .sp-why, .sp-packages, .sp-faqs, .sp-cta { padding: 96px 0; }
+                    .sp-core-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+                    .sp-core-h2 { font-size: clamp(2rem, 4vw, 3.2rem); }
+                    .sp-showcase-layout { grid-template-columns: 220px 1fr; gap: 40px; }
+                    .sp-showcase-btn { font-size: 11px; padding: 13px 16px; }
+                    .sp-showcase-content { grid-template-columns: 1fr; gap: 32px; }
+                    .sp-showcase-img { aspect-ratio: 16/9; max-height: 360px; }
+                    .sp-genres-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+                    .sp-genres-h2 { font-size: clamp(2rem, 4vw, 3rem); }
+                    .sp-journey-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+                    .sp-journey-h2 { font-size: clamp(2rem, 4vw, 3rem); }
+                    .sp-why-inner { grid-template-columns: 1fr; gap: 48px; }
+                    .sp-why-h2 { font-size: clamp(1.8rem, 3.2vw, 2.6rem); }
+                    .sp-why-img-wrap { display: none; }
+                    .sp-packages-grid { gap: 20px; }
+                    .sp-pkg-card { padding: 28px; }
+                    .sp-pkg-card.featured { transform: scale(1.02); }
+                    .sp-pkg-price { font-size: 36px; }
+                    .sp-packages-h2 { font-size: clamp(2rem, 4vw, 3rem); }
+                    .sp-cta-h2 { font-size: clamp(2rem, 4.5vw, 3.2rem); }
+                    .sp-cta-sub { font-size: 15px; }
+                    .sp-cta-btn { font-size: 12px; padding: 16px 32px; }
+                }
+
+                /* ══════════════════════════════════════
+                   900px — Tablet
+                ══════════════════════════════════════ */
+                @media (max-width: 900px) {
+                    .sp-core-inner, .sp-genres-inner, .sp-packages-inner { padding: 0 40px; }
+                    .sp-showcase-inner, .sp-journey-inner, .sp-why-inner { padding: 0 40px; }
+                    .sp-faqs-inner { padding: 0 40px; }
+                    .sp-core, .sp-showcase, .sp-genres, .sp-journey, .sp-why, .sp-packages, .sp-faqs, .sp-cta { padding: 80px 0; }
+                    .sp-hero-h1 { font-size: clamp(2.2rem, 6vw, 3.6rem); }
+                    .sp-hero-sub { font-size: 0.95rem; }
+                    .sp-core-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+                    .sp-core-h2 { font-size: clamp(1.8rem, 5vw, 2.8rem); }
+                    .sp-core-header { margin-bottom: 48px; }
+                    .sp-showcase-layout { grid-template-columns: 1fr; gap: 32px; }
+                    .sp-showcase-nav { flex-direction: row; flex-wrap: wrap; position: static; }
+                    .sp-showcase-btn { width: auto; flex: 1; min-width: 100px; }
+                    .sp-showcase-content { grid-template-columns: 1fr; }
+                    .sp-showcase-img { aspect-ratio: 16/9; max-height: 380px; }
+                    .sp-genres-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+                    .sp-genres-h2 { font-size: clamp(1.8rem, 5vw, 2.8rem); }
+                    .sp-journey-grid { grid-template-columns: repeat(2, 1fr); gap: 28px; }
+                    .sp-journey-h2 { font-size: clamp(1.8rem, 5vw, 2.8rem); }
+                    .sp-journey-line { display: none; }
+                    .sp-why-inner { grid-template-columns: 1fr; }
+                    .sp-why-img-wrap { display: none; }
+                    .sp-why-h2 { font-size: clamp(1.8rem, 5vw, 2.6rem); }
+                    .sp-packages-grid { grid-template-columns: 1fr; gap: 24px; max-width: 480px; margin: 0 auto; }
+                    .sp-pkg-card.featured { transform: scale(1); }
+                    .sp-packages-h2 { font-size: clamp(1.8rem, 5vw, 2.8rem); }
+                    .sp-cta-h2 { font-size: clamp(1.8rem, 5.5vw, 2.8rem); }
+                    .sp-cta-sub { font-size: 15px; }
+                }
+
+                /* ══════════════════════════════════════
+                   768px — Tablet Portrait
+                ══════════════════════════════════════ */
+                @media (max-width: 768px) {
+                    .sp-core-inner, .sp-genres-inner, .sp-packages-inner { padding: 0 32px; }
+                    .sp-showcase-inner, .sp-journey-inner, .sp-why-inner { padding: 0 32px; }
+                    .sp-faqs-inner { padding: 0 32px; }
+                    .sp-hero-h1 { font-size: clamp(1.9rem, 7vw, 3rem); }
+                    .sp-core-card { padding: 24px; border-radius: 18px; }
+                    .sp-genre-card { padding: 16px; }
+                    .sp-genres-grid { gap: 12px; }
+                    .sp-pkg-card { padding: 28px; border-radius: 18px; }
+                    .sp-cta-h2 { font-size: clamp(1.6rem, 6vw, 2.4rem); }
+                }
+
+                /* ══════════════════════════════════════
+                   640px — Large Mobile
+                ══════════════════════════════════════ */
+                @media (max-width: 640px) {
+                    .sp-core-inner, .sp-genres-inner, .sp-packages-inner { padding: 0 20px; }
+                    .sp-showcase-inner, .sp-journey-inner, .sp-why-inner { padding: 0 20px; }
+                    .sp-faqs-inner { padding: 0 20px; }
+                    .sp-cta-inner { padding: 0 20px; }
+                    .sp-core, .sp-showcase, .sp-genres, .sp-journey, .sp-why, .sp-packages, .sp-faqs, .sp-cta { padding: 56px 0; }
+                    .sp-hero-h1 { font-size: clamp(1.7rem, 8vw, 2.6rem); margin-bottom: 20px; }
+                    .sp-hero-sub { font-size: 0.875rem; }
+                    .sp-core-grid { grid-template-columns: 1fr; gap: 14px; }
+                    .sp-core-h2 { font-size: clamp(1.5rem, 7vw, 2.2rem); }
+                    .sp-core-header { margin-bottom: 36px; }
+                    .sp-core-card { padding: 20px; border-radius: 16px; }
+                    .sp-core-icon { width: 44px; height: 44px; margin-bottom: 16px; }
+                    .sp-core-title { font-size: 15px; }
+                    .sp-core-desc { font-size: 13px; }
+                    .sp-showcase-nav { flex-direction: column; }
+                    .sp-showcase-btn { width: 100%; }
+                    .sp-genres-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+                    .sp-genres-h2 { font-size: clamp(1.5rem, 7vw, 2.2rem); }
+                    .sp-genres-header { margin-bottom: 36px; }
+                    .sp-genre-card { padding: 16px; border-radius: 12px; }
+                    .sp-genre-icon { width: 40px; height: 40px; margin-bottom: 12px; }
+                    .sp-genre-title { font-size: 11px; }
+                    .sp-genre-desc { font-size: 10.5px; }
+                    .sp-journey-grid { grid-template-columns: 1fr; gap: 24px; }
+                    .sp-journey-h2 { font-size: clamp(1.5rem, 7vw, 2.2rem); }
+                    .sp-journey-header { margin-bottom: 36px; }
+                    .sp-journey-circle { width: 52px; height: 52px; margin-bottom: 16px; }
+                    .sp-journey-num { font-size: 16px; }
+                    .sp-journey-title { font-size: 15px; }
+                    .sp-journey-desc { font-size: 13px; }
+                    .sp-why-h2 { font-size: clamp(1.5rem, 7vw, 2.2rem); }
+                    .sp-why-text { font-size: 13.5px; }
+                    .sp-why-list { gap: 14px; }
+                    .sp-packages-grid { max-width: 100%; }
+                    .sp-packages-h2 { font-size: clamp(1.5rem, 7vw, 2.2rem); }
+                    .sp-pkg-card { padding: 24px; border-radius: 16px; }
+                    .sp-pkg-title { font-size: 17px; }
+                    .sp-pkg-price { font-size: 40px; }
+                    .sp-pkg-feat { font-size: 12px; }
+                    .sp-pkg-btn { font-size: 11px; padding: 14px; }
+                    .sp-faqs-h2 { font-size: clamp(1.5rem, 7vw, 2.2rem); }
+                    .sp-faqs-header { margin-bottom: 36px; }
+                    .sp-faq-q { font-size: 13.5px; }
+                    .sp-faq-answer { font-size: 13px; }
+                    .sp-faq-trigger { padding: 18px; }
+                    .sp-cta-h2 { font-size: clamp(1.5rem, 7.5vw, 2.2rem); }
+                    .sp-cta-sub { font-size: 14px; }
+                    .sp-cta-btn { font-size: 11px; padding: 14px 24px; border-radius: 10px; width: 100%; justify-content: center; }
+                }
+
+                /* ══════════════════════════════════════
+                   480px — Standard Mobile
+                ══════════════════════════════════════ */
+                @media (max-width: 480px) {
+                    .sp-hero-h1 { font-size: clamp(1.5rem, 8.5vw, 2.2rem); }
+                    .sp-core-h2, .sp-genres-h2, .sp-journey-h2, .sp-packages-h2, .sp-faqs-h2, .sp-cta-h2, .sp-why-h2 { font-size: clamp(1.35rem, 7.5vw, 1.9rem); }
+                }
+
+                /* ══════════════════════════════════════
+                   380px — Small Mobile
+                ══════════════════════════════════════ */
+                @media (max-width: 380px) {
+                    .sp-core-inner, .sp-genres-inner, .sp-packages-inner { padding: 0 14px; }
+                    .sp-showcase-inner, .sp-journey-inner, .sp-why-inner, .sp-faqs-inner, .sp-cta-inner { padding: 0 14px; }
+                    .sp-hero-h1 { font-size: 1.4rem; }
+                    .sp-core-h2, .sp-genres-h2, .sp-journey-h2, .sp-packages-h2, .sp-faqs-h2, .sp-cta-h2, .sp-why-h2 { font-size: 1.25rem; }
+                    .sp-genres-grid { grid-template-columns: 1fr 1fr; }
+                    .sp-pkg-price { font-size: 34px; }
+                }
+
+                /* ══════════════════════════════════════
+                   320px — Very Small
+                ══════════════════════════════════════ */
+                @media (max-width: 320px) {
+                    .sp-core-inner, .sp-genres-inner, .sp-packages-inner { padding: 0 12px; }
+                    .sp-showcase-inner, .sp-journey-inner, .sp-why-inner, .sp-faqs-inner, .sp-cta-inner { padding: 0 12px; }
+                    .sp-hero-h1 { font-size: 1.25rem; }
+                    .sp-core-h2, .sp-genres-h2, .sp-journey-h2, .sp-packages-h2, .sp-faqs-h2, .sp-cta-h2, .sp-why-h2 { font-size: 1.1rem; }
+                    .sp-cta-btn { font-size: 10px; padding: 12px 18px; }
+                }
+            `}</style>
+
+            <main className="sp-main">
+
+                {/* S1 HERO */}
+                <section className="sp-hero">
+                    <div className="absolute inset-0 opacity-[0.04] pointer-events-none" style={{ backgroundImage: "url('/images/Left-Section_bg.webp')", backgroundSize: "40px 40px" }} />
+                    <div className="absolute pointer-events-none" style={{ top: "33%", right: "25%", width: 600, height: 600, background: "rgba(232,57,29,0.1)", borderRadius: "50%", filter: "blur(150px)" }} />
+                    <div className="sp-hero-inner">
+                        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.5 }} className="sp-eyebrow">
+                            <span className="sp-eyebrow-line" /><span className="sp-eyebrow-text">What We Do</span><span className="sp-eyebrow-line" />
+                        </motion.div>
+                        <motion.h1 variants={maskReveal} initial="hidden" animate="visible" className="sp-hero-h1">
+                            PROFESSIONAL EBOOK WRITING AND <br /><span className="accent">PUBLISHING SERVICES YOU CAN TRUST.</span>
+                        </motion.h1>
+                        <motion.p variants={fadeUp} initial="hidden" animate="visible" className="sp-hero-sub">
+                            Whether you're an aspiring author, entrepreneur, or expert with a story to tell, working with Bexley Publishing ensures your ideas are transformed into a compelling, polished book.
+                        </motion.p>
                     </div>
+                </section>
 
-                    <motion.div variants={staggerContainer} initial="hidden" animate={gridInView ? "visible" : "hidden"} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {coreServices.map(({ icon: Icon, title, desc, color }) => (
-                            <motion.div key={title} variants={fadeUp} className="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 group cursor-default relative overflow-hidden">
-                                <div className="absolute top-0 left-0 w-full h-1 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" style={{ background: color }} />
-                                <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-colors duration-300" style={{ backgroundColor: `${color}15` }}>
-                                    <Icon size={24} style={{ color: color }} className="group-hover:scale-110 transition-transform duration-300" />
-                                </div>
-                                <h3 className="font-black text-black uppercase text-lg mb-3 tracking-wide">{title}</h3>
-                                <p className="text-gray-500 text-[14px] leading-relaxed">{desc}</p>
-                            </motion.div>
-                        ))}
-                    </motion.div>
-                </div>
-            </section>
-
-            {/* ════════════════════════════════════════════
-                SECTION 3: INTERACTIVE SERVICE SHOWCASE
-            ════════════════════════════════════════════ */}
-            <section className="relative w-full bg-[#05070f] py-32 overflow-hidden">
-                <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: `radial-gradient(#fff 1px, transparent 1px)`, backgroundSize: "30px 30px" }} />
-
-                <div className="max-w-[1200px] mx-auto px-8 lg:px-16 relative z-10">
-                    <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-16 items-start">
-                        <div className="flex flex-col gap-3 lg:sticky lg:top-32">
-                            {detailedServices.map(({ id, label, icon: Icon }) => (
-                                <motion.button key={id} onClick={() => setActiveService(id)} whileTap={{ scale: 0.95 }} className={`w-full flex items-center gap-4 px-5 py-4 rounded-xl text-left font-bold uppercase tracking-wider text-[13px] transition-all duration-300 border ${activeService === id ? "bg-[#e8391d] border-[#e8391d] text-white shadow-lg shadow-[#e8391d]/30" : "bg-white/5 border-white/10 text-white/60 hover:bg-white/10 hover:text-white"}`}>
-                                    <Icon size={16} /> {label}
-                                </motion.button>
-                            ))}
+                {/* S2 CORE SERVICES */}
+                <section ref={gridRef} className="sp-core">
+                    <motion.div initial={{ width: "0%" }} animate={gridInView ? { width: "100%" } : {}} transition={{ duration: 1.5, ease: smoothEase }} className="absolute top-0 left-0 h-1 bg-[#e8391d] origin-left" />
+                    <div className="sp-core-inner">
+                        <div className="sp-core-header">
+                            <motion.h2 variants={maskReveal} initial="hidden" animate={gridInView ? "visible" : "hidden"} className="sp-core-h2">
+                                From Manuscript to Marketplace. <span className="accent">Your Complete Publishing Partner.</span>
+                            </motion.h2>
                         </div>
-
-                        <AnimatePresence mode="wait">
-                            <motion.div key={currentService.id} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -30 }} transition={{ duration: 0.5, ease: smoothEase }} className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-                                <div className="relative rounded-3xl overflow-hidden aspect-[3/4] shadow-2xl shadow-black/50">
-                                    <Image src={currentService.image} alt={currentService.title} fill className="object-cover" />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                                    <div className="absolute bottom-0 left-0 right-0 p-8">
-                                        <h3 className="font-black text-white text-2xl uppercase leading-tight">{currentService.title}</h3>
-                                    </div>
-                                </div>
-                                <div>
-                                    <p className="text-white/70 leading-[1.85] mb-8 text-[15px]">{currentService.desc}</p>
-                                    <div className="flex flex-col gap-4 mb-10">
-                                        {currentService.features.map((feat) => (
-                                            <div key={feat} className="flex items-center gap-3">
-                                                <CheckCircle2 size={18} className="text-[#e8391d] shrink-0" />
-                                                <span className="text-white/90 text-[14px] font-medium">{feat}</span>
-                                            </div>
-                                        ))}
-                                    </div>
-                                    <motion.a href="/contact" whileHover={{ gap: "14px", boxShadow: "0 10px 30px rgba(232, 57, 29, 0.4)" }} whileTap={{ scale: 0.95 }} className="inline-flex items-center gap-3 bg-[#e8391d] text-white font-black uppercase tracking-widest px-8 py-4 rounded-xl text-[12px] cursor-pointer transition-all">
-                                        Get Started <ArrowRight size={16} />
-                                    </motion.a>
-                                </div>
-                            </motion.div>
-                        </AnimatePresence>
-                    </div>
-                </div>
-            </section>
-
-            {/* ════════════════════════════════════════════
-                SECTION 4: GENRES WE PUBLISH (NEW)
-            ════════════════════════════════════════════ */}
-            <section className="relative w-full bg-[#faf9f7] py-32 overflow-hidden">
-                <div className="max-w-[1200px] mx-auto px-8 lg:px-16">
-                    <div className="text-center mb-16 overflow-hidden">
-                        <motion.div initial={{ y: "100%" }} whileInView={{ y: 0 }} viewport={{ once: true }} className="flex items-center justify-center gap-3 mb-4">
-                            <span className="w-8 h-[2px] bg-[#e8391d]" />
-                            <span className="text-[#e8391d] font-black uppercase tracking-[0.28em] text-[11px]">Categories</span>
-                            <span className="w-8 h-[2px] bg-[#e8391d]" />
-                        </motion.div>
-                        <motion.h2 variants={maskReveal} initial="hidden" whileInView="visible" viewport={{ once: true }} className="font-black text-black uppercase leading-none" style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)" }}>
-                            GENRES WE <span className="text-[#e8391d]">PUBLISH</span>
-                        </motion.h2>
-                    </div>
-
-                    <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
-                        {genres.map(({ icon: Icon, title, desc }) => (
-                            <motion.div key={title} variants={fadeUp} className="bg-white rounded-2xl p-6 border border-gray-100 text-center hover:border-[#e8391d]/50 hover:shadow-lg transition-all duration-500 group cursor-default">
-                                <div className="w-12 h-12 rounded-full bg-[#e8391d]/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-[#e8391d] transition-colors duration-300">
-                                    <Icon size={20} className="text-[#e8391d] group-hover:text-white transition-colors duration-300" />
-                                </div>
-                                <h4 className="font-black text-black uppercase text-sm tracking-wider mb-1">{title}</h4>
-                                <p className="text-gray-400 text-[11px] leading-relaxed">{desc}</p>
-                            </motion.div>
-                        ))}
-                    </motion.div>
-                </div>
-            </section>
-
-            {/* ════════════════════════════════════════════
-                SECTION 5: THE PUBLISHING JOURNEY (NEW)
-            ════════════════════════════════════════════ */}
-            <section className="relative w-full bg-[#111] py-32 overflow-hidden">
-                <div className="max-w-[1200px] mx-auto px-8 lg:px-16 relative z-10">
-                    <div className="text-center mb-20 overflow-hidden">
-                        <motion.h2 variants={maskReveal} initial="hidden" whileInView="visible" viewport={{ once: true }} className="font-black text-white uppercase leading-none" style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)" }}>
-                            YOUR JOURNEY TO <span className="text-[#e8391d]">BESTSELLER</span>
-                        </motion.h2>
-                    </div>
-
-                    <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
-                        {/* Connecting line for desktop */}
-                        <div className="hidden lg:block absolute top-8 left-[12%] right-[12%] h-[2px] bg-white/10 z-0" />
-
-                        {journeySteps.map(({ step, title, desc }) => (
-                            <motion.div key={step} variants={fadeUp} className="relative z-10 flex flex-col items-center text-center">
-                                <div className="w-16 h-16 rounded-full bg-[#e8391d] flex items-center justify-center mb-6 shadow-lg shadow-[#e8391d]/30">
-                                    <span className="font-black text-white text-xl">{step}</span>
-                                </div>
-                                <h3 className="font-black text-white uppercase text-lg mb-3 tracking-wide">{title}</h3>
-                                <p className="text-white/50 text-[14px] leading-relaxed max-w-[250px]">{desc}</p>
-                            </motion.div>
-                        ))}
-                    </motion.div>
-                </div>
-            </section>
-
-            {/* ════════════════════════════════════════════
-                SECTION 6: WHY CHOOSE BEXLEY (NEW)
-            ════════════════════════════════════════════ */}
-            <section className="relative w-full bg-[#05070f] py-32 overflow-hidden">
-                <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: `radial-gradient(#fff 1px, transparent 1px)`, backgroundSize: "30px 30px" }} />
-
-                <div className="max-w-[1200px] mx-auto px-8 lg:px-16 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-                    <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                        <motion.div variants={fadeUp} className="flex items-center gap-3 mb-4">
-                            <span className="w-8 h-[2px] bg-[#e8391d]" />
-                            <span className="text-[#e8391d] font-black uppercase tracking-[0.28em] text-[11px]">Why Bexley?</span>
-                        </motion.div>
-
-                        <motion.h2 variants={fadeUp} className="font-black text-white uppercase leading-[1.05] mb-10" style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}>
-                            BUILT FOR AUTHORS. <br /><span className="text-[#e8391d]">DRIVEN BY RESULT.</span>
-                        </motion.h2>
-
-                        <motion.div variants={staggerContainer} className="flex flex-col gap-5">
-                            {[
-                                "100% Copyright Ownership — Your book, your rules.",
-                                "No Upfront Fees — Flexible milestone-based payments.",
-                                "Global Distribution — Amazon, B&N, Ingram, and 40+ platforms.",
-                                "Dedicated Project Manager — Personal guidance from Day 1.",
-                                "Premium Ghostwriting — Voice-matched, confidential, and NDA protected."
-                            ].map((item) => (
-                                <motion.div key={item} variants={fadeUp} className="flex items-start gap-4 group">
-                                    <div className="mt-1 w-6 h-6 rounded-full bg-[#e8391d]/10 flex items-center justify-center shrink-0 group-hover:bg-[#e8391d] transition-colors duration-300">
-                                        <CheckCircle2 size={14} className="text-[#e8391d] group-hover:text-white transition-colors" />
-                                    </div>
-                                    <p className="text-white/60 text-[15px] leading-relaxed">{item}</p>
+                        <motion.div variants={staggerContainer} initial="hidden" animate={gridInView ? "visible" : "hidden"} className="sp-core-grid">
+                            {coreServices.map(({ icon: Icon, title, desc, color }) => (
+                                <motion.div key={title} variants={fadeUp} className="sp-core-card">
+                                    <div className="sp-core-card-bar" style={{ background: color }} />
+                                    <div className="sp-core-icon" style={{ background: `${color}15` }}><Icon size={24} style={{ color }} /></div>
+                                    <h3 className="sp-core-title">{title}</h3>
+                                    <p className="sp-core-desc">{desc}</p>
                                 </motion.div>
                             ))}
                         </motion.div>
-                    </motion.div>
-
-                    <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: smoothEase }} className="relative hidden lg:block">
-                        <div className="relative rounded-3xl overflow-hidden shadow-xl z-10" style={{ aspectRatio: "1/1" }}>
-                            <Image src="/images/about-us-bg.webp" alt="Author writing" fill className="object-cover" />
-                            <div className="absolute inset-0 bg-[#e8391d]/20 mix-blend-multiply" />
-                        </div>
-                        <div className="absolute -bottom-5 -right-5 w-full h-full rounded-3xl border-[3px] border-[#e8391d]/25 -z-0" />
-                    </motion.div>
-                </div>
-            </section>
-
-            {/* ════════════════════════════════════════════
-                SECTION 7: PACKAGES / PRICING
-            ════════════════════════════════════════════ */}
-            <section className="relative w-full bg-[#faf9f7] py-32 overflow-hidden">
-                <div className="max-w-[1200px] mx-auto px-8 lg:px-16">
-                    <div className="text-center mb-20 overflow-hidden">
-                        <motion.div initial={{ y: "100%" }} whileInView={{ y: 0 }} viewport={{ once: true }} className="flex items-center justify-center gap-3 mb-4">
-                            <span className="w-8 h-[2px] bg-[#e8391d]" />
-                            <span className="text-[#e8391d] font-black uppercase tracking-[0.28em] text-[11px]">Packages</span>
-                            <span className="w-8 h-[2px] bg-[#e8391d]" />
-                        </motion.div>
-                        <motion.h2 variants={maskReveal} initial="hidden" whileInView="visible" viewport={{ once: true }} className="font-black text-black uppercase leading-none" style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)" }}>
-                            PUBLISHING <span className="text-[#e8391d]">PACKAGES</span>
-                        </motion.h2>
                     </div>
+                </section>
 
-                    <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-                        {packages.map(({ title, price, desc, features, highlight }) => (
-                            <motion.div key={title} variants={fadeUp} className={`relative rounded-3xl p-10 transition-all duration-500 ${highlight ? "bg-[#05070f] text-white scale-105 shadow-2xl border-2 border-[#e8391d] z-10" : "bg-white text-black border border-gray-200 hover:border-[#e8391d]/30 hover:shadow-xl"}`}>
-                                {highlight && <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#e8391d] text-white text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full">Most Popular</div>}
-                                <h3 className="font-black uppercase tracking-wider text-xl mb-2">{title}</h3>
-                                <p className={`text-sm mb-6 ${highlight ? "text-white/60" : "text-gray-500"}`}>{desc}</p>
-                                <div className="mb-8">
-                                    <span className="font-black text-5xl">{price}</span>
-                                    {price !== "Custom" && <span className={`text-sm ${highlight ? "text-white/50" : "text-gray-400"}`}> / project</span>}
-                                </div>
-                                <div className="flex flex-col gap-4 mb-10">
-                                    {features.map((feat) => (
-                                        <div key={feat} className="flex items-center gap-3">
-                                            <Sparkles size={16} className={highlight ? "text-[#e8391d]" : "text-gray-400"} />
-                                            <span className={`text-sm ${highlight ? "text-white/90" : "text-gray-600"}`}>{feat}</span>
+                {/* S3 SHOWCASE */}
+                <section className="sp-showcase">
+                    <div className="absolute inset-0 pointer-events-none" style={{ opacity: 0.03, backgroundImage: "radial-gradient(#fff 1px, transparent 1px)", backgroundSize: "30px 30px" }} />
+                    <div className="sp-showcase-inner">
+                        <div className="sp-showcase-layout">
+                            <div className="sp-showcase-nav">
+                                {detailedServices.map(({ id, label, icon: Icon }) => (
+                                    <motion.button key={id} onClick={() => setActiveService(id)} whileTap={{ scale: 0.95 }} className={`sp-showcase-btn ${activeService === id ? "active" : "inactive"}`}>
+                                        <Icon size={15} /> {label}
+                                    </motion.button>
+                                ))}
+                            </div>
+                            <AnimatePresence mode="wait">
+                                <motion.div key={currentService.id} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -30 }} transition={{ duration: 0.5, ease: smoothEase }} className="sp-showcase-content">
+                                    <div className="sp-showcase-img">
+                                        <Image src={currentService.image} alt={currentService.title} fill className="object-cover"
+                                            sizes="(max-width: 640px) 100vw, (max-width: 900px) 100vw, (max-width: 1200px) 45vw, 520px" />
+                                        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.2), transparent)" }} />
+                                        <div className="sp-showcase-img-caption">
+                                            <h3 className="sp-showcase-title">{currentService.title}</h3>
                                         </div>
-                                    ))}
-                                </div>
-                                <motion.a href="/contact" whileHover={highlight ? { backgroundColor: "#fff", color: "#e8391d" } : { backgroundColor: "#e8391d", color: "#fff", borderColor: "#e8391d" }} whileTap={{ scale: 0.95 }} className={`w-full flex items-center justify-center gap-2 py-4 rounded-xl font-black uppercase tracking-widest text-[12px] transition-all cursor-pointer border-2 ${highlight ? "bg-[#e8391d] border-[#e8391d] text-white" : "bg-transparent border-black text-black"}`}>
-                                    Get Started <ArrowRight size={14} />
-                                </motion.a>
-                            </motion.div>
-                        ))}
-                    </motion.div>
-                </div>
-            </section>
-
-            {/* ════════════════════════════════════════════
-                SECTION 8: SERVICE FAQs (NEW)
-            ════════════════════════════════════════════ */}
-            <section className="relative w-full bg-[#111] py-32 overflow-hidden">
-                <div className="max-w-[900px] mx-auto px-8 relative z-10">
-                    <div className="text-center mb-16">
-                        <motion.h2 variants={maskReveal} initial="hidden" whileInView="visible" viewport={{ once: true }} className="font-black text-white uppercase leading-none" style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}>
-                            SERVICE <span className="text-[#e8391d]">FAQS</span>
-                        </motion.h2>
-                    </div>
-
-                    <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="flex flex-col gap-4">
-                        {faqs.map(({ q, a }, i) => (
-                            <motion.div key={i} variants={fadeUp} className="border border-white/10 rounded-2xl overflow-hidden">
-                                <button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="w-full flex items-center justify-between p-6 text-left group cursor-pointer">
-                                    <span className="font-bold text-white text-[15px] pr-4">{q}</span>
-                                    <div className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${openFaq === i ? "bg-[#e8391d] text-white" : "bg-white/5 text-white/50"}`}>
-                                        {openFaq === i ? <Minus size={14} /> : <Plus size={14} />}
                                     </div>
-                                </button>
-                                <AnimatePresence initial={false}>
-                                    {openFaq === i && (
-                                        <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3, ease: smoothEase }} className="overflow-hidden">
-                                            <div className="px-6 pb-6 text-white/60 text-[14px] leading-relaxed">
-                                                {a}
-                                            </div>
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
+                                    <div>
+                                        <p className="sp-showcase-desc">{currentService.desc}</p>
+                                        <div className="sp-showcase-features">
+                                            {currentService.features.map((feat) => (
+                                                <div key={feat} className="sp-showcase-feat">
+                                                    <CheckCircle2 size={18} style={{ color: "#e8391d", flexShrink: 0 }} />
+                                                    <span>{feat}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                        <a href="/contact" className="sp-showcase-cta">Get Started <ArrowRight size={16} /></a>
+                                    </div>
+                                </motion.div>
+                            </AnimatePresence>
+                        </div>
+                    </div>
+                </section>
+
+                {/* S4 GENRES */}
+                <section className="sp-genres">
+                    <div className="sp-genres-inner">
+                        <div className="sp-genres-header">
+                            <motion.div initial={{ y: "100%" }} whileInView={{ y: 0 }} viewport={{ once: true }} className="sp-eyebrow">
+                                <span className="sp-eyebrow-line" /><span className="sp-eyebrow-text">Categories</span><span className="sp-eyebrow-line" />
                             </motion.div>
-                        ))}
+                            <motion.h2 variants={maskReveal} initial="hidden" whileInView="visible" viewport={{ once: true }} className="sp-genres-h2">
+                                GENRES WE <span className="accent">PUBLISH</span>
+                            </motion.h2>
+                        </div>
+                        <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="sp-genres-grid">
+                            {genres.map(({ icon: Icon, title, desc }) => (
+                                <motion.div key={title} variants={fadeUp} className="sp-genre-card">
+                                    <div className="sp-genre-icon"><Icon size={20} style={{ color: "#e8391d" }} /></div>
+                                    <h4 className="sp-genre-title">{title}</h4>
+                                    <p className="sp-genre-desc">{desc}</p>
+                                </motion.div>
+                            ))}
+                        </motion.div>
+                    </div>
+                </section>
+
+                {/* S5 JOURNEY */}
+                <section className="sp-journey">
+                    <div className="sp-journey-inner">
+                        <div className="sp-journey-header">
+                            <motion.h2 variants={maskReveal} initial="hidden" whileInView="visible" viewport={{ once: true }} className="sp-journey-h2">
+                                YOUR JOURNEY TO <span className="accent">BESTSELLER</span>
+                            </motion.h2>
+                        </div>
+                        <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="sp-journey-grid">
+                            <div className="sp-journey-line" style={{ display: "block" }} />
+                            {journeySteps.map(({ step, title, desc }) => (
+                                <motion.div key={step} variants={fadeUp} className="sp-journey-card">
+                                    <div className="sp-journey-circle"><span className="sp-journey-num">{step}</span></div>
+                                    <h3 className="sp-journey-title">{title}</h3>
+                                    <p className="sp-journey-desc">{desc}</p>
+                                </motion.div>
+                            ))}
+                        </motion.div>
+                    </div>
+                </section>
+
+                {/* S6 WHY CHOOSE */}
+                <section className="sp-why">
+                    <div className="absolute inset-0 pointer-events-none" style={{ opacity: 0.03, backgroundImage: "radial-gradient(#fff 1px, transparent 1px)", backgroundSize: "30px 30px" }} />
+                    <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="sp-why-inner">
+                        <div>
+                            <motion.div variants={fadeUp} className="sp-eyebrow sp-eyebrow-left" style={{ marginBottom: 16 }}>
+                                <span className="sp-eyebrow-line" /><span className="sp-eyebrow-text">Why Bexley?</span>
+                            </motion.div>
+                            <motion.h2 variants={fadeUp} className="sp-why-h2">BUILT FOR AUTHORS. <br /><span className="accent">DRIVEN BY RESULT.</span></motion.h2>
+                            <motion.div variants={staggerContainer} className="sp-why-list">
+                                {["100% Copyright Ownership — Your book, your rules.", "No Upfront Fees — Flexible milestone-based payments.", "Global Distribution — Amazon, B&N, Ingram, and 40+ platforms.", "Dedicated Project Manager — Personal guidance from Day 1.", "Premium Ghostwriting — Voice-matched, confidential, and NDA protected."].map((item) => (
+                                    <motion.div key={item} variants={fadeUp} className="sp-why-item">
+                                        <div className="sp-why-icon"><CheckCircle2 size={14} style={{ color: "#e8391d" }} /></div>
+                                        <p className="sp-why-text">{item}</p>
+                                    </motion.div>
+                                ))}
+                            </motion.div>
+                        </div>
+                        <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: smoothEase }} className="sp-why-img-wrap" style={{ position: "relative" }}>
+                            <Image src="/images/Services/Services-3.png" alt="Author writing" fill className="object-cover"
+                                sizes="(max-width: 1200px) 0px, 560px" />
+                            <div className="absolute inset-0" style={{ background: "rgba(232,57,29,0.2)", mixBlendMode: "multiply" }} />
+                            <div className="absolute" style={{ bottom: -20, right: -20, width: "100%", height: "100%", borderRadius: 24, border: "3px solid rgba(232,57,29,0.25)", zIndex: -1 }} />
+                        </motion.div>
                     </motion.div>
-                </div>
-            </section>
+                </section>
 
-            {/* ════════════════════════════════════════════
-                SECTION 9: MASSIVE CTA
-            ════════════════════════════════════════════ */}
-            <section className="relative w-full bg-[#e8391d] py-28 overflow-hidden">
-                <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: `url('/images/Left-Section_bg.webp')`, backgroundSize: "40px 40px" }} />
+                {/* S8 FAQs */}
+                <section className="sp-faqs">
+                    <div className="sp-faqs-inner">
+                        <div className="sp-faqs-header">
+                            <motion.h2 variants={maskReveal} initial="hidden" whileInView="visible" viewport={{ once: true }} className="sp-faqs-h2">
+                                SERVICE <span className="accent">FAQS</span>
+                            </motion.h2>
+                        </div>
+                        <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="sp-faqs-list">
+                            {faqs.map(({ q, a }, i) => (
+                                <motion.div key={i} variants={fadeUp} className="sp-faq-item">
+                                    <button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="sp-faq-trigger">
+                                        <span className="sp-faq-q">{q}</span>
+                                        <div className={`sp-faq-icon ${openFaq === i ? "open" : "closed"}`}>
+                                            {openFaq === i ? <Minus size={14} /> : <Plus size={14} />}
+                                        </div>
+                                    </button>
+                                    <AnimatePresence initial={false}>
+                                        {openFaq === i && (
+                                            <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3, ease: smoothEase }} style={{ overflow: "hidden" }}>
+                                                <div className="sp-faq-answer">{a}</div>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+                                </motion.div>
+                            ))}
+                        </motion.div>
+                    </div>
+                </section>
 
-                <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="max-w-4xl mx-auto text-center px-8 relative z-10">
-                    <h2 className="font-black text-white uppercase leading-tight mb-6" style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)" }}>
-                        NOT SURE WHICH SERVICE YOU NEED?
-                    </h2>
-                    <p className="text-white/80 text-lg max-w-xl mx-auto mb-10 leading-relaxed">
-                        Speak to one of our publishing consultants today. We’ll map out the perfect plan for your book.
-                    </p>
-                    <motion.a href="/contact" whileHover={{ backgroundColor: "#fff", color: "#e8391d", gap: "14px", boxShadow: "0 20px 60px rgba(0,0,0,0.2)" }} whileTap={{ scale: 0.95 }} className="inline-flex items-center gap-3 bg-black text-white font-black uppercase tracking-widest px-10 py-5 rounded-xl text-[14px] cursor-pointer transition-all duration-300">
-                        Book A Free Call <ArrowRight size={18} />
-                    </motion.a>
-                </motion.div>
-            </section>
+                {/* S9 CTA */}
+                <section className="sp-cta">
+                    <div className="absolute inset-0 pointer-events-none" style={{ opacity: 0.1, backgroundImage: "url('/images/Left-Section_bg.webp')", backgroundSize: "40px 40px" }} />
+                    <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="sp-cta-inner">
+                        <h2 className="sp-cta-h2">NOT SURE WHICH SERVICE YOU NEED?</h2>
+                        <p className="sp-cta-sub">Speak to one of our publishing consultants today. We'll map out the perfect plan for your book.</p>
+                        <a href="/contact" className="sp-cta-btn">Book A Free Call <ArrowRight size={18} /></a>
+                    </motion.div>
+                </section>
 
-        </main>
+            </main>
+        </>
     );
 }

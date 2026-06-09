@@ -9,42 +9,42 @@ const faqs = [
     {
         question: "How much time do you take to complete the ghostwriting process?",
         body: "The timeline depends on various factors, including the book's length, nature, genre, and complexity. Most projects usually require from a few weeks to several months to be professionally done.",
-        cta: { label: "Explore Ghostwriting", href: "#" },
+        cta: { label: "Explore Ghostwriting", href: "/InnerServices/ghostwriting" },
     },
     {
         question: "What genres do you write and publish?",
         body: "We have a team of experts who work across all genres, such as fiction, nonfiction, children's books, biographies, poetry, memoirs, romance, business books, fantasy, sci-fi, horror, and more.",
-        cta: { label: "View Writing Services", href: "#" },
+        cta: { label: "View Writing Services", href: "/InnerServices/book-writing" },
     },
     {
         question: "Do I have full rights and ownership of my book after publication?",
         body: "Definitely! Once the book is completed and published, you keep full ownership, copyrights, royalties, and publishing rights.",
-        cta: { label: "Get Started", href: "#" },
+        cta: { label: "Get Started", href: "/contact" },
     },
     {
         question: "What do your proofreading and editing tasks include?",
         body: "We check grammar mistakes, spelling errors, and sentence structures through developmental editing and proofreading. We enhance your book's readability and preserve your original writing style and voice.",
-        cta: { label: "Explore Editing", href: "#" },
+        cta: { label: "Explore Editing", href: "/InnerServices/book-editing" },
     },
     {
         question: "What platforms do you prefer for publication and distribution?",
         body: "We prefer all known publishing and distribution platforms, including Amazon Kindle, Apple Books, Barnes & Noble, Kobo, Google Books, and other global platforms.",
-        cta: { label: "Explore Publishing", href: "#" },
+        cta: { label: "Explore Publishing", href: "/InnerServices/book-publishing" },
     },
     {
         question: "Can you help if I have an unfinished draft or only have an idea?",
         body: "Yes, we can. You just need to share your unfinished manuscript or idea. Our writers and publishing experts take your rough draft or concept and make it a complete, professional book.",
-        cta: { label: "Start With An Idea", href: "#" },
+        cta: { label: "Start With An Idea", href: "/contact" },
     },
     {
         question: "What marketing and promotion services do you offer?",
         body: "We offer all book visibility services, including author branding, pre-marketing book promotions through PR and article writing, social media marketing, book trailers, Amazon optimization, email marketing, and other visibility campaigns.",
-        cta: { label: "Explore Marketing", href: "#" },
+        cta: { label: "Explore Marketing", href: "/InnerServices/book-marketing" },
     },
     {
         question: "How much do your writing, editing, and publishing packages cost?",
         body: "The price varies based on your project's needs, such as book length, design requirements, and services you need. Our publishing packages scale with you, suggesting that they are more flexible.",
-        cta: { label: "View Pricing", href: "#" },
+        cta: { label: "Get Started", href: "/contact" },
     },
 ];
 
@@ -468,7 +468,7 @@ export default function FAQSection() {
                                 Even now, if you have any questions about our ebook support and services, scroll down for questions authors often ask.
                             </p>
                             <motion.a
-                                href="#"
+                                href="/contact"
                                 whileHover={{ backgroundColor: "rgba(0,0,0,0.2)", gap: "14px" }}
                                 whileTap={{ scale: 0.97 }}
                                 className="faq-cta-btn"

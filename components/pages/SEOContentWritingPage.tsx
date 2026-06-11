@@ -6,6 +6,7 @@ import {
     Search, ArrowRight, CheckCircle2, BarChart3, FileText, ShoppingCart,
     BookOpen, PenTool, Minus, Plus, Phone, TrendingUp, Eye, Target
 } from "lucide-react";
+import HeroButtons from "../HeroButton";
 
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -432,10 +433,8 @@ export default function SEOContentWritingPage() {
                         <motion.p variants={fadeUp} initial="hidden" animate="visible" className="seo-hero-sub">
                             We create high-quality content that's relevant to your readers and helps your brand get found more easily by search engines.
                         </motion.p>
-                        <motion.div variants={fadeUp} initial="hidden" animate="visible" className="seo-hero-btns">
-                            <a href="#overview" className="seo-btn-primary">Learn More <ArrowRight size={16} /></a>
-                            <a href="/contact" className="seo-btn-outline">Get A Free Quote</a>
-                        </motion.div>
+                        
+                        <HeroButtons />
                     </div>
                 </section>
 

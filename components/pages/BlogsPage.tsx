@@ -3,6 +3,7 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView, Variants } from "framer-motion";
 import Image from "next/image";
 import { ArrowRight, Clock, BookOpen, Mail, PenTool, Palette, Rocket, BarChart } from "lucide-react";
+import HeroButtons from "../HeroButton";
 
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -104,6 +105,8 @@ export default function BlogsPage() {
                     <motion.p variants={fadeUp} initial="hidden" animate="visible" className="text-white/60 leading-[1.85] max-w-2xl mx-auto" style={{ fontSize: "clamp(0.9rem, 1.1vw, 1.05rem)" }}>
                         Expert advice, industry trends, and actionable strategies to help you write, publish, and market your book successfully.
                     </motion.p>
+
+                    <HeroButtons />
                 </div>
             </section>
 

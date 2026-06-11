@@ -7,6 +7,7 @@ import {
     UserCheck, Users, AudioLines, SlidersHorizontal, UploadCloud,
     Phone, Minus, Plus, Sparkles, FileAudio, Clapperboard, Gauge, AudioWaveform
 } from "lucide-react";
+import HeroButtons from "../HeroButton";
 
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -81,15 +82,8 @@ export default function AudiobookNarrationPage() {
                     <motion.p variants={fadeUp} initial="hidden" animate="visible" className="text-white/60 leading-[1.85] max-w-2xl mx-auto mb-10" style={{ fontSize: "clamp(0.9rem, 1.1vw, 1.05rem)" }}>
                         A great audiobook does more than read the words on a page. It captures emotion, atmosphere, personality, and pacing in a way that keeps listeners engaged from the first chapter to the final line. We handle the entire production process, pairing your book with the right voice and delivering professional audio ready for today's leading platforms.
                     </motion.p>
-
-                    <motion.div variants={fadeUp} initial="hidden" animate="visible" className="flex flex-wrap justify-center gap-4">
-                        <motion.a href="#overview" whileHover={{ backgroundColor: "#c0271a", gap: "14px", boxShadow: "0 10px 40px rgba(232, 57, 29, 0.4)" }} whileTap={{ scale: 0.95 }} className="inline-flex items-center gap-3 bg-[#e8391d] text-white font-black uppercase tracking-widest px-8 py-4 rounded-xl text-[12px] cursor-pointer transition-all">
-                            Learn More <ArrowRight size={16} />
-                        </motion.a>
-                        <motion.a href="/contact" whileHover={{ borderColor: "#e8391d", color: "#e8391d" }} whileTap={{ scale: 0.95 }} className="inline-flex items-center gap-3 border-2 border-white text-white font-black uppercase tracking-widest px-8 py-4 rounded-xl text-[12px] cursor-pointer transition-all">
-                            LISTEN TO SAMPLE VOICES
-                        </motion.a>
-                    </motion.div>
+                    
+                    <HeroButtons />
                 </div>
             </section>
 

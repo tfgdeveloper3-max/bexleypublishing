@@ -6,6 +6,7 @@ import {
     BookHeart, ArrowRight, CheckCircle2, Mic, Heart, ShieldCheck,
     BookOpen, PenTool, Minus, Plus, Phone, Users, Clock, TreePine
 } from "lucide-react";
+import HeroButtons from "../HeroButton";
 
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -430,10 +431,8 @@ export default function MemoirWritingPage() {
                         <motion.p variants={fadeUp} initial="hidden" animate="visible" className="mw-hero-sub">
                             Want to share your life story with the world and become a published author? Bexley Publishing has a deep understanding of the memoir genre, personal storytelling, and emotional authenticity. Let your story be the one that impacts readers.
                         </motion.p>
-                        <motion.div variants={fadeUp} initial="hidden" animate="visible" className="mw-hero-btns">
-                            <a href="#overview" className="mw-btn-primary">Learn More <ArrowRight size={16} /></a>
-                            <a href="/contact" className="mw-btn-outline">Get A Free Quote</a>
-                        </motion.div>
+
+                        <HeroButtons />
                     </div>
                 </section>
 

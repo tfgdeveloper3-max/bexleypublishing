@@ -6,6 +6,7 @@ import {
     PenTool, ArrowRight, CheckCircle2, ShieldCheck, Fingerprint, Mic,
     BookOpen, UserCircle, Briefcase, Heart, Minus, Plus, Phone, Lock, Sparkles
 } from "lucide-react";
+import HeroButtons from "../HeroButton";
 
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -432,10 +433,8 @@ export default function GhostwritingPage() {
                         <motion.p variants={fadeUp} initial="hidden" animate="visible" className="gw-hero-sub">
                             Get your story polished with our ghostwriting service. Our competent and experienced team of ghostwriters preserves your voice, creating a masterpiece, the one that has only your name on it and the one to which only you have the right.
                         </motion.p>
-                        <motion.div variants={fadeUp} initial="hidden" animate="visible" className="gw-hero-btns">
-                            <a href="#overview" className="gw-btn-primary">Learn More <ArrowRight size={16} /></a>
-                            <a href="/contact" className="gw-btn-outline">Get A Free Quote</a>
-                        </motion.div>
+
+                        <HeroButtons />
                     </div>
                 </section>
 

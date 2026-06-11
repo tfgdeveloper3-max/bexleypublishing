@@ -6,6 +6,7 @@ import {
     BookHeart, ArrowRight, CheckCircle2, Palette, Baby, GraduationCap,
     Sparkles, BookOpen, PenTool, Minus, Plus, Phone, Users, LayoutGrid, Smile
 } from "lucide-react";
+import HeroButtons from "../HeroButton";
 
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -431,10 +432,8 @@ export default function ChildrensBookPage() {
                         <motion.p variants={fadeUp} initial="hidden" animate="visible" className="cb-hero-sub">
                             Make your children's book a bedtime favorite for young minds with our expert writers for young audiences.
                         </motion.p>
-                        <motion.div variants={fadeUp} initial="hidden" animate="visible" className="cb-hero-btns">
-                            <a href="#overview" className="cb-btn-primary">Learn More <ArrowRight size={16} /></a>
-                            <a href="/contact" className="cb-btn-outline">Get A Free Quote</a>
-                        </motion.div>
+
+                        <HeroButtons />
                     </div>
                 </section>
 

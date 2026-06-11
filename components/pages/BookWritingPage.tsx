@@ -6,6 +6,7 @@ import {
     PenTool, ArrowRight, CheckCircle2, BookOpen, Sword, Heart, Briefcase,
     Rocket, Baby, GraduationCap, Phone, Minus, Plus, Users, FileText, Sparkles
 } from "lucide-react";
+import HeroButtons from "../HeroButton";
 
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -435,10 +436,8 @@ export default function BookWritingPage() {
                         <motion.p variants={fadeUp} initial="hidden" animate="visible" className="bw-hero-sub">
                             Looking for "writing" that speaks volumes? Bexley Publishing helps you communicate your thoughts effectively to the whole world by publishing a book that hooks readers from start to finish.
                         </motion.p>
-                        <motion.div variants={fadeUp} initial="hidden" animate="visible" className="bw-hero-btns">
-                            <a href="#overview" className="bw-btn-primary">Learn More <ArrowRight size={16} /></a>
-                            <a href="/contact" className="bw-btn-outline">Get A Free Quote</a>
-                        </motion.div>
+
+                        <HeroButtons />
                     </div>
                 </section>
 

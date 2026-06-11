@@ -6,6 +6,7 @@ import {
     ArrowRight, CheckCircle2, Eye, Skull, UserX,
     PenTool, Minus, Plus, Phone, Users, Fingerprint, Siren, Shuffle
 } from "lucide-react";
+import HeroButtons from "../HeroButton";
 
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -528,10 +529,7 @@ export default function MysteryWritingPage() {
                             Our mystery writing team creates suspense-filled stories packed with hidden secrets, compelling suspects, carefully placed clues, and endings that leave readers stunned.
                         </motion.p>
 
-                        <motion.div variants={fadeUp} initial="hidden" animate="visible" className="mys-hero-btns">
-                            <a href="#overview" className="mys-btn-primary">Learn More <ArrowRight size={16} /></a>
-                            <a href="/contact" className="mys-btn-outline">Get A Free Quote</a>
-                        </motion.div>
+                        <HeroButtons />
                     </div>
                 </section>
 

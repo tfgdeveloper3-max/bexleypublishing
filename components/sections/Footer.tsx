@@ -252,9 +252,9 @@ export default function Footer() {
                 /* Scroll to top */
                 .ft-scroll-top {
                     position: fixed;
-                    bottom: 32px; right: 32px;
+                    bottom: 90px; right: 40px;
                     z-index: 50;
-                    width: 48px; height: 48px;
+                    width: 40px; height: 40px;
                     border-radius: 50%;
                     background: #e8391d;
                     border: none;
@@ -292,7 +292,7 @@ export default function Footer() {
                     .ft-bottom-inner { max-width: 2200px; }
                     .ft-copy, .ft-bottom-link { font-size: 15px; }
                     .ft-bottom-links { gap: 32px; }
-                    .ft-scroll-top { width: 64px; height: 64px; bottom: 48px; right: 48px; }
+                    .ft-scroll-top { width: 64px; height: 64px; bottom: 118px; right: 48px; }
                     .ft-logo-wrap { margin-bottom: 40px; }
                 }
 
@@ -315,7 +315,7 @@ export default function Footer() {
                     .ft-bottom { padding: 28px 130px; }
                     .ft-bottom-inner { max-width: 1700px; }
                     .ft-copy, .ft-bottom-link { font-size: 13px; }
-                    .ft-scroll-top { width: 56px; height: 56px; bottom: 40px; right: 40px; }
+                    .ft-scroll-top { width: 56px; height: 56px; bottom: 100px; right: 40px; }
                 }
 
                 /* ═══════════════════════════════════
@@ -406,7 +406,7 @@ export default function Footer() {
                     .ft-copy { font-size: 11px; }
                     .ft-bottom-link { font-size: 11px; }
                     .ft-bottom-links { gap: 14px; flex-wrap: wrap; }
-                    .ft-scroll-top { width: 42px; height: 42px; bottom: 20px; right: 20px; }
+                    .ft-scroll-top { width: 42px; height: 42px; bottom: 70px; right: 20px; }
                 }
 
                 /* ═══════════════════════════════════

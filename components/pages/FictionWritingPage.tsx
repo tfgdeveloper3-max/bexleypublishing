@@ -6,6 +6,7 @@ import {
     BookOpen, ArrowRight, CheckCircle2, Sword, Heart, Ghost,
     PenTool, Minus, Plus, Phone, Users, Map, Sparkles
 } from "lucide-react";
+import HeroButtons from "../HeroButton";
 
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -430,10 +431,8 @@ export default function FictionWritingPage() {
                         <motion.p variants={fadeUp} initial="hidden" animate="visible" className="fw-hero-sub">
                             Our fiction writing team develops emotionally engaging stories filled with suspense, passion, conflict, and characters readers genuinely connect with.
                         </motion.p>
-                        <motion.div variants={fadeUp} initial="hidden" animate="visible" className="fw-hero-btns">
-                            <a href="#overview" className="fw-btn-primary">Learn More <ArrowRight size={16} /></a>
-                            <a href="/contact" className="fw-btn-outline">Get A Free Quote</a>
-                        </motion.div>
+
+                        <HeroButtons />
                     </div>
                 </section>
 

@@ -2,10 +2,11 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView, Variants } from "framer-motion";
 import Image from "next/image";
+import QuoteModal from "@/components/Quotemodal";
 import {
     BookOpen, PenTool, Palette, Rocket, ArrowRight, CheckCircle2,
     Sparkles, FileText, BarChart, Sword, Heart, Briefcase, Globe,
-    Baby, GraduationCap, Minus, Plus
+    Baby, GraduationCap, Minus, Plus, MessageCircle, Phone
 } from "lucide-react";
 
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -68,9 +69,36 @@ const packages = [
     { title: "Elite", price: "Custom", desc: "End-to-end ghostwriting, publishing, and aggressive marketing for bestsellers.", features: ["Everything in Professional", "Full Ghostwriting", "Book Marketing Campaign", "Audiobook Narration", "PR & Launch Strategy"], highlight: false },
 ];
 
+function openLiveChat() {
+    if (typeof window === "undefined") return;
+
+    if (window.LiveChatWidget) {
+        window.LiveChatWidget.call("maximize");
+        return;
+    }
+
+    const lc = (window as any).LC_API;
+    if (lc && typeof lc.open_chat_window === "function") {
+        lc.open_chat_window();
+        return;
+    }
+
+    const selectors = [
+        "#chat-widget-container button",
+        "[id^='chat-widget']",
+        "iframe[title*='chat' i]",
+    ];
+    for (const sel of selectors) {
+        const el = document.querySelector<HTMLElement>(sel);
+        if (el) { el.click(); return; }
+    }
+}
+
 export default function ServicesPage() {
     const [activeService, setActiveService] = useState("writing");
     const [openFaq, setOpenFaq] = useState<number | null>(0);
+    const [quoteModal, setQuoteModal] = useState(false);
+
     const gridRef = useRef<HTMLDivElement>(null);
     const gridInView = useInView(gridRef, { once: true, margin: "-100px" });
     const currentService = detailedServices.find(s => s.id === activeService) || detailedServices[0];
@@ -94,6 +122,110 @@ export default function ServicesPage() {
                 .sp-hero-h1 { font-weight: 900; color: white; text-transform: uppercase; line-height: 0.95; margin-bottom: 32px; font-size: clamp(2.5rem, 6vw, 4rem); }
                 .sp-hero-h1 .accent { color: #e8391d; }
                 .sp-hero-sub { color: rgba(255,255,255,0.6); line-height: 1.85; max-width: 680px; margin: 0 auto; font-size: clamp(0.9rem, 1.1vw, 1.05rem); }
+
+                /* ── Hero Buttons ── */
+                .sp-hero-buttons {
+                    display: flex;
+                    gap: 16px;
+                    justify-content: center;
+                    flex-wrap: wrap;
+                    margin-top: 44px;
+                }
+                .sp-hero-btn {
+                    position: relative;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 10px;
+                    font-family: 'Raleway', Arial, sans-serif;
+                    font-weight: 900;
+                    font-size: 12px;
+                    text-transform: uppercase;
+                    letter-spacing: 0.12em;
+                    padding: 0 28px;
+                    height: 52px;
+                    border-radius: 14px;
+                    text-decoration: none;
+                    cursor: pointer;
+                    border: none;
+                    outline: none;
+                    overflow: hidden;
+                    transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
+                    white-space: nowrap;
+                    background: none;
+                }
+                .sp-hero-btn:active { transform: scale(0.96) !important; }
+                .sp-hero-btn::before {
+                    content: '';
+                    position: absolute;
+                    top: 0; left: -100%;
+                    width: 60%;
+                    height: 100%;
+                    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.18), transparent);
+                    transform: skewX(-20deg);
+                    transition: left 0.55s ease;
+                    pointer-events: none;
+                    z-index: 1;
+                }
+                .sp-hero-btn:hover::before { left: 160%; }
+                .sp-hero-btn svg { position: relative; z-index: 2; flex-shrink: 0; }
+
+                /* BTN 1 — Request A Quote */
+                .sp-hero-btn--quote {
+                    background: #e8391d;
+                    color: white;
+                }
+                .sp-hero-btn--quote:hover {
+                    transform: translateY(-3px);
+                    box-shadow: 0 12px 32px rgba(232,57,29,0.5), 0 0 0 3px rgba(232,57,29,0.2);
+                }
+
+                /* BTN 2 — Live Chat */
+                .sp-hero-btn--chat {
+                    background: rgba(255,255,255,0.06);
+                    color: white;
+                    box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.25);
+                }
+                .sp-hero-btn--chat:hover {
+                    background: rgba(255,255,255,0.12);
+                    transform: translateY(-3px);
+                    box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.55), 0 10px 28px rgba(0,0,0,0.35);
+                }
+
+                /* BTN 3 — Call Now */
+                .sp-hero-btn--call {
+                    background: transparent;
+                    color: #e8391d;
+                    box-shadow: inset 0 0 0 1.5px rgba(232,57,29,0.55);
+                }
+                .sp-hero-btn--call:hover {
+                    background: rgba(232,57,29,0.08);
+                    transform: translateY(-3px);
+                    box-shadow: inset 0 0 0 1.5px #e8391d, 0 10px 28px rgba(232,57,29,0.25);
+                }
+
+                /* Green pulse dot on Live Chat */
+                .sp-hero-btn__dot {
+                    position: relative;
+                    z-index: 2;
+                    width: 8px;
+                    height: 8px;
+                    border-radius: 50%;
+                    background: #22c55e;
+                    flex-shrink: 0;
+                    box-shadow: 0 0 6px rgba(34,197,94,0.9);
+                }
+                .sp-hero-btn__dot::after {
+                    content: '';
+                    position: absolute;
+                    inset: -3px;
+                    border-radius: 50%;
+                    background: rgba(34,197,94,0.3);
+                    animation: sp-pulse 2s ease infinite;
+                }
+                @keyframes sp-pulse {
+                    0%, 100% { transform: scale(1); opacity: 1; }
+                    50% { transform: scale(1.7); opacity: 0; }
+                }
 
                 /* ══ S2 CORE GRID ══ */
                 .sp-core { position: relative; width: 100%; background: #faf9f7; padding: 128px 0; overflow: hidden; }
@@ -221,7 +353,6 @@ export default function ServicesPage() {
                 .sp-cta-btn { display: inline-flex; align-items: center; gap: 12px; background: black; color: white; font-weight: 900; font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em; padding: 20px 40px; border-radius: 12px; text-decoration: none; cursor: pointer; transition: all 0.3s ease; }
                 .sp-cta-btn:hover { background: white; color: #e8391d; gap: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
 
-
                 /* ══════════════════════════════════════
                    2560px — 4K
                 ══════════════════════════════════════ */
@@ -229,11 +360,11 @@ export default function ServicesPage() {
                     .sp-hero-inner { max-width: 1800px; }
                     .sp-hero-h1 { font-size: clamp(4.5rem, 5.5vw, 8rem); margin-bottom: 52px; }
                     .sp-hero-sub { font-size: clamp(1.2rem, 1.1vw, 1.6rem); max-width: 1100px; }
-
+                    .sp-hero-buttons { gap: 24px; margin-top: 64px; }
+                    .sp-hero-btn { height: 68px; padding: 0 40px; font-size: 15px; border-radius: 18px; gap: 14px; }
                     .sp-core-inner, .sp-genres-inner, .sp-packages-inner { max-width: 2200px; padding: 0 160px; }
                     .sp-showcase-inner, .sp-journey-inner, .sp-why-inner, .sp-faqs-inner { max-width: 2200px; padding: 0 160px; }
                     .sp-core, .sp-showcase, .sp-genres, .sp-journey, .sp-why, .sp-packages, .sp-faqs, .sp-cta { padding: 200px 0; }
-
                     .sp-core-h2, .sp-genres-h2, .sp-journey-h2, .sp-packages-h2 { font-size: clamp(4rem, 5vw, 7rem); }
                     .sp-core-header, .sp-genres-header, .sp-journey-header, .sp-packages-header { margin-bottom: 120px; }
                     .sp-core-grid { gap: 40px; }
@@ -241,7 +372,6 @@ export default function ServicesPage() {
                     .sp-core-icon { width: 72px; height: 72px; border-radius: 22px; margin-bottom: 36px; }
                     .sp-core-title { font-size: 22px; margin-bottom: 16px; }
                     .sp-core-desc { font-size: 18px; }
-
                     .sp-showcase-layout { grid-template-columns: 360px 1fr; gap: 100px; }
                     .sp-showcase-nav { gap: 18px; }
                     .sp-showcase-btn { padding: 22px 28px; font-size: 16px; border-radius: 18px; }
@@ -251,25 +381,21 @@ export default function ServicesPage() {
                     .sp-showcase-feat span { font-size: 18px; }
                     .sp-showcase-features { gap: 22px; margin-bottom: 56px; }
                     .sp-showcase-cta { font-size: 16px; padding: 22px 52px; border-radius: 18px; }
-
                     .sp-genres-grid { gap: 32px; }
                     .sp-genre-card { padding: 36px; border-radius: 24px; }
                     .sp-genre-icon { width: 68px; height: 68px; margin-bottom: 24px; }
                     .sp-genre-title { font-size: 15px; }
                     .sp-genre-desc { font-size: 14px; }
-
                     .sp-journey-grid { gap: 48px; }
                     .sp-journey-circle { width: 88px; height: 88px; margin-bottom: 32px; }
                     .sp-journey-num { font-size: 28px; }
                     .sp-journey-title { font-size: 22px; margin-bottom: 16px; }
                     .sp-journey-desc { font-size: 18px; max-width: 320px; }
-
                     .sp-why-inner { gap: 120px; }
                     .sp-why-h2 { font-size: clamp(3rem, 3.5vw, 5rem); margin-bottom: 60px; }
                     .sp-why-list { gap: 28px; }
                     .sp-why-text { font-size: 19px; }
                     .sp-why-icon { width: 32px; height: 32px; }
-
                     .sp-packages-grid { gap: 52px; }
                     .sp-pkg-card { padding: 60px; border-radius: 36px; }
                     .sp-pkg-title { font-size: 26px; }
@@ -278,14 +404,12 @@ export default function ServicesPage() {
                     .sp-pkg-feat { font-size: 17px; gap: 16px; }
                     .sp-pkg-features { gap: 22px; }
                     .sp-pkg-btn { font-size: 15px; padding: 20px; border-radius: 16px; }
-
                     .sp-faqs-inner { max-width: 1600px; padding: 0 160px; }
                     .sp-faq-q { font-size: 19px; }
                     .sp-faq-answer { font-size: 17px; padding: 0 32px 32px; }
                     .sp-faq-trigger { padding: 32px; }
                     .sp-faq-icon { width: 44px; height: 44px; }
                     .sp-faqs-list { gap: 24px; }
-
                     .sp-cta-inner { max-width: 1400px; }
                     .sp-cta-h2 { font-size: clamp(3.5rem, 5vw, 7rem); }
                     .sp-cta-sub { font-size: 24px; max-width: 800px; }
@@ -299,49 +423,42 @@ export default function ServicesPage() {
                     .sp-hero-inner { max-width: 1400px; }
                     .sp-hero-h1 { font-size: clamp(3.5rem, 5vw, 6.5rem); }
                     .sp-hero-sub { font-size: clamp(1.05rem, 1.1vw, 1.35rem); max-width: 900px; }
-
+                    .sp-hero-buttons { gap: 20px; margin-top: 56px; }
+                    .sp-hero-btn { height: 60px; padding: 0 36px; font-size: 14px; }
                     .sp-core-inner, .sp-genres-inner, .sp-packages-inner { max-width: 1700px; padding: 0 130px; }
                     .sp-showcase-inner, .sp-journey-inner, .sp-why-inner { max-width: 1700px; padding: 0 130px; }
                     .sp-faqs-inner { max-width: 1200px; padding: 0 64px; }
                     .sp-core, .sp-showcase, .sp-genres, .sp-journey, .sp-why, .sp-packages, .sp-faqs, .sp-cta { padding: 160px 0; }
-
                     .sp-core-h2, .sp-genres-h2, .sp-journey-h2, .sp-packages-h2 { font-size: clamp(3rem, 4.5vw, 6rem); }
                     .sp-core-grid { gap: 32px; }
                     .sp-core-card { padding: 44px; }
                     .sp-core-icon { width: 64px; height: 64px; }
                     .sp-core-title { font-size: 20px; }
                     .sp-core-desc { font-size: 16px; }
-
                     .sp-showcase-layout { grid-template-columns: 320px 1fr; gap: 80px; }
                     .sp-showcase-btn { font-size: 14px; padding: 18px 24px; }
                     .sp-showcase-title { font-size: 26px; }
                     .sp-showcase-desc { font-size: 17px; }
                     .sp-showcase-feat span { font-size: 16px; }
                     .sp-showcase-cta { font-size: 14px; padding: 20px 44px; }
-
                     .sp-genres-grid { gap: 28px; }
                     .sp-genre-card { padding: 28px; }
                     .sp-genre-title { font-size: 13px; }
                     .sp-genre-desc { font-size: 12px; }
-
                     .sp-journey-grid { gap: 40px; }
                     .sp-journey-circle { width: 72px; height: 72px; }
                     .sp-journey-title { font-size: 20px; }
                     .sp-journey-desc { font-size: 16px; max-width: 280px; }
-
                     .sp-why-h2 { font-size: clamp(2.5rem, 3.2vw, 4.2rem); }
                     .sp-why-text { font-size: 17px; }
                     .sp-why-inner { gap: 100px; }
-
                     .sp-packages-grid { gap: 40px; }
                     .sp-pkg-card { padding: 52px; }
                     .sp-pkg-title { font-size: 23px; }
                     .sp-pkg-price { font-size: 58px; }
                     .sp-pkg-feat { font-size: 15px; }
-
                     .sp-faq-q { font-size: 17px; }
                     .sp-faq-answer { font-size: 15px; }
-
                     .sp-cta-h2 { font-size: clamp(3rem, 4.5vw, 6rem); }
                     .sp-cta-sub { font-size: 21px; }
                     .sp-cta-btn { font-size: 16px; padding: 22px 52px; }
@@ -408,6 +525,7 @@ export default function ServicesPage() {
                     .sp-core, .sp-showcase, .sp-genres, .sp-journey, .sp-why, .sp-packages, .sp-faqs, .sp-cta { padding: 80px 0; }
                     .sp-hero-h1 { font-size: clamp(2.2rem, 6vw, 3.6rem); }
                     .sp-hero-sub { font-size: 0.95rem; }
+                    .sp-hero-buttons { gap: 12px; margin-top: 36px; }
                     .sp-core-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
                     .sp-core-h2 { font-size: clamp(1.8rem, 5vw, 2.8rem); }
                     .sp-core-header { margin-bottom: 48px; }
@@ -444,6 +562,7 @@ export default function ServicesPage() {
                     .sp-genres-grid { gap: 12px; }
                     .sp-pkg-card { padding: 28px; border-radius: 18px; }
                     .sp-cta-h2 { font-size: clamp(1.6rem, 6vw, 2.4rem); }
+                    .sp-hero-btn { height: 46px; padding: 0 20px; font-size: 11px; }
                 }
 
                 /* ══════════════════════════════════════
@@ -457,6 +576,8 @@ export default function ServicesPage() {
                     .sp-core, .sp-showcase, .sp-genres, .sp-journey, .sp-why, .sp-packages, .sp-faqs, .sp-cta { padding: 56px 0; }
                     .sp-hero-h1 { font-size: clamp(1.7rem, 8vw, 2.6rem); margin-bottom: 20px; }
                     .sp-hero-sub { font-size: 0.875rem; }
+                    .sp-hero-buttons { flex-direction: column; align-items: stretch; gap: 10px; margin-top: 32px; }
+                    .sp-hero-btn { height: 48px; justify-content: center; width: 100%; border-radius: 12px; font-size: 11px; }
                     .sp-core-grid { grid-template-columns: 1fr; gap: 14px; }
                     .sp-core-h2 { font-size: clamp(1.5rem, 7vw, 2.2rem); }
                     .sp-core-header { margin-bottom: 36px; }
@@ -548,6 +669,41 @@ export default function ServicesPage() {
                         <motion.p variants={fadeUp} initial="hidden" animate="visible" className="sp-hero-sub">
                             Whether you're an aspiring author, entrepreneur, or expert with a story to tell, working with Bexley Publishing ensures your ideas are transformed into a compelling, polished book.
                         </motion.p>
+
+                        {/* ── Hero Buttons ── */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 24 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.7, delay: 0.85, ease: smoothEase }}
+                            className="sp-hero-buttons"
+                        >
+                            {/* Button 1 — Request A Quote */}
+                            <button
+                                type="button"
+                                className="sp-hero-btn sp-hero-btn--quote"
+                                onClick={() => setQuoteModal(true)}
+                            >
+                                <FileText size={16} />
+                                Request A Quote
+                            </button>
+
+                            {/* Button 2 — Live Chat */}
+                            <button
+                                type="button"
+                                className="sp-hero-btn sp-hero-btn--chat"
+                                onClick={openLiveChat}
+                            >
+                                <span className="sp-hero-btn__dot" aria-hidden="true" />
+                                <MessageCircle size={16} />
+                                Live Chat
+                            </button>
+
+                            {/* Button 3 — Call Now */}
+                            <a href="tel:2797770380" className="sp-hero-btn sp-hero-btn--call">
+                                <Phone size={16} />
+                                Call Now
+                            </a>
+                        </motion.div>
                     </div>
                 </section>
 
@@ -723,6 +879,9 @@ export default function ServicesPage() {
                         <a href="/contact" className="sp-cta-btn">Book A Free Call <ArrowRight size={18} /></a>
                     </motion.div>
                 </section>
+
+
+                <QuoteModal isOpen={quoteModal} onClose={() => setQuoteModal(false)} />
 
             </main>
         </>

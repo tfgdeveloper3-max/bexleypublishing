@@ -7,6 +7,7 @@ import {
     Volume2, PenLine, Eye, Users, FileText, Phone, Minus, Plus,
     Search, ShieldCheck, BookMarked, Type, Clock, BookX, Rocket
 } from "lucide-react";
+import HeroButtons from "../HeroButton";
 
 // Safe TS Easing
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -89,14 +90,7 @@ export default function ChildrensBookEditingPage() {
                         Children may be small, but they're tough critics. If a story drags, they'll lose interest. If the language feels awkward, they'll tune out. If the magic isn't there, they'll move on. Our children's book editors help shape stories that capture attention, spark imagination, and keep young readers turning pages, asking questions, and coming back for "just one more read."
                     </motion.p>
 
-                    <motion.div variants={fadeUp} initial="hidden" animate="visible" className="flex flex-wrap justify-center gap-4">
-                        <motion.a href="#overview" whileHover={{ backgroundColor: "#c0271a", gap: "14px", boxShadow: "0 10px 40px rgba(232, 57, 29, 0.4)" }} whileTap={{ scale: 0.95 }} className="inline-flex items-center gap-3 bg-[#e8391d] text-white font-black uppercase tracking-widest px-8 py-4 rounded-xl text-[12px] cursor-pointer transition-all">
-                            Learn More <ArrowRight size={16} />
-                        </motion.a>
-                        <motion.a href="/contact" whileHover={{ borderColor: "#e8391d", color: "#e8391d" }} whileTap={{ scale: 0.95 }} className="inline-flex items-center gap-3 border-2 border-white text-white font-black uppercase tracking-widest px-8 py-4 rounded-xl text-[12px] cursor-pointer transition-all">
-                            Free Manuscript Review
-                        </motion.a>
-                    </motion.div>
+                    <HeroButtons />
                 </div>
             </section>
 

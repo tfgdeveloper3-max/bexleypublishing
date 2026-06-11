@@ -6,6 +6,7 @@ import {
     BookOpen, ArrowRight, CheckCircle2, BarChart3, Lightbulb, Heart,
     PenTool, Minus, Plus, Phone, Users, Search, Brain, Target, TrendingUp
 } from "lucide-react";
+import HeroButtons from "../HeroButton";
 
 // Safe TS Easing
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -85,14 +86,7 @@ export default function NonFictionWritingPage() {
                         Our professional non-fiction writing service lets you tell a more over-the-top, incredible story in a non-fiction form—start your story today.
                     </motion.p>
 
-                    <motion.div variants={fadeUp} initial="hidden" animate="visible" className="flex flex-wrap justify-center gap-4">
-                        <motion.a href="#overview" whileHover={{ backgroundColor: "#065f46", gap: "14px", boxShadow: "0 10px 40px rgba(4, 120, 87, 0.4)" }} whileTap={{ scale: 0.95 }} className="inline-flex items-center gap-3 bg-[#e8391d] text-white font-black uppercase tracking-widest px-8 py-4 rounded-xl text-[12px] cursor-pointer transition-all">
-                            Learn More <ArrowRight size={16} />
-                        </motion.a>
-                        <motion.a href="/contact" whileHover={{ borderColor: "#e8391d", color: "#e8391d" }} whileTap={{ scale: 0.95 }} className="inline-flex items-center gap-3 border-2 border-white text-white font-black uppercase tracking-widest px-8 py-4 rounded-xl text-[12px] cursor-pointer transition-all">
-                            Get A Free Quote
-                        </motion.a>
-                    </motion.div>
+                    <HeroButtons />
                 </div>
             </section>
 

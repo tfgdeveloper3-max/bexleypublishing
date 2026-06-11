@@ -6,6 +6,7 @@ import {
     Rocket, ArrowRight, CheckCircle2, Cpu, Globe, Zap,
     BookOpen, PenTool, Minus, Plus, Phone, Users, FlaskConical, Orbit
 } from "lucide-react";
+import HeroButtons from "../HeroButton";
 
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -430,10 +431,8 @@ export default function SciFiWritingPage() {
                         <motion.p variants={fadeUp} initial="hidden" animate="visible" className="sf-hero-sub">
                             Let our sci-fi writers start your project with a central "what if" concept, establishing consistent world rules, and exploring how futuristic elements impact human characters.
                         </motion.p>
-                        <motion.div variants={fadeUp} initial="hidden" animate="visible" className="sf-hero-btns">
-                            <a href="#overview" className="sf-btn-primary">Learn More <ArrowRight size={16} /></a>
-                            <a href="/contact" className="sf-btn-outline">Get A Free Quote</a>
-                        </motion.div>
+                       
+                        <HeroButtons />
                     </div>
                 </section>
 

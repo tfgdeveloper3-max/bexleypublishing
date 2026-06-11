@@ -7,6 +7,7 @@ import {
     ShieldCheck, DollarSign, Rocket, Scale, Store, Library,
     Phone, Minus, Plus, Sparkles, FileText, BadgeCheck, PenTool, X
 } from "lucide-react";
+import HeroButtons from "../HeroButton";
 
 // Safe TS Easing
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -58,7 +59,7 @@ const publishingPaths = [
 ];
 
 const distributionNetwork = [
-    { icon: Store, title: "Amazon Publishing", desc: "Make your book available through the world's largest online bookstore in print and digital formats." },
+    { icon: Store, title: "Publishing Platforms", desc: "Make your book available through the world's largest online bookstores in print and digital formats." },
     { icon: Globe, title: "Expanded Retail Distribution", desc: "Reach bookstores, online retailers, libraries, and educational institutions through established distribution networks." },
     { icon: BookOpen, title: "Digital Bookstores", desc: "Connect with readers through leading eBook platforms and international digital marketplaces." },
     { icon: Library, title: "Print-On-Demand Services", desc: "Books are printed when ordered, eliminating storage costs and inventory management." },
@@ -111,14 +112,7 @@ export default function BookPublishingPage() {
                         We help authors publish professionally with the tools, support, and distribution needed to make their books available worldwide
                     </motion.p>
 
-                    <motion.div variants={fadeUp} initial="hidden" animate="visible" className="flex flex-wrap justify-center gap-4">
-                        <motion.a href="#overview" whileHover={{ backgroundColor: "#c0271a", gap: "14px", boxShadow: "0 10px 40px rgba(232, 57, 29, 0.4)" }} whileTap={{ scale: 0.95 }} className="inline-flex items-center gap-3 bg-[#e8391d] text-white font-black uppercase tracking-widest px-8 py-4 rounded-xl text-[12px] cursor-pointer transition-all">
-                            Learn More <ArrowRight size={16} />
-                        </motion.a>
-                        <motion.a href="/contact" whileHover={{ borderColor: "#e8391d", color: "#e8391d" }} whileTap={{ scale: 0.95 }} className="inline-flex items-center gap-3 border-2 border-white text-white font-black uppercase tracking-widest px-8 py-4 rounded-xl text-[12px] cursor-pointer transition-all">
-                            Start Publishing
-                        </motion.a>
-                    </motion.div>
+                   <HeroButtons />
                 </div>
             </section>
 

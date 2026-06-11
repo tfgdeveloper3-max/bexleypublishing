@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { motion, useInView, useScroll, useTransform, Variants } from "framer-motion";
 import Image from "next/image";
 import { BookOpen, Target, Eye, Award, ArrowRight, CheckCircle2, Quote, PenTool, Palette, Rocket, Users } from "lucide-react";
+import HeroButtons from "../HeroButton";
 
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -938,11 +939,7 @@ export default function AboutPage() {
                             We are here to help authors turn raw ideas into professionally written books, make them publish-ready, and market them to build authority, attract readers, and create lasting impact.
                         </motion.p>
 
-                        <motion.div variants={fadeUp} initial="hidden" animate="visible">
-                            <a href="#story" className="ap-hero-btn">
-                                Read Our Story <ArrowRight size={16} />
-                            </a>
-                        </motion.div>
+                        <HeroButtons />
                     </div>
 
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2 }} className="ap-hero-scroll">
@@ -1129,7 +1126,7 @@ export default function AboutPage() {
                                         <p className="ap-why-text">{item}</p>
                                     </motion.div>
                                 ))}
-                            </motion.div>
+                            </motion.div>      
                         </div>
 
                         <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: smoothEase }} className="ap-why-img-wrap" style={{ position: "relative" }}>

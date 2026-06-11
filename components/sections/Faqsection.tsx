@@ -5,6 +5,35 @@ import { Plus, Minus, ArrowRight } from "lucide-react";
 
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
+declare global {
+    interface Window {
+        LiveChatWidget: any;
+        LC_API: any;
+    }
+}
+
+function openLiveChat() {
+    if (typeof window === "undefined") return;
+    if (window.LiveChatWidget) {
+        window.LiveChatWidget.call("maximize");
+        return;
+    }
+    const lc = (window as any).LC_API;
+    if (lc && typeof lc.open_chat_window === "function") {
+        lc.open_chat_window();
+        return;
+    }
+    const selectors = [
+        "#chat-widget-container button",
+        "[id^='chat-widget']",
+        "iframe[title*='chat' i]",
+    ];
+    for (const sel of selectors) {
+        const el = document.querySelector<HTMLElement>(sel);
+        if (el) { el.click(); return; }
+    }
+}
+
 const faqs = [
     {
         question: "How much time do you take to complete the ghostwriting process?",
@@ -467,14 +496,13 @@ export default function FAQSection() {
                             <p className="faq-sub">
                                 Even now, if you have any questions about our ebook support and services, scroll down for questions authors often ask.
                             </p>
-                            <motion.a
-                                href="/contact"
-                                whileHover={{ backgroundColor: "rgba(0,0,0,0.2)", gap: "14px" }}
-                                whileTap={{ scale: 0.97 }}
+                            <button
+                                type="button"
                                 className="faq-cta-btn"
+                                onClick={openLiveChat}
                             >
                                 TALK TO A CONSULTANT <ArrowRight size={15} />
-                            </motion.a>
+                            </button>
                         </motion.div>
                     </div>
                 </div>

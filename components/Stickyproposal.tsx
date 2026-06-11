@@ -8,7 +8,7 @@ export default function StickyProposal() {
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1.5, duration: 0.5, ease: "easeOut" }}
-            className="fixed bottom-8 right-8 flex items-center gap-3 z-[999]"
+            className="fixed bottom-22 right-8 flex items-center gap-3 z-[999]"
             style={{ fontFamily: "'Raleway', Arial, sans-serif" }}
         >
             <motion.a

@@ -2,6 +2,7 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView, Variants } from "framer-motion";
 import { BookOpen, ArrowRight, ExternalLink } from "lucide-react";
+import HeroButtons from "../HeroButton";
 
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -240,6 +241,8 @@ export default function PortfolioPage() {
                         <motion.p variants={fadeUp} initial="hidden" animate="visible" className="port-hero-sub">
                             From thrilling adventures to groundbreaking guides — explore the books we've brought to life across every genre.
                         </motion.p>
+
+                        <HeroButtons />
                     </div>
                 </section>
 

@@ -7,6 +7,7 @@ import {
     Droplets, BookType, Box, Truck, Globe, Phone, Minus, Plus,
     Sparkles, PenTool, ShieldCheck, Scale, Search, FileCheck, X
 } from "lucide-react";
+import HeroButtons from "../HeroButton";
 
 // Safe TS Easing
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -109,14 +110,7 @@ export default function BookPrintingPage() {
                         Nothing compares to the moment your manuscript becomes a real book. The weight in your hands. The turn of the pages. The realization that your words now exist beyond a screen. Let us produce professionally printed books that look brilliant, feel substantial, and leave a lasting impression from the very first touch.
                     </motion.p>
 
-                    <motion.div variants={fadeUp} initial="hidden" animate="visible" className="flex flex-wrap justify-center gap-4">
-                        <motion.a href="#overview" whileHover={{ backgroundColor: "#c0271a", gap: "14px", boxShadow: "0 10px 40px rgba(232, 57, 29, 0.4)" }} whileTap={{ scale: 0.95 }} className="inline-flex items-center gap-3 bg-[#e8391d] text-white font-black uppercase tracking-widest px-8 py-4 rounded-xl text-[12px] cursor-pointer transition-all">
-                            Learn More <ArrowRight size={16} />
-                        </motion.a>
-                        <motion.a href="/contact" whileHover={{ borderColor: "#e8391d", color: "#e8391d" }} whileTap={{ scale: 0.95 }} className="inline-flex items-center gap-3 border-2 border-white text-white font-black uppercase tracking-widest px-8 py-4 rounded-xl text-[12px] cursor-pointer transition-all">
-                            Get A Print Quote
-                        </motion.a>
-                    </motion.div>
+                    <HeroButtons />
                 </div>
             </section>
 

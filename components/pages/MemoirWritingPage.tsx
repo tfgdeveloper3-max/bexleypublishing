@@ -4,9 +4,11 @@ import { motion, AnimatePresence, useInView, Variants } from "framer-motion";
 import Image from "next/image";
 import {
     BookHeart, ArrowRight, CheckCircle2, Mic, Heart, ShieldCheck,
-    BookOpen, PenTool, Minus, Plus, Phone, Users, Clock, TreePine
+    BookOpen, PenTool, Minus, Plus, Phone, Users, Clock, TreePine,
+    FileText
 } from "lucide-react";
 import HeroButtons from "../HeroButton";
+import QuoteModal from "../Quotemodal";
 
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -49,6 +51,8 @@ export default function MemoirWritingPage() {
     const [openFaq, setOpenFaq] = useState<number | null>(0);
     const overviewRef = useRef<HTMLDivElement>(null);
     const overviewInView = useInView(overviewRef, { once: true, margin: "-100px" });
+    const [quoteModal, setQuoteModal] = useState(false);
+
 
     return (
         <>
@@ -585,10 +589,20 @@ export default function MemoirWritingPage() {
                         <h2 className="mw-cta-h2">DON'T WAIT FOR SOMEDAY, START TODAY.</h2>
                         <p className="mw-cta-sub">Don't leave your memoir journey unspoken. Let us help you begin your memoir writing process and answer any concerns you may have.</p>
                         <div className="mw-cta-btns">
-                            <a href="/contact" className="mw-cta-btn-dark">Start Your Memoir <ArrowRight size={18} /></a>
+                            <button
+                                type="button"
+                                className="mw-cta-btn-dark"
+                                onClick={() => setQuoteModal(true)}
+                            >
+                                <FileText size={16} />
+                                Start Your Book
+                            </button>
                             <a href="tel:2797770380" className="mw-cta-btn-border"><Phone size={16} /> Call Us Now</a>
                         </div>
                     </motion.div>
+
+                    <QuoteModal isOpen={quoteModal} onClose={() => setQuoteModal(false)} />
+
                 </section>
 
             </main>

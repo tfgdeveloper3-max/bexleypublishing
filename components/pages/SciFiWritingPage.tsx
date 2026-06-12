@@ -4,9 +4,11 @@ import { motion, AnimatePresence, useInView, Variants } from "framer-motion";
 import Image from "next/image";
 import {
     Rocket, ArrowRight, CheckCircle2, Cpu, Globe, Zap,
-    BookOpen, PenTool, Minus, Plus, Phone, Users, FlaskConical, Orbit
+    BookOpen, PenTool, Minus, Plus, Phone, Users, FlaskConical, Orbit,
+    FileText
 } from "lucide-react";
 import HeroButtons from "../HeroButton";
+import QuoteModal from "../Quotemodal";
 
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -49,6 +51,8 @@ export default function SciFiWritingPage() {
     const [openFaq, setOpenFaq] = useState<number | null>(0);
     const overviewRef = useRef<HTMLDivElement>(null);
     const overviewInView = useInView(overviewRef, { once: true, margin: "-100px" });
+    const [quoteModal, setQuoteModal] = useState(false);
+
 
     return (
         <>
@@ -431,7 +435,7 @@ export default function SciFiWritingPage() {
                         <motion.p variants={fadeUp} initial="hidden" animate="visible" className="sf-hero-sub">
                             Let our sci-fi writers start your project with a central "what if" concept, establishing consistent world rules, and exploring how futuristic elements impact human characters.
                         </motion.p>
-                       
+
                         <HeroButtons />
                     </div>
                 </section>
@@ -584,10 +588,20 @@ export default function SciFiWritingPage() {
                         <h2 className="sf-cta-h2">READY TO CHALLENGE REALITY, HINT AT FUTURISTIC STAKES, OR POSE PHILOSOPHICAL QUESTIONS?</h2>
                         <p className="sf-cta-sub">Writing science fiction is a big undertaking in a big genre. If you're ready, let us explore the expanse of the universe you have in your mind.</p>
                         <div className="sf-cta-btns">
-                            <a href="/contact" className="sf-cta-btn-dark">SHARE YOUR IDEA <ArrowRight size={18} /></a>
+                            <button
+                                type="button"
+                                className="sf-cta-btn-dark"
+                                onClick={() => setQuoteModal(true)}
+                            >
+                                <FileText size={16} />
+                                Start Your Book
+                            </button>
                             <a href="tel:2797770380" className="sf-cta-btn-border"><Phone size={16} /> Call Us Now</a>
                         </div>
                     </motion.div>
+
+                    <QuoteModal isOpen={quoteModal} onClose={() => setQuoteModal(false)} />
+
                 </section>
 
             </main>

@@ -5,9 +5,11 @@ import Image from "next/image";
 import {
     Mic, ArrowRight, CheckCircle2, BookOpen, Headphones, Volume2,
     UserCheck, Users, AudioLines, SlidersHorizontal, UploadCloud,
-    Phone, Minus, Plus, Sparkles, FileAudio, Clapperboard, Gauge, AudioWaveform
+    Phone, Minus, Plus, Sparkles, FileAudio, Clapperboard, Gauge, AudioWaveform,
+    FileText
 } from "lucide-react";
 import HeroButtons from "../HeroButton";
+import QuoteModal from "../Quotemodal";
 
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -60,6 +62,7 @@ export default function AudiobookNarrationPage() {
     const [openFaq, setOpenFaq] = useState<number | null>(0);
     const overviewRef = useRef<HTMLDivElement>(null);
     const overviewInView = useInView(overviewRef, { once: true, margin: "-100px" });
+    const [quoteModal, setQuoteModal] = useState(false);
 
     return (
         <main className="w-full overflow-hidden" style={{ fontFamily: "'Raleway', Arial, sans-serif" }}>
@@ -82,7 +85,7 @@ export default function AudiobookNarrationPage() {
                     <motion.p variants={fadeUp} initial="hidden" animate="visible" className="text-white/60 leading-[1.85] max-w-2xl mx-auto mb-10" style={{ fontSize: "clamp(0.9rem, 1.1vw, 1.05rem)" }}>
                         A great audiobook does more than read the words on a page. It captures emotion, atmosphere, personality, and pacing in a way that keeps listeners engaged from the first chapter to the final line. We handle the entire production process, pairing your book with the right voice and delivering professional audio ready for today's leading platforms.
                     </motion.p>
-                    
+
                     <HeroButtons />
                 </div>
             </section>
@@ -323,16 +326,22 @@ export default function AudiobookNarrationPage() {
                         A professionally produced audiobook can introduce your story to an entirely new audience. Let's create an audio experience listeners will enjoy from beginning to end.
                     </p>
                     <div className="flex flex-wrap justify-center gap-5">
-                        <motion.a href="/contact" whileHover={{ backgroundColor: "#fff", color: "#e8391d", gap: "14px", boxShadow: "0 20px 60px rgba(0,0,0,0.2)" }} whileTap={{ scale: 0.95 }} className="inline-flex items-center gap-3 bg-black text-white font-black uppercase tracking-widest px-10 py-5 rounded-xl text-[14px] cursor-pointer transition-all duration-300">
-                            HEAR SAMPLE VOICES <ArrowRight size={18} />
-                        </motion.a>
+                        <button
+                            type="button"
+                            style={{ backgroundColor: "#fff", color: "#e8391d", gap: "14px", boxShadow: "0 20px 60px rgba(0,0,0,0.2)" }}
+                            className="inline-flex items-center gap-3 bg-black text-white font-black uppercase tracking-widest px-10 py-5 rounded-xl text-[14px] cursor-pointer transition-all duration-300"
+                            onClick={() => setQuoteModal(true)}
+                        >
+                            <FileText size={16} />
+                            GET A FREE QUOTE
+                        </button>
                         <motion.a href="tel:2797770380" whileHover={{ gap: "14px" }} whileTap={{ scale: 0.95 }} className="inline-flex items-center gap-3 border-2 border-white text-white font-black uppercase tracking-widest px-10 py-5 rounded-xl text-[14px] cursor-pointer transition-all duration-300">
                             <Phone size={16} /> START YOUR AUDIOBOOK PROJECT
                         </motion.a>
                     </div>
                 </motion.div>
             </section>
-
+            <QuoteModal isOpen={quoteModal} onClose={() => setQuoteModal(false)} />
         </main>
     );
 }

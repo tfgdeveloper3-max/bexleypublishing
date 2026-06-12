@@ -681,15 +681,6 @@ export default function FeaturedWork() {
                                 <p className="fw-author">by {p.author}</p>
                                 <p className="fw-desc">{p.description}</p>
 
-                                <div className="fw-btns">
-                                    <a href="#" className="fw-btn-primary">
-                                        View Case Study <ExternalLink size={12} />
-                                    </a>
-                                    <a href="#" className="fw-btn-outline">
-                                        Buy on Amazon <ArrowRight size={12} />
-                                    </a>
-                                </div>
-
                                 {/* Dots */}
                                 <div className="fw-dots">
                                     {projects.map((_, i) => (

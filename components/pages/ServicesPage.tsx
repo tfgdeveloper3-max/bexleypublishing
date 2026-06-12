@@ -761,7 +761,14 @@ export default function ServicesPage() {
                                                 </div>
                                             ))}
                                         </div>
-                                        <a href="/contact" className="sp-showcase-cta">Get Started <ArrowRight size={16} /></a>
+                                        <button
+                                            type="button"
+                                            className="sp-hero-btn sp-hero-btn--quote"
+                                            onClick={() => setQuoteModal(true)}
+                                        >
+                                            <PenTool size={16} />
+                                            Get Started
+                                        </button>
                                     </div>
                                 </motion.div>
                             </AnimatePresence>
@@ -876,7 +883,14 @@ export default function ServicesPage() {
                     <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="sp-cta-inner">
                         <h2 className="sp-cta-h2">NOT SURE WHICH SERVICE YOU NEED?</h2>
                         <p className="sp-cta-sub">Speak to one of our publishing consultants today. We'll map out the perfect plan for your book.</p>
-                        <a href="/contact" className="sp-cta-btn">Book A Free Call <ArrowRight size={18} /></a>
+                        <button
+                            type="button"
+                            className="sp-cta-btn"
+                            onClick={openLiveChat}
+                        >
+                            <MessageCircle size={16} />
+                            Book A Free Consultation
+                        </button>
                     </motion.div>
                 </section>
 

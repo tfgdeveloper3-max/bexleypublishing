@@ -5,9 +5,11 @@ import Image from "next/image";
 import {
     Printer, ArrowRight, CheckCircle2, BookOpen, Package, Layers,
     Droplets, BookType, Box, Truck, Globe, Phone, Minus, Plus,
-    Sparkles, PenTool, ShieldCheck, Scale, Search, FileCheck, X
+    Sparkles, PenTool, ShieldCheck, Scale, Search, FileCheck, X,
+    FileText
 } from "lucide-react";
 import HeroButtons from "../HeroButton";
+import QuoteModal from "../Quotemodal";
 
 // Safe TS Easing
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -85,6 +87,7 @@ export default function BookPrintingPage() {
     const [openFaq, setOpenFaq] = useState<number | null>(0);
     const overviewRef = useRef<HTMLDivElement>(null);
     const overviewInView = useInView(overviewRef, { once: true, margin: "-100px" });
+    const [quoteModal, setQuoteModal] = useState(false);
 
     return (
         <main className="w-full overflow-hidden" style={{ fontFamily: "'Raleway', Arial, sans-serif" }}>
@@ -371,15 +374,22 @@ export default function BookPrintingPage() {
                         Let's turn your manuscript into a professionally printed book that readers will proudly hold, display, share, and remember.
                     </p>
                     <div className="flex flex-wrap justify-center gap-5">
-                        <motion.a href="/contact" whileHover={{ backgroundColor: "#fff", color: "#e8391d", gap: "14px", boxShadow: "0 20px 60px rgba(0,0,0,0.2)" }} whileTap={{ scale: 0.95 }} className="inline-flex items-center gap-3 bg-black text-white font-black uppercase tracking-widest px-10 py-5 rounded-xl text-[14px] cursor-pointer transition-all duration-300">
-                            Get A Print Quote <ArrowRight size={18} />
-                        </motion.a>
+                        <button
+                            type="button"
+                            style={{ backgroundColor: "#fff", color: "#e8391d", gap: "14px", boxShadow: "0 20px 60px rgba(0,0,0,0.2)" }}
+                            className="inline-flex items-center gap-3 bg-black text-white font-black uppercase tracking-widest px-10 py-5 rounded-xl text-[14px] cursor-pointer transition-all duration-300"
+                            onClick={() => setQuoteModal(true)}
+                        >
+                            <FileText size={16} />
+                            GET A FREE QUOTE
+                        </button>
                         <motion.a href="tel:2797770380" whileHover={{ gap: "14px" }} whileTap={{ scale: 0.95 }} className="inline-flex items-center gap-3 border-2 border-white text-white font-black uppercase tracking-widest px-10 py-5 rounded-xl text-[14px] cursor-pointer transition-all duration-300">
                             <Phone size={16} /> Call Us Now
                         </motion.a>
                     </div>
                 </motion.div>
             </section>
+            <QuoteModal isOpen={quoteModal} onClose={() => setQuoteModal(false)} />
 
         </main>
     );

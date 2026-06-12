@@ -2,7 +2,7 @@
 import { useRef } from "react";
 import { motion, useInView, useScroll, useTransform, Variants } from "framer-motion";
 import Image from "next/image";
-import { BookOpen, Target, Eye, Award, ArrowRight, CheckCircle2, Quote, PenTool, Palette, Rocket, Users } from "lucide-react";
+import { BookOpen, Target, Eye, Award, ArrowRight, CheckCircle2, Quote, PenTool, Palette, Rocket, Users, MessageCircle } from "lucide-react";
 import HeroButtons from "../HeroButton";
 
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -21,6 +21,31 @@ const staggerContainer: Variants = {
     hidden: {},
     visible: { transition: { staggerChildren: 0.12, delayChildren: 0.2 } },
 };
+
+function openLiveChat() {
+    if (typeof window === "undefined") return;
+
+    if (window.LiveChatWidget) {
+        window.LiveChatWidget.call("maximize");
+        return;
+    }
+
+    const lc = (window as any).LC_API;
+    if (lc && typeof lc.open_chat_window === "function") {
+        lc.open_chat_window();
+        return;
+    }
+
+    const selectors = [
+        "#chat-widget-container button",
+        "[id^='chat-widget']",
+        "iframe[title*='chat' i]",
+    ];
+    for (const sel of selectors) {
+        const el = document.querySelector<HTMLElement>(sel);
+        if (el) { el.click(); return; }
+    }
+}
 
 const stats = [
     { icon: BookOpen, num: "500+", label: "Books Published" },
@@ -1126,7 +1151,7 @@ export default function AboutPage() {
                                         <p className="ap-why-text">{item}</p>
                                     </motion.div>
                                 ))}
-                            </motion.div>      
+                            </motion.div>
                         </div>
 
                         <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: smoothEase }} className="ap-why-img-wrap" style={{ position: "relative" }}>
@@ -1144,9 +1169,15 @@ export default function AboutPage() {
                     <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="ap-cta-inner">
                         <h2 className="ap-cta-h2">PUBLISH FASTER, REACH FARTHER, SELL SMARTER.</h2>
                         <p className="ap-cta-sub">Let Bexley Publishing experts turn your raw data into a professionally written book designed to create havoc in the whole world.</p>
-                        <a href="/contact" className="ap-cta-btn">
-                            Get A Free Consultation <ArrowRight size={18} />
-                        </a>
+                        <button
+                            type="button"
+                            className="ap-cta-btn"
+                            onClick={openLiveChat}
+                        >
+                            <span className="sp-hero-btn__dot" aria-hidden="true" />
+                            <MessageCircle size={16} />
+                            Get A Free Consultation
+                        </button>
                     </motion.div>
                 </section>
 

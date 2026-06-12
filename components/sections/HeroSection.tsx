@@ -5,6 +5,7 @@ import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { gsap } from "gsap";
 import { SplitText } from "gsap/SplitText";
 import { Volume2, ArrowRight, Accessibility } from "lucide-react";
+import QuoteModal from "../Quotemodal";
 
 const containerVariants = {
     hidden: {},
@@ -37,6 +38,8 @@ export default function HeroSection() {
     const headingRef = useRef<HTMLHeadingElement>(null);
     const leftBgRef = useRef<HTMLDivElement>(null);
     const videoRef = useRef<HTMLVideoElement>(null);
+    const [quoteModal, setQuoteModal] = useState(false);
+
     const magnetic1 = useMagnetic();
     const magnetic2 = useMagnetic();
 
@@ -497,17 +500,17 @@ export default function HeroSection() {
 
                             <motion.div variants={fadeUp} className="hero-ctas">
                                 <motion.a
-                                    href="#"
-                                    style={{ x: magnetic1.x, y: magnetic1.y }}
-                                    onMouseMove={magnetic1.handleMouse}
-                                    onMouseLeave={magnetic1.handleLeave}
-                                    whileTap={{ scale: 0.95 }}
-                                    className="hero-btn-primary"
                                 >
-                                    Request Growth Strategy <ArrowRight size={15} />
+                                    <button
+                                        type="button"
+                                        className="hero-btn-primary"
+                                        onClick={() => setQuoteModal(true)}
+                                    >
+                                        Request Growth Strategy <ArrowRight size={15} />
+                                    </button>
                                 </motion.a>
                                 <motion.a
-                                    href="#"
+                                    href="/portfolio"
                                     style={{ x: magnetic2.x, y: magnetic2.y }}
                                     onMouseMove={magnetic2.handleMouse}
                                     onMouseLeave={magnetic2.handleLeave}
@@ -518,36 +521,9 @@ export default function HeroSection() {
                                 </motion.a>
                             </motion.div>
                         </motion.div>
-
-                        {/* Accessibility */}
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: 2, duration: 0.5 }}
-                            className="hero-accessibility"
-                        >
-                            <Accessibility size={15} />
-                        </motion.div>
-                    </div>
-
-                    {/* RIGHT */}
-                    <div className="hero-right-content">
-                        <motion.div
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 1.5, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                            style={{ position: "absolute", bottom: 28, left: 28, zIndex: 20 }}
-                        >
-                            <motion.button
-                                whileHover={{ scale: 1.15, borderColor: "rgba(255,255,255,0.8)" }}
-                                whileTap={{ scale: 0.9 }}
-                                className="hero-audio-btn"
-                            >
-                                <Volume2 size={17} />
-                            </motion.button>
-                        </motion.div>
                     </div>
                 </div>
+                <QuoteModal isOpen={quoteModal} onClose={() => setQuoteModal(false)} />
             </section>
         </>
     );

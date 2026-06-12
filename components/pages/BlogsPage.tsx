@@ -2,8 +2,9 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView, Variants } from "framer-motion";
 import Image from "next/image";
-import { ArrowRight, Clock, BookOpen, Mail, PenTool, Palette, Rocket, BarChart } from "lucide-react";
+import { ArrowRight, Clock, BookOpen, Mail, PenTool, Palette, Rocket, BarChart, FileText } from "lucide-react";
 import HeroButtons from "../HeroButton";
+import QuoteModal from "../Quotemodal";
 
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -11,6 +12,8 @@ const maskReveal: Variants = {
     hidden: { clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)", y: 40 },
     visible: { clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)", y: 0, transition: { duration: 1, ease: smoothEase } },
 };
+
+
 
 const fadeUp: Variants = {
     hidden: { opacity: 0, y: 30, filter: "blur(4px)" },
@@ -79,6 +82,7 @@ export default function BlogsPage() {
     const [activeCategory, setActiveCategory] = useState("all");
     const gridRef = useRef<HTMLDivElement>(null);
     const gridInView = useInView(gridRef, { once: true, margin: "-80px" });
+    const [quoteModal, setQuoteModal] = useState(false);
 
     const featuredPost = posts.find(p => p.featured);
     const filteredPosts = posts.filter(p => !p.featured && (activeCategory === "all" || p.category === activeCategory));
@@ -167,8 +171,8 @@ export default function BlogsPage() {
                                 key={value}
                                 onClick={() => setActiveCategory(value)}
                                 className={`flex items-center gap-2 px-5 py-2.5 rounded-full font-bold uppercase tracking-widest text-[11px] transition-all duration-300 border ${activeCategory === value
-                                        ? "bg-[#e8391d] text-white border-[#e8391d] shadow-lg shadow-[#e8391d]/20"
-                                        : "bg-transparent text-black/60 border-gray-300 hover:border-[#e8391d] hover:text-[#e8391d]"
+                                    ? "bg-[#e8391d] text-white border-[#e8391d] shadow-lg shadow-[#e8391d]/20"
+                                    : "bg-transparent text-black/60 border-gray-300 hover:border-[#e8391d] hover:text-[#e8391d]"
                                     }`}
                             >
                                 <Icon size={12} /> {label}
@@ -266,12 +270,20 @@ export default function BlogsPage() {
                     <p className="text-white/80 text-lg max-w-xl mx-auto mb-10 leading-relaxed">
                         Reading about success is great. Living it is better. Let’s publish your book and make it the next big read.
                     </p>
-                    <motion.a href="/contact" whileHover={{ backgroundColor: "#fff", color: "#e8391d", gap: "14px", boxShadow: "0 20px 60px rgba(0,0,0,0.2)" }} whileTap={{ scale: 0.95 }} className="inline-flex items-center gap-3 bg-black text-white font-black uppercase tracking-widest px-10 py-5 rounded-xl text-[14px] cursor-pointer transition-all duration-300">
-                        Start Your Book <ArrowRight size={18} />
-                    </motion.a>
+                    <button
+                        type="button"
+                        style={{ backgroundColor: "#fff", color: "#e8391d", gap: "14px", boxShadow: "0 20px 60px rgba(0,0,0,0.2)" }}
+                        className="inline-flex items-center gap-3 bg-black text-white font-black uppercase tracking-widest px-10 py-5 rounded-xl text-[14px] cursor-pointer transition-all duration-300"
+                        onClick={() => setQuoteModal(true)}
+                    >
+                        <FileText size={16} />
+                        Start Your Book
+                    </button>
                 </motion.div>
+
+                <QuoteModal isOpen={quoteModal} onClose={() => setQuoteModal(false)} />
             </section>
 
-        </main>
+        </main >
     );
 }

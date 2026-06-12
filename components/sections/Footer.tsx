@@ -1,9 +1,10 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useInView, Variants } from "framer-motion";
-import { ArrowRight, Phone, Mail, MapPin } from "lucide-react";
+import { ArrowRight, Phone, Mail, MapPin, Edit, FileText } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import QuoteModal from "../Quotemodal";
 
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -65,6 +66,7 @@ const linkStagger: Variants = {
 export default function Footer() {
     const footerRef = useRef<HTMLElement>(null);
     const isInView = useInView(footerRef, { once: true, margin: "-50px" });
+    const [quoteModal, setQuoteModal] = useState(false);
 
     return (
         <>
@@ -483,9 +485,14 @@ export default function Footer() {
                                 GRAB THE SPOTLIGHT YOUR STORY DESERVES.
                             </motion.h3>
                         </div>
-                        <Link href="/contact" className="ft-cta-btn">
-                            Get a Free Proposal <ArrowRight size={15} />
-                        </Link>
+                        <button
+                            type="button"
+                            className="ft-cta-btn"
+                            onClick={() => setQuoteModal(true)}
+                        >
+                            <FileText  size={16} />
+                            Get a Free Proposal
+                        </button>
                     </div>
                 </motion.div>
 
@@ -627,6 +634,8 @@ export default function Footer() {
                         <polyline points="18 15 12 9 6 15" />
                     </svg>
                 </motion.button>
+
+                <QuoteModal isOpen={quoteModal} onClose={() => setQuoteModal(false)} />
             </footer>
         </>
     );

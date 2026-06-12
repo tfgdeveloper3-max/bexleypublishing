@@ -4,9 +4,11 @@ import { motion, AnimatePresence, useInView, Variants } from "framer-motion";
 import Image from "next/image";
 import {
     BookOpen, ArrowRight, CheckCircle2, Sword, Heart, Ghost,
-    PenTool, Minus, Plus, Phone, Users, Map, Sparkles
+    PenTool, Minus, Plus, Phone, Users, Map, Sparkles,
+    FileText
 } from "lucide-react";
 import HeroButtons from "../HeroButton";
+import QuoteModal from "../Quotemodal";
 
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -49,6 +51,8 @@ export default function FictionWritingPage() {
     const [openFaq, setOpenFaq] = useState<number | null>(0);
     const overviewRef = useRef<HTMLDivElement>(null);
     const overviewInView = useInView(overviewRef, { once: true, margin: "-100px" });
+    const [quoteModal, setQuoteModal] = useState(false);
+
 
     return (
         <>
@@ -584,11 +588,20 @@ export default function FictionWritingPage() {
                         <h2 className="fw-cta-h2">DON'T JUST IMAGINE THE STORY. WRITE IT.</h2>
                         <p className="fw-cta-sub">From worldbuilding to final edits, we guide your fiction journey from concept to completed manuscript.</p>
                         <div className="fw-cta-btns">
-                            <a href="/contact" className="fw-cta-btn-dark">START YOUR JOURNEY <ArrowRight size={18} /></a>
+                            <button
+                                type="button"
+                                className="fw-cta-btn-dark"
+                                onClick={() => setQuoteModal(true)}
+                            >
+                                <FileText size={16} />
+                                Start Your Book
+                            </button>
                             <a href="tel:2797770380" className="fw-cta-btn-border"><Phone size={16} /> Call Us Now</a>
                         </div>
                     </motion.div>
                 </section>
+
+                <QuoteModal isOpen={quoteModal} onClose={() => setQuoteModal(false)} />
 
             </main>
         </>

@@ -7,6 +7,7 @@ import {
     Rocket, Baby, GraduationCap, Phone, Minus, Plus, Users, FileText, Sparkles
 } from "lucide-react";
 import HeroButtons from "../HeroButton";
+import QuoteModal from "../Quotemodal";
 
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -49,6 +50,7 @@ const faqs = [
 
 export default function BookWritingPage() {
     const [openFaq, setOpenFaq] = useState<number | null>(0);
+    const [quoteModal, setQuoteModal] = useState(false);
     const overviewRef = useRef<HTMLDivElement>(null);
     const overviewInView = useInView(overviewRef, { once: true, margin: "-100px" });
 
@@ -592,10 +594,20 @@ export default function BookWritingPage() {
                         <h2 className="bw-cta-h2">READY TO TEAM UP WITH YOUR DEDICATED WRITER?</h2>
                         <p className="bw-cta-sub">Whether you are looking for a storyteller, novelist, playwright, screenwriter, or fabulist, share your project with us, and let us dedicate a writer to it.</p>
                         <div className="bw-cta-btns">
-                            <a href="/contact" className="bw-cta-btn-dark">Start Your Book <ArrowRight size={18} /></a>
+                            <button
+                                type="button"
+                                className="bw-cta-btn-dark"
+                                onClick={() => setQuoteModal(true)}
+                            >
+                                <FileText size={16} />
+                                Start Your Book
+                            </button>
                             <a href="tel:2797770380" className="bw-cta-btn-border"><Phone size={16} /> Call Us Now</a>
                         </div>
                     </motion.div>
+
+                    <QuoteModal isOpen={quoteModal} onClose={() => setQuoteModal(false)} />
+
                 </section>
 
             </main>

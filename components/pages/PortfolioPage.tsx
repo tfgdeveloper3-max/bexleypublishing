@@ -1,7 +1,7 @@
 "use client";
 import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView, Variants } from "framer-motion";
-import { BookOpen, ArrowRight, ExternalLink } from "lucide-react";
+import { BookOpen, ArrowRight, ExternalLink, MessageCircle } from "lucide-react";
 import HeroButtons from "../HeroButton";
 
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -18,6 +18,31 @@ const staggerContainer: Variants = {
     hidden: {},
     visible: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
 };
+
+function openLiveChat() {
+    if (typeof window === "undefined") return;
+
+    if (window.LiveChatWidget) {
+        window.LiveChatWidget.call("maximize");
+        return;
+    }
+
+    const lc = (window as any).LC_API;
+    if (lc && typeof lc.open_chat_window === "function") {
+        lc.open_chat_window();
+        return;
+    }
+
+    const selectors = [
+        "#chat-widget-container button",
+        "[id^='chat-widget']",
+        "iframe[title*='chat' i]",
+    ];
+    for (const sel of selectors) {
+        const el = document.querySelector<HTMLElement>(sel);
+        if (el) { el.click(); return; }
+    }
+}
 
 // ── Genre config ──────────────────────────────────────────────────────────────
 const genres = [
@@ -347,14 +372,6 @@ export default function PortfolioPage() {
                                                 </div>
                                                 <h3 className="port-hover-title">{book.title}</h3>
                                                 <p className="port-hover-author">by {book.author}</p>
-                                                <div className="port-hover-btns">
-                                                    <a href="#" className="port-hover-btn-primary">
-                                                        View Details <ExternalLink size={11} />
-                                                    </a>
-                                                    <a href="#" className="port-hover-btn-outline">
-                                                        Buy Now <ArrowRight size={11} />
-                                                    </a>
-                                                </div>
                                             </div>
 
                                         </motion.div>
@@ -375,9 +392,14 @@ export default function PortfolioPage() {
                         <p className="port-cta-sub">
                             Join the ranks of bestselling authors. Let's publish your book and create a success story together.
                         </p>
-                        <a href="/contact" className="port-cta-btn">
-                            Start Publishing Today <ArrowRight size={18} />
-                        </a>
+                        <button
+                            type="button"
+                            className="port-cta-btn"
+                            onClick={openLiveChat}
+                        >
+                            <MessageCircle size={16} />
+                            Book A Free Consultation
+                        </button>
                     </motion.div>
                 </section>
 

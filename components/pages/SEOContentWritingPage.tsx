@@ -7,6 +7,7 @@ import {
     BookOpen, PenTool, Minus, Plus, Phone, TrendingUp, Eye, Target
 } from "lucide-react";
 import HeroButtons from "../HeroButton";
+import QuoteModal from "../Quotemodal";
 
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -49,6 +50,8 @@ export default function SEOContentWritingPage() {
     const [openFaq, setOpenFaq] = useState<number | null>(0);
     const overviewRef = useRef<HTMLDivElement>(null);
     const overviewInView = useInView(overviewRef, { once: true, margin: "-100px" });
+    const [quoteModal, setQuoteModal] = useState(false);
+
 
     return (
         <>
@@ -433,7 +436,7 @@ export default function SEOContentWritingPage() {
                         <motion.p variants={fadeUp} initial="hidden" animate="visible" className="seo-hero-sub">
                             We create high-quality content that's relevant to your readers and helps your brand get found more easily by search engines.
                         </motion.p>
-                        
+
                         <HeroButtons />
                     </div>
                 </section>
@@ -586,11 +589,20 @@ export default function SEOContentWritingPage() {
                         <h2 className="seo-cta-h2">BETTER CONTENT. BIGGER SEARCH PRESENCE.</h2>
                         <p className="seo-cta-sub">Don't let competitors with weaker products but stronger SEO take away your customers. Let's fix that today.</p>
                         <div className="seo-cta-btns">
-                            <a href="/contact" className="seo-cta-btn-dark">Get an SEO Strategy <ArrowRight size={18} /></a>
+                            <button
+                                type="button"
+                                className="seo-cta-btn-dark"
+                                onClick={() => setQuoteModal(true)}
+                            >
+                                <FileText size={16} />
+                                Start Your Book
+                            </button>
                             <a href="tel:2797770380" className="seo-cta-btn-border"><Phone size={16} /> Call Us Now</a>
                         </div>
                     </motion.div>
                 </section>
+
+                <QuoteModal isOpen={quoteModal} onClose={() => setQuoteModal(false)} />
 
             </main>
         </>

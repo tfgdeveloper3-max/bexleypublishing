@@ -4,9 +4,11 @@ import { motion, AnimatePresence, useInView, Variants } from "framer-motion";
 import Image from "next/image";
 import {
     ArrowRight, CheckCircle2, Eye, Skull, UserX,
-    PenTool, Minus, Plus, Phone, Users, Fingerprint, Siren, Shuffle
+    PenTool, Minus, Plus, Phone, Users, Fingerprint, Siren, Shuffle,
+    FileText
 } from "lucide-react";
 import HeroButtons from "../HeroButton";
+import QuoteModal from "../Quotemodal";
 
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -28,40 +30,42 @@ const slugify = (str: string) =>
     str.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "");
 
 const subGenres = [
-    { icon: Siren,       title: "STARTING WITH THE CENTRAL QUESTION",    desc: "Every mystery begins with a question that demands an answer. We build the story around that curiosity from the very beginning." },
-    { icon: Eye,         title: "CREATING SUSPECTS WITH SOMETHING TO HIDE", desc: "The strongest mysteries are driven by characters. We create believable suspects, motives, secrets, and conflicts that add depth to the story." },
-    { icon: Fingerprint, title: "PLACING CLUES WITH PURPOSE",             desc: "Every clue matters. We carefully plant information throughout the narrative to build suspense without making the solution obvious." },
-    { icon: Skull,       title: "DELIVERING A REVEAL THAT MAKES SENSE",   desc: "The ending should surprise readers while still feeling logical. We connect every important detail to create a satisfying conclusion." },
+    { icon: Siren, title: "STARTING WITH THE CENTRAL QUESTION", desc: "Every mystery begins with a question that demands an answer. We build the story around that curiosity from the very beginning." },
+    { icon: Eye, title: "CREATING SUSPECTS WITH SOMETHING TO HIDE", desc: "The strongest mysteries are driven by characters. We create believable suspects, motives, secrets, and conflicts that add depth to the story." },
+    { icon: Fingerprint, title: "PLACING CLUES WITH PURPOSE", desc: "Every clue matters. We carefully plant information throughout the narrative to build suspense without making the solution obvious." },
+    { icon: Skull, title: "DELIVERING A REVEAL THAT MAKES SENSE", desc: "The ending should surprise readers while still feeling logical. We connect every important detail to create a satisfying conclusion." },
 ];
 
 const anatomySteps = [
-    { num: "01", title: "CLASSIC WHODUNIT MYSTERIES",  desc: "Intriguing investigations, misleading clues, suspicious characters, and satisfying conclusions that keep readers engaged throughout.",            icon: Siren },
-    { num: "02", title: "THRILLER MYSTERIES",          desc: "High-stakes situations, unexpected developments, mounting tension, and relentless suspense that keep readers racing through every chapter.",      icon: UserX },
-    { num: "03", title: "CRIME & DETECTIVE FICTION",   desc: "Fast-moving investigations, layered suspects, and compelling storylines built around solving complex cases.",                                     icon: Eye },
-    { num: "04", title: "PSYCHOLOGICAL MYSTERIES",     desc: "Stories filled with secrets, deception, uncertainty, and tension that keep readers questioning everything they believe.",                         icon: Shuffle },
-    { num: "05", title: "COZY MYSTERIES",              desc: "Character-focused mysteries featuring engaging puzzles, intriguing situations, and suspense without graphic content.",                            icon: Fingerprint },
+    { num: "01", title: "CLASSIC WHODUNIT MYSTERIES", desc: "Intriguing investigations, misleading clues, suspicious characters, and satisfying conclusions that keep readers engaged throughout.", icon: Siren },
+    { num: "02", title: "THRILLER MYSTERIES", desc: "High-stakes situations, unexpected developments, mounting tension, and relentless suspense that keep readers racing through every chapter.", icon: UserX },
+    { num: "03", title: "CRIME & DETECTIVE FICTION", desc: "Fast-moving investigations, layered suspects, and compelling storylines built around solving complex cases.", icon: Eye },
+    { num: "04", title: "PSYCHOLOGICAL MYSTERIES", desc: "Stories filled with secrets, deception, uncertainty, and tension that keep readers questioning everything they believe.", icon: Shuffle },
+    { num: "05", title: "COZY MYSTERIES", desc: "Character-focused mysteries featuring engaging puzzles, intriguing situations, and suspense without graphic content.", icon: Fingerprint },
 ];
 
 const processSteps = [
-    { step: "01", title: "WE KNOW HOW TO BUILD SUSPENSE",         desc: "Our writers carefully control the flow of information to keep curiosity alive from beginning to end.",                              icon: Skull },
-    { step: "02", title: "WE CREATE CHARACTERS READERS QUESTION", desc: "We create layered characters that keep readers uncertain about who they can trust.",                                                 icon: Users },
-    { step: "03", title: "WE BALANCE CLUES AND MISDIRECTION",     desc: "We strike the balance that keeps readers engaged without making the mystery feel unfair.",                                           icon: Fingerprint },
-    { step: "04", title: "WE KEEP THE STORY MOVING FORWARD",      desc: "We maintain momentum throughout the story to keep readers invested.",                                                               icon: PenTool },
-    { step: "05", title: "WE FOCUS ON THE FINAL PAYOFF",          desc: "We craft endings that connect the clues, answer important questions, and leave readers feeling satisfied with the outcome.",        icon: Siren },
+    { step: "01", title: "WE KNOW HOW TO BUILD SUSPENSE", desc: "Our writers carefully control the flow of information to keep curiosity alive from beginning to end.", icon: Skull },
+    { step: "02", title: "WE CREATE CHARACTERS READERS QUESTION", desc: "We create layered characters that keep readers uncertain about who they can trust.", icon: Users },
+    { step: "03", title: "WE BALANCE CLUES AND MISDIRECTION", desc: "We strike the balance that keeps readers engaged without making the mystery feel unfair.", icon: Fingerprint },
+    { step: "04", title: "WE KEEP THE STORY MOVING FORWARD", desc: "We maintain momentum throughout the story to keep readers invested.", icon: PenTool },
+    { step: "05", title: "WE FOCUS ON THE FINAL PAYOFF", desc: "We craft endings that connect the clues, answer important questions, and leave readers feeling satisfied with the outcome.", icon: Siren },
 ];
 
 const faqs = [
-    { q: "How Do You Build a Mystery Without Plot Holes?",     a: "We carefully map clues, timelines, character actions, and key revelations to ensure every detail connects logically and supports the story." },
-    { q: "What Makes a Red Herring Actually Work?",            a: "A strong red herring feels believable, fits naturally into the plot, and creates suspicion without misleading readers unfairly." },
+    { q: "How Do You Build a Mystery Without Plot Holes?", a: "We carefully map clues, timelines, character actions, and key revelations to ensure every detail connects logically and supports the story." },
+    { q: "What Makes a Red Herring Actually Work?", a: "A strong red herring feels believable, fits naturally into the plot, and creates suspicion without misleading readers unfairly." },
     { q: "Do You Plan Mysteries or Discover Them While Writing?", a: "We typically outline mysteries beforehand, allowing us to control clues, pacing, suspense, and reveals while maintaining consistency throughout." },
-    { q: "Can You Write a Multi-Book Mystery Series?",         a: "Yes, we create mystery series with recurring characters, connected story arcs, and fresh investigations that keep readers returning." },
-    { q: "How Do You Keep Readers Guessing Until the End?",    a: "We balance clues, secrets, suspects, and unexpected discoveries carefully, revealing information gradually while maintaining suspense and reader curiosity." },
+    { q: "Can You Write a Multi-Book Mystery Series?", a: "Yes, we create mystery series with recurring characters, connected story arcs, and fresh investigations that keep readers returning." },
+    { q: "How Do You Keep Readers Guessing Until the End?", a: "We balance clues, secrets, suspects, and unexpected discoveries carefully, revealing information gradually while maintaining suspense and reader curiosity." },
 ];
 
 export default function MysteryWritingPage() {
     const [openFaq, setOpenFaq] = useState<number | null>(0);
     const overviewRef = useRef<HTMLDivElement>(null);
     const overviewInView = useInView(overviewRef, { once: true, margin: "-100px" });
+    const [quoteModal, setQuoteModal] = useState(false);
+
 
     return (
         <>
@@ -759,11 +763,21 @@ export default function MysteryWritingPage() {
                             From hidden secrets and suspicious characters to shocking discoveries and unforgettable endings, our mystery writing team creates stories that keep readers hooked until the final page.
                         </p>
                         <div className="mys-cta-btns">
-                            <a href="/contact" className="mys-cta-btn-dark">START YOUR MYSTERY TODAY <ArrowRight size={18} /></a>
+                            <button
+                                type="button"
+                                className="mys-cta-btn-dark"
+                                onClick={() => setQuoteModal(true)}
+                            >
+                                <FileText size={16} />
+                                Start Your Book
+                            </button>
                             <a href="tel:2797770380" className="mys-cta-btn-border"><Phone size={16} /> Call Us Now</a>
                         </div>
                     </motion.div>
                 </section>
+
+                <QuoteModal isOpen={quoteModal} onClose={() => setQuoteModal(false)} />
+
 
             </main>
         </>

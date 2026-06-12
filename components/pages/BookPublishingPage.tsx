@@ -8,6 +8,7 @@ import {
     Phone, Minus, Plus, Sparkles, FileText, BadgeCheck, PenTool, X
 } from "lucide-react";
 import HeroButtons from "../HeroButton";
+import QuoteModal from "../Quotemodal";
 
 // Safe TS Easing
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -87,6 +88,7 @@ export default function BookPublishingPage() {
     const [openFaq, setOpenFaq] = useState<number | null>(0);
     const overviewRef = useRef<HTMLDivElement>(null);
     const overviewInView = useInView(overviewRef, { once: true, margin: "-100px" });
+    const [quoteModal, setQuoteModal] = useState(false);
 
     return (
         <main className="w-full overflow-hidden" style={{ fontFamily: "'Raleway', Arial, sans-serif" }}>
@@ -112,7 +114,7 @@ export default function BookPublishingPage() {
                         We help authors publish professionally with the tools, support, and distribution needed to make their books available worldwide
                     </motion.p>
 
-                   <HeroButtons />
+                    <HeroButtons />
                 </div>
             </section>
 
@@ -180,8 +182,8 @@ export default function BookPublishingPage() {
                     <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {publishingPaths.map(({ title, subtitle, icon: Icon, features, tag }) => (
                             <motion.div key={title} variants={fadeUp} className={`rounded-2xl p-8 border relative overflow-hidden transition-all duration-500 ${tag === "Empowered"
-                                    ? "bg-[#e8391d]/5 border-[#e8391d]/50 hover:border-[#e8391d]"
-                                    : "bg-white/[0.02] border-white/10 hover:border-white/20"
+                                ? "bg-[#e8391d]/5 border-[#e8391d]/50 hover:border-[#e8391d]"
+                                : "bg-white/[0.02] border-white/10 hover:border-white/20"
                                 }`}>
                                 {/* Tag */}
                                 <div className="absolute top-4 right-4">
@@ -259,7 +261,7 @@ export default function BookPublishingPage() {
                 <div className="max-w-[1200px] mx-auto px-8 lg:px-16 relative z-10">
                     <div className="text-center mb-20">
                         <motion.h2 variants={maskReveal} initial="hidden" whileInView="visible" viewport={{ once: true }} className="font-black text-white uppercase leading-none" style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)" }}>
-                           HOW WE HELP YOU <span className="text-[#e8391d]">PUBLISH</span>
+                            HOW WE HELP YOU <span className="text-[#e8391d]">PUBLISH</span>
                         </motion.h2>
                     </div>
 
@@ -374,15 +376,22 @@ export default function BookPublishingPage() {
                         Let us help you prepare, publish, and distribute your book professionally so readers can finally discover it.
                     </p>
                     <div className="flex flex-wrap justify-center gap-5">
-                        <motion.a href="/contact" whileHover={{ backgroundColor: "#fff", color: "#e8391d", gap: "14px", boxShadow: "0 20px 60px rgba(0,0,0,0.2)" }} whileTap={{ scale: 0.95 }} className="inline-flex items-center gap-3 bg-black text-white font-black uppercase tracking-widest px-10 py-5 rounded-xl text-[14px] cursor-pointer transition-all duration-300">
-                            GET A FREE QUOTE <ArrowRight size={18} />
-                        </motion.a>
+                        <button
+                            type="button"
+                            style={{ backgroundColor: "#fff", color: "#e8391d", gap: "14px", boxShadow: "0 20px 60px rgba(0,0,0,0.2)" }}
+                            className="inline-flex items-center gap-3 bg-black text-white font-black uppercase tracking-widest px-10 py-5 rounded-xl text-[14px] cursor-pointer transition-all duration-300"
+                            onClick={() => setQuoteModal(true)}
+                        >
+                            <FileText size={16} />
+                            GET A FREE QUOTE
+                        </button>
                         <motion.a href="tel:2797770380" whileHover={{ gap: "14px" }} whileTap={{ scale: 0.95 }} className="inline-flex items-center gap-3 border-2 border-white text-white font-black uppercase tracking-widest px-10 py-5 rounded-xl text-[14px] cursor-pointer transition-all duration-300">
                             <Phone size={16} /> START YOUR PUBLISHING JOURNEY
                         </motion.a>
                     </div>
                 </motion.div>
             </section>
+            <QuoteModal isOpen={quoteModal} onClose={() => setQuoteModal(false)} />
 
         </main>
     );

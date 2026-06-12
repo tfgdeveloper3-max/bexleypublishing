@@ -1,7 +1,8 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useInView, Variants } from "framer-motion";
-import { BookOpen, Users, Award, Star, ArrowRight } from "lucide-react";
+import { BookOpen, Users, Award, Star, ArrowRight, FileText, Edit } from "lucide-react";
+import QuoteModal from "@/components/Quotemodal";
 
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -23,6 +24,8 @@ const fadeUp: Variants = {
 export default function AboutSection() {
     const ref = useRef<HTMLDivElement>(null);
     const inView = useInView(ref, { once: true, margin: "-80px" });
+    const [quoteModal, setQuoteModal] = useState(false);
+
 
     return (
         <>
@@ -468,16 +471,24 @@ export default function AboutSection() {
                             </motion.p>
 
                             <motion.div variants={fadeUp} className="about-ctas">
-                                <a href="/contact" className="btn-primary">
-                                    Start Your Journey <ArrowRight size={15} />
-                                </a>
+                                <button
+                                    type="button"
+                                    className="btn-primary"
+                                    onClick={() => setQuoteModal(true)}
+                                >
+                                    <Edit size={16} />
+                                    Start Your Journey
+                                </button>
                                 <a href="/portfolio" className="btn-ghost">
                                     View Portfolio <ArrowRight size={14} />
                                 </a>
+                                
                             </motion.div>
                         </motion.div>
                     </div>
                 </div>
+
+                <QuoteModal isOpen={quoteModal} onClose={() => setQuoteModal(false)} />
             </section>
         </>
     );

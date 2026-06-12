@@ -4,9 +4,11 @@ import { motion, AnimatePresence, useInView, Variants } from "framer-motion";
 import Image from "next/image";
 import {
     PenTool, ArrowRight, CheckCircle2, ShieldCheck, Fingerprint, Mic,
-    BookOpen, UserCircle, Briefcase, Heart, Minus, Plus, Phone, Lock, Sparkles
+    BookOpen, UserCircle, Briefcase, Heart, Minus, Plus, Phone, Lock, Sparkles,
+    FileText
 } from "lucide-react";
 import HeroButtons from "../HeroButton";
+import QuoteModal from "../Quotemodal";
 
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -49,6 +51,7 @@ export default function GhostwritingPage() {
     const [openFaq, setOpenFaq] = useState<number | null>(0);
     const overviewRef = useRef<HTMLDivElement>(null);
     const overviewInView = useInView(overviewRef, { once: true, margin: "-100px" });
+    const [quoteModal, setQuoteModal] = useState(false);
 
     return (
         <>
@@ -586,10 +589,20 @@ export default function GhostwritingPage() {
                         <h2 className="gw-cta-h2">READY TO PUBLISH SOMETHING REMARKABLE?</h2>
                         <p className="gw-cta-sub">We're your partner you can trust with your ideas and stories. Let us make your words dance while you relax.</p>
                         <div className="gw-cta-btns">
-                            <a href="/contact" className="gw-cta-btn-dark">Start Your Book <ArrowRight size={18} /></a>
+                            <button
+                                type="button"
+                                className="gw-cta-btn-dark"
+                                onClick={() => setQuoteModal(true)}
+                            >
+                                <FileText size={16} />
+                                Start Your Book
+                            </button>
                             <a href="tel:2797770380" className="gw-cta-btn-border"><Phone size={16} /> Call Us Now</a>
                         </div>
                     </motion.div>
+
+                    <QuoteModal isOpen={quoteModal} onClose={() => setQuoteModal(false)} />
+
                 </section>
 
             </main>

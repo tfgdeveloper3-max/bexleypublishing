@@ -3,6 +3,7 @@ import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { motion, useInView, Variants } from "framer-motion";
 import { Phone, Mail, MapPin, Clock, Shield, MessageCircle, Send, Loader2 } from "lucide-react";
+import { span } from "framer-motion/client";
 
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -377,67 +378,6 @@ export default function ContactPage() {
             </section>
 
             {/* ════════════════════════════════════════════
-                SECTION 3: GLOBAL REACH
-            ════════════════════════════════════════════ */}
-            <section className="relative w-full bg-[#faf9f7] py-32 overflow-hidden">
-                <div className="max-w-[1200px] mx-auto px-8 lg:px-16 text-center">
-                    <motion.div
-                        initial={{ y: "100%" }}
-                        whileInView={{ y: 0 }}
-                        viewport={{ once: true }}
-                        className="flex items-center justify-center gap-3 mb-4"
-                    >
-                        <span className="w-8 h-[2px] bg-[#e8391d]" />
-                        <span className="text-[#e8391d] font-black uppercase tracking-[0.28em] text-[11px]">Worldwide Distribution</span>
-                        <span className="w-8 h-[2px] bg-[#e8391d]" />
-                    </motion.div>
-                    <motion.h2
-                        variants={maskReveal}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        className="font-black text-black uppercase leading-none mb-16"
-                        style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)" }}
-                    >
-                        PUBLISHING <span className="text-[#e8391d]">GLOBALLY</span>
-                    </motion.h2>
-
-                    {/* Stylized Abstract Map with Pulsing Dots */}
-                    <div className="relative w-full max-w-4xl mx-auto aspect-[2/1] bg-white rounded-3xl border border-gray-200 shadow-xl overflow-hidden p-8">
-                        <div
-                            className="absolute inset-0 opacity-[0.05]"
-                            style={{ backgroundImage: `linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)`, backgroundSize: "40px 40px" }}
-                        />
-
-                        {[
-                            { top: "30%", left: "20%", city: "New York" },
-                            { top: "25%", left: "48%", city: "London" },
-                            { top: "35%", left: "75%", city: "Tokyo" },
-                            { top: "65%", left: "30%", city: "São Paulo" },
-                            { top: "60%", left: "65%", city: "Sydney" },
-                        ].map(({ top, left, city }) => (
-                            <div key={city} className="absolute group cursor-pointer" style={{ top, left }}>
-                                <span className="relative flex h-4 w-4">
-                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#e8391d] opacity-50"></span>
-                                    <span className="relative inline-flex rounded-full h-4 w-4 bg-[#e8391d] border-2 border-white shadow-lg"></span>
-                                </span>
-                                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                                    <div className="bg-black text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-lg shadow-xl whitespace-nowrap">
-                                        {city}
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-
-                        <div className="absolute bottom-6 right-8 text-right">
-                            <p className="font-black text-black text-3xl">40+</p>
-                            <p className="text-gray-400 text-[11px] uppercase tracking-widest font-bold">Countries &amp; Platforms</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* ════════════════════════════════════════════
                 SECTION 4: MASSIVE CTA
             ════════════════════════════════════════════ */}
             <section className="relative w-full bg-[#e8391d] py-28 overflow-hidden">
@@ -470,7 +410,6 @@ export default function ContactPage() {
                     </motion.a>
                 </motion.div>
             </section>
-
         </main>
     );
 }

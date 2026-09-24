@@ -35,6 +35,7 @@ const fadeUp: Variants = {
 
 type Point = { title?: string; text: string };
 type LinkItem = { label: string; href: string };
+type VideoItem = { label: string; src: string; poster: string };
 
 type Strategy = {
     id: string;
@@ -42,12 +43,11 @@ type Strategy = {
     title: string;
     summary?: string;
     image?: string;
-    video?: string; 
     alt: string;
-    ratio?: string;
+    ratio: string;
     points: Point[];
     link?: LinkItem;
-    videos?: LinkItem[];
+    videos?: VideoItem[];
     collaborator?: LinkItem;
 };
 
@@ -56,8 +56,9 @@ const STRATEGIES: Strategy[] = [
         id: "email-marketing",
         nav: "Email Marketing",
         title: "Email Marketing",
-        image: "/images/marketing/email-marketing.jpg",
+        image: "/images/marketing/Email-Marketing.jpg",
         alt: "Email marketing campaign for a book",
+        ratio: "2000 / 1333",
         points: [
             { text: "Our email campaigns reach subscribers interested in your book's specific genre, ensuring your work is introduced to a relevant audience rather than sent to random recipients." },
             { text: "Create email content that highlights your book's unique story, key themes, and value to potential readers." },
@@ -69,9 +70,9 @@ const STRATEGIES: Strategy[] = [
         id: "book-signing",
         nav: "Book Signing Events",
         title: "Book Signing Events",
-        image: "/images/marketing/book-signing.jpg",
-        alt: "Collage of author book signing events in bookstores",
-        ratio: "782 / 720",
+        image: "/images/marketing/Book-Signing-Event.jpg",
+        alt: "Author signing books and greeting readers in a bookstore",
+        ratio: "3504 / 2336",
         points: [
             { text: "Connect with readers in person, build meaningful relationships, and create memorable experiences around your book." },
             { text: "Support the organization of book signing events at suitable venues, helping you engage with your target audience." },
@@ -84,8 +85,9 @@ const STRATEGIES: Strategy[] = [
         id: "author-branding",
         nav: "Author Branding",
         title: "Author Branding & Promotional Materials",
-        image: "/images/marketing/author-branding.jpg",
-        alt: "Branded author stationery with book, bookmark, and business card",
+        image: "/images/marketing/Author-Branding.jpg",
+        alt: "Branded author gift box with book, bookmark, pen, and business card",
+        ratio: "1 / 1",
         points: [
             { text: "Elevate your author brand with professionally designed stationery that reflects your unique identity and creates a consistent, recognizable image." },
             { text: "Incorporate your book cover, author logo, and brand elements into business cards, letterheads, bookmarks, and other promotional stationery." },
@@ -97,8 +99,8 @@ const STRATEGIES: Strategy[] = [
         id: "times-square",
         nav: "Times Square",
         title: "Times Square Video Promotion",
-        image: "/images/marketing/times-square.jpg",
         alt: "Book promotion on a Times Square digital billboard",
+        ratio: "16 / 9",
         points: [
             { text: "Showcase your book and author brand on the digital billboards of Times Square, one of the world's most recognizable advertising destinations." },
             { text: "Present your book cover, author name, and promotional visuals through an engaging video designed to capture attention in a high-traffic environment." },
@@ -106,8 +108,8 @@ const STRATEGIES: Strategy[] = [
             { text: "Capture the moment and share your Times Square promotion across social media and digital platforms to extend its reach beyond the physical display." },
         ],
         videos: [
-            { label: "Watch Video 1", href: "https://www.kapwing.com/videos/6ab17bb357cd8eba72415238" },
-            { label: "Watch Video 2", href: "https://www.kapwing.com/videos/6ab17cb3651a8f6cfa1eb8db" },
+            { label: "Video 1", src: "/video/time-square-1.mp4", poster: "/video/time-square-1-poster.jpg" },
+            { label: "Video 2", src: "/video/time-square-2.mp4", poster: "/video/time-square-2-poster.jpg" },
         ],
         collaborator: { label: "Glastonbury Publications", href: "https://glastonburypublications.com/" },
     },
@@ -115,8 +117,9 @@ const STRATEGIES: Strategy[] = [
         id: "influencer-marketing",
         nav: "Influencer Marketing",
         title: "Influencer Marketing & Shark Tank Network Exposure",
-        image: "/images/marketing/influencer-marketing.jpg",
-        alt: "Influencer creating content about a book",
+        image: "/images/marketing/Influencer-Marketing.jpg",
+        alt: "Influencer marketing on a laptop and phone",
+        ratio: "1000 / 667",
         points: [
             { text: "Leverage promotional opportunities with influencers associated with Shark Tank to introduce your book and author brand to engaged audiences." },
             { text: "Present your book through carefully selected influencer collaborations designed to create awareness and spark interest among potential readers." },
@@ -128,9 +131,9 @@ const STRATEGIES: Strategy[] = [
         id: "author-of-the-month",
         nav: "Author of the Month",
         title: "Author of the Month Nominations on Global Platforms",
-        image: "/images/marketing/author-of-the-month.jpg",
-        alt: "Author of the Month feature banner for a children's book",
-        ratio: "966 / 524",
+        image: "/images/marketing/Author-Month.jpg",
+        alt: "Author proudly holding her published children's book",
+        ratio: "1200 / 896",
         points: [
             { text: "Position your author brand for international recognition through Author of the Month nomination opportunities, helping showcase your literary work and connect with audiences beyond your local market." },
             { text: "Present your book for consideration in international Author of the Month nomination programs and literary recognition initiatives, subject to the platform's eligibility and selection process." },
@@ -145,8 +148,9 @@ const STRATEGIES: Strategy[] = [
         title: "Book to Screen: Bringing Your Story to Life",
         summary:
             "Our Book-to-Screen services are designed to help authors explore the pathway from the written page to visual storytelling, from screenplay development to professional industry presentation.",
-        image: "/images/marketing/book-to-screen.jpg",
-        alt: "Book being adapted into a screenplay",
+        image: "/images/marketing/Book-to-Screen.jpg",
+        alt: "Reader turning the page of a digital book on a tablet",
+        ratio: "612 / 407",
         points: [
             { title: "Book-to-Screen Adaptation", text: "Transform your published book into a professionally structured screenplay, adapting its characters, plot, dialogue, and narrative for film or television while preserving the heart of your original story." },
             { title: "Media Kit & Industry Presentation", text: "Develop a professional media kit featuring your book, author profile, story synopsis, character details, and adaptation concept to help present your project in a clear and compelling format." },
@@ -160,8 +164,9 @@ const STRATEGIES: Strategy[] = [
         title: "BookTalk",
         summary:
             "An opportunity to bring your story to life through meaningful conversations, author insights, and audience engagement.",
-        image: "/images/marketing/booktalk.jpg",
-        alt: "Author discussing a book with readers",
+        image: "/images/marketing/BookTalk.jpg",
+        alt: "Group of readers discussing books around a table",
+        ratio: "612 / 408",
         points: [
             { title: "Author Storytelling & Live Discussions", text: "Present your book through engaging book talks, author discussions, and literary conversations that highlight your story, inspiration, and creative journey." },
             { text: "Create opportunities to interact with readers, answer questions, and build meaningful connections around your book and its message." },
@@ -248,31 +253,57 @@ const MAIL_LISTS: ListGroup[] = [
 function StrategyRow({ s, reduce }: { s: Strategy; reduce: boolean }) {
     const ref = useRef<HTMLDivElement>(null);
     const inView = useInView(ref, { once: true, margin: "-100px" });
+    const [videoIndex, setVideoIndex] = useState(0);
+    const video = s.videos?.[videoIndex];
 
     return (
         <article id={s.id} ref={ref} className="mp-row">
-            <motion.div
-                className="mp-row-media"
-                style={s.ratio ? { aspectRatio: s.ratio } : undefined}
-                initial={reduce ? false : { clipPath: "inset(100% 0% 0% 0% round 24px)" }}
-                animate={inView ? { clipPath: "inset(0% 0% 0% 0% round 24px)" } : {}}
-                transition={{ duration: 1.1, ease: smoothEase }}
-            >
-                {s.video ? (
-                    <video
-                        src={s.video}
-                        poster={s.image}
-                        autoPlay={!reduce}
-                        muted
-                        loop
-                        playsInline
-                        controls={reduce}
-                        aria-label={s.alt}
-                    />
-                ) : (
-                    <img src={s.image} alt={s.alt} loading="lazy" />
+            <div className="mp-row-mediacol">
+                <motion.div
+                    className="mp-row-media"
+                    style={{
+                        aspectRatio: s.ratio,
+                        maxWidth: `calc(var(--mp-media-max-h) * (${s.ratio}))`,
+                    }}
+                    initial={reduce ? false : { clipPath: "inset(100% 0% 0% 0% round 24px)" }}
+                    animate={inView ? { clipPath: "inset(0% 0% 0% 0% round 24px)" } : {}}
+                    transition={{ duration: 1.1, ease: smoothEase }}
+                >
+                    {video ? (
+                        <video
+                            key={video.src}
+                            src={video.src}
+                            poster={video.poster}
+                            autoPlay={!reduce}
+                            muted
+                            loop
+                            playsInline
+                            controls
+                            preload="metadata"
+                            aria-label={`${s.alt} (${video.label})`}
+                        />
+                    ) : (
+                        <img src={s.image} alt={s.alt} loading="lazy" />
+                    )}
+                </motion.div>
+
+                {s.videos && s.videos.length > 1 && (
+                    <div className="mp-vtabs" role="group" aria-label="Choose video">
+                        {s.videos.map((v, i) => (
+                            <button
+                                key={v.src}
+                                type="button"
+                                className="mp-video-link"
+                                aria-pressed={videoIndex === i}
+                                onClick={() => setVideoIndex(i)}
+                            >
+                                <PlayCircle size={18} />
+                                {v.label}
+                            </button>
+                        ))}
+                    </div>
                 )}
-            </motion.div>
+            </div>
 
             <motion.div
                 className="mp-row-body"
@@ -301,23 +332,6 @@ function StrategyRow({ s, reduce }: { s: Strategy; reduce: boolean }) {
                         </li>
                     ))}
                 </motion.ul>
-
-                {s.videos && (
-                    <motion.div variants={fadeUp} className="mp-videos">
-                        {s.videos.map((v) => (
-                            <a
-                                key={v.href}
-                                href={v.href}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="mp-video-link"
-                            >
-                                <PlayCircle size={18} />
-                                {v.label}
-                            </a>
-                        ))}
-                    </motion.div>
-                )}
 
                 {s.link && (
                     <motion.a variants={fadeUp} href={s.link.href} className="mp-btn-ghost">
@@ -419,6 +433,8 @@ export default function MarketingProposal() {
                     --mp-header-offset: 88px;
                     /* Height of MarketingNavbar overlaying the top of the hero */
                     --mp-navbar-height: 88px;
+                    /* Tallest a strategy image/video may get */
+                    --mp-media-max-h: 600px;
 
                     font-family: 'Raleway', Arial, sans-serif;
                     background: var(--mp-bg);
@@ -566,9 +582,10 @@ export default function MarketingProposal() {
                     position: relative;
                     width: 100%;
                     height: 100%;
-                    object-fit: cover;
+                    /* contain = whole image visible, nothing cut off */
+                    object-fit: contain;
+                    object-position: center;
                     border-radius: 24px;
-                    box-shadow: 0 25px 60px rgba(0,0,0,0.5);
                 }
 
                 /* ═══════════════════════════════════════
@@ -658,14 +675,16 @@ export default function MarketingProposal() {
                     scroll-margin-top: calc(var(--mp-header-offset) + 90px);
                 }
                 .mp-row + .mp-row { border-top: 1px solid var(--mp-line); }
-                .mp-row:nth-child(even) .mp-row-media { order: 2; }
+                .mp-row:nth-child(even) .mp-row-mediacol { order: 2; }
+                .mp-row-mediacol { min-width: 0; }
 
                 .mp-row-media {
                     position: relative;
                     border-radius: 24px;
                     overflow: hidden;
-                    aspect-ratio: 4 / 3;
-                    background: #e9e6e1;
+                    width: 100%;
+                    margin: 0 auto;
+                    background: #000;
                     box-shadow: 0 25px 60px rgba(0,0,0,0.12);
                 }
                 .mp-row-media img,
@@ -674,7 +693,8 @@ export default function MarketingProposal() {
                     inset: 0;
                     width: 100%;
                     height: 100%;
-                    object-fit: cover;
+                    /* Box matches each file's own ratio; contain guarantees no cropping */
+                    object-fit: contain;
                 }
 
                 .mp-row-body { display: flex; flex-direction: column; }
@@ -707,13 +727,15 @@ export default function MarketingProposal() {
                     font-size: clamp(0.9rem, 1.1vw, 1rem);
                 }
                 .mp-points strong { color: var(--mp-ink); font-weight: 700; }
-                .mp-videos {
+                .mp-vtabs {
                     display: flex;
                     flex-wrap: wrap;
-                    gap: 12px;
-                    margin: 0 0 24px;
+                    gap: 10px;
+                    margin-top: 16px;
                 }
                 .mp-video-link {
+                    font-family: inherit;
+                    cursor: pointer;
                     display: inline-flex;
                     align-items: center;
                     gap: 8px;
@@ -729,6 +751,7 @@ export default function MarketingProposal() {
                 }
                 .mp-video-link svg { color: var(--mp-red); }
                 .mp-video-link:hover { border-color: var(--mp-red); color: var(--mp-red); }
+                .mp-video-link[aria-pressed="true"] { background: var(--mp-ink); border-color: var(--mp-ink); color: #fff; }
 
                 .mp-collab {
                     display: flex;
@@ -908,6 +931,7 @@ export default function MarketingProposal() {
                 ═══════════════════════════════════════ */
                 @media (min-width: 2400px) {
                     .mp-inner { max-width: 2200px; padding: 0 160px; }
+                    .mp { --mp-media-max-h: 960px; }
                     .mp-hero-grid { padding-top: 200px; padding-bottom: 200px; gap: 140px; }
                     .mp-hero h1 { font-size: clamp(5rem, 4.6vw, 8rem); }
                     .mp-h2 { font-size: clamp(3rem, 3vw, 5rem); }
@@ -932,6 +956,7 @@ export default function MarketingProposal() {
                 ═══════════════════════════════════════ */
                 @media (min-width: 1800px) and (max-width: 2399px) {
                     .mp-inner { max-width: 1680px; padding: 0 120px; }
+                    .mp { --mp-media-max-h: 720px; }
                     .mp-hero-grid { padding-top: 160px; padding-bottom: 160px; gap: 110px; }
                     .mp-row { gap: 120px; padding: 72px 0; }
                     .mp-lists-grid { grid-template-columns: 360px 1fr; }
@@ -976,9 +1001,8 @@ export default function MarketingProposal() {
                     }
                     .mp-hero-grid { padding-top: 80px; padding-bottom: 96px; }
                     .mp-hero-media { aspect-ratio: 16 / 10; max-width: 640px; }
-                    .mp-row:nth-child(even) .mp-row-media { order: 0; }
+                    .mp-row:nth-child(even) .mp-row-mediacol { order: 0; }
                     .mp-row { gap: 32px; padding: 48px 0; }
-                    .mp-row-media { aspect-ratio: 16 / 10; }
                     .mp-intro { padding: 80px 0 64px; }
                     .mp-strategies { padding: 72px 0 24px; }
                     .mp-strategies-head { margin-bottom: 40px; }
@@ -1125,7 +1149,7 @@ export default function MarketingProposal() {
                             animate={heroInView ? { opacity: 1, scale: 1 } : {}}
                             transition={{ duration: 1.2, delay: 0.3, ease: smoothEase }}
                         >
-                            <img src="/images/marketing/hero.jpg" alt="Author holding a newly published book" />
+                            <img src="/images/marketing/Hero.png" alt="Author holding a newly published book" />
                         </motion.div>
                     </div>
                 </section>

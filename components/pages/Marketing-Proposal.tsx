@@ -250,6 +250,9 @@ const MAIL_LISTS: ListGroup[] = [
     },
 ];
 
+/* ═══════════════════════════════════════
+   STRATEGY ROW
+═══════════════════════════════════════ */
 function StrategyRow({ s, reduce }: { s: Strategy; reduce: boolean }) {
     const ref = useRef<HTMLDivElement>(null);
     const inView = useInView(ref, { once: true, margin: "-100px" });
@@ -263,6 +266,7 @@ function StrategyRow({ s, reduce }: { s: Strategy; reduce: boolean }) {
                     className="mp-row-media"
                     style={{
                         aspectRatio: s.ratio,
+                        // Cap the height without breaking the ratio (no black bars)
                         maxWidth: `calc(var(--mp-media-max-h) * (${s.ratio}))`,
                     }}
                     initial={reduce ? false : { clipPath: "inset(100% 0% 0% 0% round 24px)" }}
@@ -356,6 +360,9 @@ function StrategyRow({ s, reduce }: { s: Strategy; reduce: boolean }) {
     );
 }
 
+/* ═══════════════════════════════════════
+   PAGE
+═══════════════════════════════════════ */
 export default function MarketingProposal() {
     const reduce = useReducedMotion() ?? false;
     const [quoteModal, setQuoteModal] = useState(false);
@@ -368,6 +375,7 @@ export default function MarketingProposal() {
     const introRef = useRef<HTMLDivElement>(null);
     const introInView = useInView(introRef, { once: true, margin: "-80px" });
 
+    /* Footer genre links: #mailing-list-romance → open that tab and scroll to the table */
     useEffect(() => {
         const openFromHash = () => {
             const match = window.location.hash.match(/^#mailing-list-(.+)$/);
@@ -384,6 +392,7 @@ export default function MarketingProposal() {
         return () => window.removeEventListener("hashchange", openFromHash);
     }, [reduce]);
 
+    /* Highlight the strategy currently on screen in the sticky nav */
     useEffect(() => {
         const observer = new IntersectionObserver(
             (entries) => {
@@ -400,6 +409,7 @@ export default function MarketingProposal() {
         return () => observer.disconnect();
     }, []);
 
+    /* Keep the active nav pill visible on small screens */
     useEffect(() => {
         const nav = document.querySelector<HTMLDivElement>(".mp-nav");
         const pill = nav?.querySelector<HTMLAnchorElement>(`a[data-id="${activeNav}"]`);
@@ -408,6 +418,7 @@ export default function MarketingProposal() {
         const pillRect = pill.getBoundingClientRect();
         const left =
             nav.scrollLeft + (pillRect.left - navRect.left) - nav.clientWidth / 2 + pillRect.width / 2;
+        // Scroll the pill bar sideways only — never the page itself
         nav.scrollTo({ left, behavior: reduce ? "auto" : "smooth" });
     }, [activeNav, reduce]);
 
@@ -428,6 +439,8 @@ export default function MarketingProposal() {
                     --mp-bg: #faf9f7;
                     --mp-ink: #000;
                     --mp-muted: #6b7280;
+                    /* Paragraph text: darker for readability */
+                    --mp-text: #000;
                     --mp-line: rgba(0,0,0,0.1);
                     /* Height of your site header, if it's sticky/fixed */
                     --mp-header-offset: 88px;
@@ -485,7 +498,7 @@ export default function MarketingProposal() {
                 .mp-h2 .accent { color: var(--mp-red); }
 
                 .mp-body {
-                    color: var(--mp-muted);
+                    color: var(--mp-text);
                     line-height: 1.85;
                     font-size: clamp(0.95rem, 1.25vw, 1.1rem);
                     margin: 0 0 20px;
@@ -557,7 +570,7 @@ export default function MarketingProposal() {
                     margin: 0 0 28px;
                 }
                 .mp-hero h1 .accent { color: var(--mp-red); display: block; }
-                .mp-hero .mp-body { color: rgba(255,255,255,0.7); }
+                .mp-hero .mp-body { color: rgba(255,255,255,0.85); }
                 .mp-hero .mp-btn-ghost { border-color: rgba(255,255,255,0.3); }
                 .mp-hero .mp-btn-ghost:hover { color: var(--mp-red); border-color: var(--mp-red); }
                 .mp-hero-ctas {
@@ -709,7 +722,7 @@ export default function MarketingProposal() {
                     font-weight: 500;
                     font-size: clamp(1rem, 1.3vw, 1.15rem);
                     line-height: 1.6;
-                    color: #374151;
+                    color: #000;
                     margin: 0 0 24px;
                 }
                 .mp-points {
@@ -722,7 +735,7 @@ export default function MarketingProposal() {
                 .mp-points li {
                     display: flex;
                     gap: 14px;
-                    color: var(--mp-muted);
+                    color: var(--mp-text);
                     line-height: 1.7;
                     font-size: clamp(0.9rem, 1.1vw, 1rem);
                 }
@@ -854,7 +867,7 @@ export default function MarketingProposal() {
                 }
                 .mp-table tr:last-child td { border-bottom: 0; }
                 .mp-table td:first-child { font-weight: 700; }
-                .mp-table td:nth-child(2) { color: var(--mp-muted); font-variant-numeric: tabular-nums; }
+                .mp-table td:nth-child(2) { color: var(--mp-text); font-variant-numeric: tabular-nums; }
                 .mp-table td:last-child {
                     font-weight: 900;
                     color: var(--mp-red);
@@ -865,7 +878,7 @@ export default function MarketingProposal() {
                 .mp-note {
                     margin-top: 16px;
                     font-size: 13px;
-                    color: var(--mp-muted);
+                    color: var(--mp-text);
                 }
 
                 /* ═══════════════════════════════════════
@@ -892,7 +905,7 @@ export default function MarketingProposal() {
                     margin: 0;
                 }
                 .mp-cta p {
-                    color: rgba(255,255,255,0.85);
+                    color: rgba(255,255,255,0.95);
                     line-height: 1.8;
                     font-size: clamp(0.95rem, 1.2vw, 1.1rem);
                     margin: 0 0 32px;
@@ -1088,7 +1101,6 @@ export default function MarketingProposal() {
             `}</style>
 
             <main className="mp">
-                {/* ════════════ HERO ════════════ */}
                 <section className="mp-hero" ref={heroRef}>
                     <motion.div
                         initial={reduce ? false : { width: "0%" }}
@@ -1154,7 +1166,6 @@ export default function MarketingProposal() {
                     </div>
                 </section>
 
-                {/* ════════════ INTRO ════════════ */}
                 <section className="mp-intro" ref={introRef}>
                     <div className="mp-inner mp-intro-grid">
                         <motion.div
@@ -1198,7 +1209,6 @@ export default function MarketingProposal() {
                     </div>
                 </section>
 
-                {/* ════════════ STICKY NAV ════════════ */}
                 <nav className="mp-nav-wrap" aria-label="Marketing strategies">
                     <div className="mp-inner mp-nav">
                         {STRATEGIES.map((s) => (
@@ -1217,7 +1227,6 @@ export default function MarketingProposal() {
                     </div>
                 </nav>
 
-                {/* ════════════ STRATEGIES ════════════ */}
                 <section className="mp-strategies">
                     <div className="mp-inner">
                         <div className="mp-strategies-head">
@@ -1241,7 +1250,6 @@ export default function MarketingProposal() {
                     </div>
                 </section>
 
-                {/* ════════════ MAILING LIST ════════════ */}
                 <section id="mailing-list" className="mp-lists">
                     <div className="mp-inner">
                         <div className="mp-label">
@@ -1316,7 +1324,6 @@ export default function MarketingProposal() {
                     </div>
                 </section>
 
-                {/* ════════════ CLOSING CTA ════════════ */}
                 <section className="mp-cta">
                     <div className="mp-inner mp-cta-grid">
                         <h2>

@@ -3,7 +3,6 @@ import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { motion, useInView, Variants } from "framer-motion";
 import { Phone, Mail, MapPin, Clock, Shield, MessageCircle, Send, Loader2 } from "lucide-react";
-import { span } from "framer-motion/client";
 
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -33,6 +32,37 @@ const floatingIcon = {
 
 type Status = "idle" | "loading" | "error";
 
+const LEAD_URL = "https://crm.authorssale.com/api/lead/L6RQei7pdOcTUyOSaGLKvGjguhnurLb9";
+const MAX_ATTEMPTS = 3;
+
+const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+/* Retries the request if the connection fails (e.g. ERR_QUIC_PROTOCOL_ERROR)
+   or the server has a temporary error (5xx), so visitors don't have to click twice. */
+async function postWithRetry(url: string, body: unknown): Promise<Response> {
+    let lastError: unknown;
+
+    for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+        try {
+            const res = await fetch(url, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body),
+            });
+
+            if (res.status >= 500 && attempt < MAX_ATTEMPTS) {
+                await wait(600 * attempt);
+                continue;
+            }
+            return res;
+        } catch (err) {
+            lastError = err;
+            if (attempt < MAX_ATTEMPTS) await wait(600 * attempt);
+        }
+    }
+    throw lastError;
+}
+
 export default function ContactPage() {
     const router = useRouter();
     const [formData, setFormData] = useState({
@@ -59,28 +89,25 @@ export default function ContactPage() {
         setStatus("loading");
         setErrorMsg("");
 
+        /* The API has no service field, so the selected service
+           is added to the top of the message instead. */
+        const fullMessage = formData.service
+            ? `Service: ${formData.service}\n\n${formData.message}`
+            : formData.message;
+
         try {
-            const res = await fetch(
-                "https://leads.authorpublishers.us/api/lead/IVM9q9SroBJJSvk6COwYtq0qc29tpGor",
-                {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        Name: formData.name,
-                        Email: formData.email,
-                        "Phone Number": formData.phone,
-                        "Service Name": formData.service,
-                        Message: formData.message,
-                    }),
-                }
-            );
+            const res = await postWithRetry(LEAD_URL, {
+                Name: formData.name,
+                Email: formData.email,
+                "Phone Number": formData.phone,
+                Message: fullMessage,
+            });
 
             // 409 = duplicate entry, treat as success and redirect
             if (!res.ok && res.status !== 409) throw new Error(`Server error ${res.status}`);
 
             router.push("/thank-you");
-        } catch (err: unknown) {
-            console.error("Lead submission error:", err);
+        } catch {
             setErrorMsg("Something went wrong. Please try again or call us directly.");
             setStatus("error");
         }

@@ -99,7 +99,7 @@ export default function AboutPage() {
                 .ap-hero {
                     position: relative;
                     width: 100%;
-                    height: 100vh;
+                    height: 120vh;
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -1063,7 +1063,7 @@ export default function AboutPage() {
                     </div>
                 </section>
 
-                {/* ═══ SECTION 4: TEAM ═══ */}
+                {/* ═══ SECTION 4: TEAM ═══ 
                 <section className="ap-team">
                     <div className="ap-team-inner">
                         <div className="ap-team-header">
@@ -1095,34 +1095,7 @@ export default function AboutPage() {
                             ))}
                         </motion.div>
                     </div>
-                </section>
-
-                {/* ═══ SECTION 5: TESTIMONIALS ═══ */}
-                <section className="ap-testimonials">
-                    <div className="ap-testimonials-inner">
-                        <div className="ap-testimonials-header">
-                            <motion.div initial={{ y: "100%" }} whileInView={{ y: 0 }} viewport={{ once: true }} style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 12, marginBottom: 16 }}>
-                                <span className="ap-eyebrow-line" />
-                                <span className="ap-eyebrow-text">TESTIMONIALS</span>
-                                <span className="ap-eyebrow-line" />
-                            </motion.div>
-                            <motion.h2 variants={maskReveal} initial="hidden" whileInView="visible" viewport={{ once: true }} className="ap-testimonials-h2">
-                                REVIEWS BY WINNING AUTHORS
-                            </motion.h2>
-                        </div>
-
-                        <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="ap-testimonials-grid">
-                            {testimonials.map(({ name, book, quote }) => (
-                                <motion.div key={name} variants={fadeUp} className="ap-testimonial-card">
-                                    <Quote size={40} style={{ color: "rgba(232,57,29,0.2)", position: "absolute", top: 32, right: 32 }} />
-                                    <p className="ap-testimonial-quote">"{quote}"</p>
-                                    <p className="ap-testimonial-name">{name}</p>
-                                    <p className="ap-testimonial-book">Author: {book}</p>
-                                </motion.div>
-                            ))}
-                        </motion.div>
-                    </div>
-                </section>
+                </section>*/}
 
                 {/* ═══ SECTION 6: WHY CHOOSE US ═══ */}
                 <section className="ap-why">
@@ -1162,6 +1135,37 @@ export default function AboutPage() {
                         </motion.div>
                     </motion.div>
                 </section>
+
+
+                
+                {/* ═══ SECTION 5: TESTIMONIALS ═══ */}
+                <section className="ap-testimonials">
+                    <div className="ap-testimonials-inner">
+                        <div className="ap-testimonials-header">
+                            <motion.div initial={{ y: "100%" }} whileInView={{ y: 0 }} viewport={{ once: true }} style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 12, marginBottom: 16 }}>
+                                <span className="ap-eyebrow-line" />
+                                <span className="ap-eyebrow-text">TESTIMONIALS</span>
+                                <span className="ap-eyebrow-line" />
+                            </motion.div>
+                            <motion.h2 variants={maskReveal} initial="hidden" whileInView="visible" viewport={{ once: true }} className="ap-testimonials-h2">
+                                REVIEWS BY WINNING AUTHORS
+                            </motion.h2>
+                        </div>
+
+                        <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="ap-testimonials-grid">
+                            {testimonials.map(({ name, book, quote }) => (
+                                <motion.div key={name} variants={fadeUp} className="ap-testimonial-card">
+                                    <Quote size={40} style={{ color: "rgba(232,57,29,0.2)", position: "absolute", top: 32, right: 32 }} />
+                                    <p className="ap-testimonial-quote">"{quote}"</p>
+                                    <p className="ap-testimonial-name">{name}</p>
+                                    <p className="ap-testimonial-book">Author: {book}</p>
+                                </motion.div>
+                            ))}
+                        </motion.div>
+                    </div>
+                </section>
+
+                
 
                 {/* ═══ SECTION 7: CTA ═══ */}
                 <section className="ap-cta">

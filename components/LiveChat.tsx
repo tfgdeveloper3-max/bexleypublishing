@@ -54,7 +54,7 @@ export default function LiveChat() {
             <Script id="livechat-settings" strategy="beforeInteractive">
                 {`
           window.__lc = window.__lc || {};
-          window.__lc.license = 19067595;
+          window.__lc.license = 19839776;
           window.__lc.chat_between_groups = false;
           window.__lc.params = [{ name: "Page", value: window.location.href }];
         `}

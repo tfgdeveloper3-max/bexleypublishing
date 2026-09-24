@@ -1,40 +1,12 @@
-"use client";
-import Navbar from "@/components/Navbar";
-import HeroSection from "@/components/sections/HeroSection";
-import AboutSection from "@/components/sections/Aboutsection";
-import StickyProposal from "@/components/Stickyproposal";
-import FeaturedWork from "@/components/sections/Featuredwork";
-import Brandingsection from "@/components/sections/Brandingsection";
-import Faqsection from "@/components/sections/Faqsection";
-import Blogsection from "@/components/sections/Blogsection";
-import Contactsection from "@/components/sections/Contactsection";
-import Newslettersection from "@/components/sections/Newslettersection";
-import Footer from "@/components/sections/Footer";
+import { Metadata } from "next";
+import HomeClient from "./HomeClient";
 
+export const metadata: Metadata = {
+  title: "Bexley Publishing — Professional Book Publishing Services",
+  description:
+    "Bexley Publishing helps authors write, edit, design, publish, and market their books. From ghostwriting to global distribution — your story starts here.",
+};
 
 export default function Home() {
-
-  return (
-    <main>
-      <Navbar />
-
-      <HeroSection />
-
-      <AboutSection />
-
-      <Brandingsection />
-
-      <FeaturedWork />
-
-      <Blogsection />
-
-      <Faqsection />
-
-      <Contactsection />
-
-      <Newslettersection />
-
-      <Footer />
-    </main>
-  );
+  return <HomeClient />;
 }

@@ -8,6 +8,40 @@ import { X, Loader2, Tag, ArrowRight } from "lucide-react";
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 type Status = "idle" | "loading" | "error";
 
+const LEAD_URL = "https://crm.authorssale.com/api/lead/L6RQei7pdOcTUyOSaGLKvGjguhnurLb9";
+const MAX_ATTEMPTS = 3;
+
+const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+/* Retries the request if the connection itself fails (e.g. ERR_QUIC_PROTOCOL_ERROR)
+   or the server has a temporary error (5xx). The browser usually falls back to a
+   working connection on the second try, so the visitor never sees the error. */
+async function postWithRetry(url: string, body: unknown): Promise<Response> {
+    let lastError: unknown;
+
+    for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+        try {
+            const res = await fetch(url, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body),
+            });
+
+            if (res.status >= 500 && attempt < MAX_ATTEMPTS) {
+                console.warn(`[QuoteModal] Attempt ${attempt} got ${res.status}, retrying...`); // TEMP DEBUG
+                await wait(600 * attempt);
+                continue;
+            }
+            return res;
+        } catch (err) {
+            lastError = err;
+            console.warn(`[QuoteModal] Attempt ${attempt} failed to connect:`, err); // TEMP DEBUG
+            if (attempt < MAX_ATTEMPTS) await wait(600 * attempt);
+        }
+    }
+    throw lastError;
+}
+
 interface QuoteModalProps {
     isOpen: boolean;
     onClose: () => void;
@@ -40,22 +74,32 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
         e.preventDefault();
         setStatus("loading");
         setErrorMsg("");
+
+        /* The API has no service field, so the selected service
+           is added to the top of the message instead. */
+        const fullMessage = form.service
+            ? `Service: ${form.service}\n\n${form.message}`
+            : form.message;
+
+        const payload = {
+            Name: form.name,
+            Email: form.email,
+            "Phone Number": form.phone,
+            Message: fullMessage,
+        };
+
+
         try {
-            const res = await fetch("https://leads.authorpublishers.us/api/lead/IVM9q9SroBJJSvk6COwYtq0qc29tpGor", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    Name: form.name,
-                    Email: form.email,
-                    "Phone Number": form.phone,
-                    "Service Name": form.service,
-                    Message: form.message,
-                }),
-            });
+            const res = await postWithRetry(LEAD_URL, payload);
+
+            
+            
+
             if (!res.ok && res.status !== 409) throw new Error();
             onClose();
             router.push("/thank-you");
-        } catch {
+        } catch (err) {
+            console.error("[QuoteModal] Submit failed:", err); // TEMP DEBUG
             setErrorMsg("Something went wrong. Please try again or call us directly.");
             setStatus("error");
         }

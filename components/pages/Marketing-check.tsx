@@ -2,7 +2,6 @@
 import { useEffect, useRef, useState } from "react";
 import {
     motion,
-    AnimatePresence,
     useInView,
     useReducedMotion,
     Variants,
@@ -10,6 +9,9 @@ import {
 import { ArrowRight, Edit, Phone, Mail, ExternalLink, Check, PlayCircle } from "lucide-react";
 import QuoteModal from "@/components/Quotemodal";
 
+/* ═══════════════════════════════════════
+   CONFIG — replace with your real details
+═══════════════════════════════════════ */
 const CONTACT = {
     phone: "(279) 777-0380",
     phoneHref: "tel:2797770380",
@@ -33,6 +35,9 @@ const fadeUp: Variants = {
     },
 };
 
+/* ═══════════════════════════════════════
+   CONTENT
+═══════════════════════════════════════ */
 type Point = { title?: string; text: string };
 type LinkItem = { label: string; href: string };
 type VideoItem = { label: string; src: string; poster: string };
@@ -44,6 +49,7 @@ type Strategy = {
     summary?: string;
     image?: string;
     alt: string;
+    /* Natural width / height of the image or video, so nothing gets cropped */
     ratio: string;
     points: Point[];
     link?: LinkItem;
@@ -94,6 +100,7 @@ const STRATEGIES: Strategy[] = [
             { text: "Turn everyday interactions into opportunities to showcase your author identity and keep your book in the minds of potential readers." },
             { text: "Create polished, memorable stationery that reinforces your professionalism, supports networking, and helps you build meaningful connections with readers and industry professionals." },
         ],
+        // TODO: add collaborator link when available
     },
     {
         id: "times-square",
@@ -126,6 +133,7 @@ const STRATEGIES: Strategy[] = [
             { text: "Utilize influencer-driven content, recommendations, and promotional features to showcase your book's unique message and connect with new audiences." },
             { text: "Extend your visibility beyond traditional marketing channels through strategic influencer exposure, helping you build awareness and strengthen your presence in the literary marketplace." },
         ],
+        // TODO: add collaborator link when available
     },
     {
         id: "author-of-the-month",
@@ -172,9 +180,11 @@ const STRATEGIES: Strategy[] = [
             { text: "Create opportunities to interact with readers, answer questions, and build meaningful connections around your book and its message." },
             { text: "Use book talks as a platform to strengthen your public presence, showcase your expertise, and establish a recognizable identity within literary communities." },
         ],
+        // TODO: add collaborator link when available
     },
 ];
 
+/* Mailing list data (from the proposal document) */
 type ListRow = { genre: string; size: string; price?: string };
 type ListGroup = { id: string; label: string; rows: ListRow[] };
 
@@ -250,6 +260,9 @@ const MAIL_LISTS: ListGroup[] = [
     },
 ];
 
+/* ═══════════════════════════════════════
+   STRATEGY ROW
+═══════════════════════════════════════ */
 function StrategyRow({ s, reduce }: { s: Strategy; reduce: boolean }) {
     const ref = useRef<HTMLDivElement>(null);
     const inView = useInView(ref, { once: true, margin: "-100px" });
@@ -263,6 +276,7 @@ function StrategyRow({ s, reduce }: { s: Strategy; reduce: boolean }) {
                     className="mp-row-media"
                     style={{
                         aspectRatio: s.ratio,
+                        // Cap the height without breaking the ratio (no black bars)
                         maxWidth: `calc(var(--mp-media-max-h) * (${s.ratio}))`,
                     }}
                     initial={reduce ? false : { clipPath: "inset(100% 0% 0% 0% round 24px)" }}
@@ -362,7 +376,6 @@ function StrategyRow({ s, reduce }: { s: Strategy; reduce: boolean }) {
 export default function MarketingProposal() {
     const reduce = useReducedMotion() ?? false;
     const [quoteModal, setQuoteModal] = useState(false);
-    const [activeList, setActiveList] = useState(MAIL_LISTS[0].id);
     const [activeNav, setActiveNav] = useState(STRATEGIES[0].id);
 
     const heroRef = useRef<HTMLDivElement>(null);
@@ -370,23 +383,6 @@ export default function MarketingProposal() {
 
     const introRef = useRef<HTMLDivElement>(null);
     const introInView = useInView(introRef, { once: true, margin: "-80px" });
-
-    /* Footer genre links: #mailing-list-romance → open that tab and scroll to the table */
-    useEffect(() => {
-        const openFromHash = () => {
-            const match = window.location.hash.match(/^#mailing-list-(.+)$/);
-            if (!match) return;
-            const group = MAIL_LISTS.find((l) => l.id === match[1]);
-            if (!group) return;
-            setActiveList(group.id);
-            document
-                .getElementById("mailing-list")
-                ?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
-        };
-        openFromHash();
-        window.addEventListener("hashchange", openFromHash);
-        return () => window.removeEventListener("hashchange", openFromHash);
-    }, [reduce]);
 
     /* Highlight the strategy currently on screen in the sticky nav */
     useEffect(() => {
@@ -418,8 +414,6 @@ export default function MarketingProposal() {
         nav.scrollTo({ left, behavior: reduce ? "auto" : "smooth" });
     }, [activeNav, reduce]);
 
-    const currentList = MAIL_LISTS.find((l) => l.id === activeList)!;
-    const hasPrice = currentList.rows.some((r) => r.price);
 
     return (
         <>
@@ -806,45 +800,46 @@ export default function MarketingProposal() {
                 }
                 .mp-lists-grid {
                     display: grid;
-                    grid-template-columns: 300px 1fr;
-                    gap: 56px;
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                    gap: 32px;
                     align-items: start;
                 }
-                .mp-tabs {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 4px;
-                }
-                .mp-tab {
-                    font-family: inherit;
-                    text-align: left;
-                    font-weight: 700;
-                    font-size: 15px;
-                    color: var(--mp-muted);
-                    background: transparent;
-                    border: 0;
-                    border-left: 3px solid var(--mp-line);
-                    padding: 14px 18px;
-                    cursor: pointer;
-                    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-                }
-                .mp-tab:hover { color: var(--mp-ink); }
-                .mp-tab[aria-selected="true"] {
-                    color: var(--mp-ink);
-                    border-color: var(--mp-red);
-                    background: #fff;
-                }
-
-                .mp-table-wrap {
+                .mp-list-card {
                     background: #fff;
                     border-radius: 20px;
                     box-shadow: 0 20px 50px rgba(0,0,0,0.07);
-                    overflow-x: auto;
+                    overflow: hidden;
+                    scroll-margin-top: calc(var(--mp-header-offset) + 90px);
+                    /* keep a genre's heading and table on the same PDF page */
+                    break-inside: avoid;
+                    page-break-inside: avoid;
                 }
+                .mp-list-heading {
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+                    margin: 0;
+                    padding: 22px 24px;
+                    font-weight: 900;
+                    font-size: clamp(1rem, 1.3vw, 1.2rem);
+                    text-transform: uppercase;
+                    letter-spacing: 0.04em;
+                    line-height: 1.25;
+                    color: var(--mp-ink);
+                    border-bottom: 3px solid var(--mp-red);
+                }
+                .mp-list-heading::before {
+                    content: "";
+                    width: 10px;
+                    height: 10px;
+                    flex-shrink: 0;
+                    border-radius: 2px;
+                    background: var(--mp-red);
+                }
+                .mp-table-wrap { overflow-x: auto; }
                 .mp-table {
                     width: 100%;
                     border-collapse: collapse;
-                    min-width: 460px;
                 }
                 .mp-table th {
                     text-align: left;
@@ -854,17 +849,18 @@ export default function MarketingProposal() {
                     letter-spacing: 0.18em;
                     color: #fff;
                     background: var(--mp-ink);
-                    padding: 18px 24px;
+                    padding: 14px 24px;
                 }
                 .mp-table td {
-                    padding: 18px 24px;
+                    padding: 14px 24px;
                     font-size: 15px;
+                    color: var(--mp-text);
                     border-bottom: 1px solid var(--mp-line);
                 }
                 .mp-table tr:last-child td { border-bottom: 0; }
                 .mp-table td:first-child { font-weight: 700; }
-                .mp-table td:nth-child(2) { color: var(--mp-text); font-variant-numeric: tabular-nums; }
-                .mp-table td:last-child {
+                .mp-table td.mp-size { font-variant-numeric: tabular-nums; white-space: nowrap; }
+                .mp-table td.mp-price {
                     font-weight: 900;
                     color: var(--mp-red);
                     font-variant-numeric: tabular-nums;
@@ -872,7 +868,7 @@ export default function MarketingProposal() {
                 .mp-table th:not(:first-child),
                 .mp-table td:not(:first-child) { text-align: right; }
                 .mp-note {
-                    margin-top: 16px;
+                    margin-top: 24px;
                     font-size: 13px;
                     color: var(--mp-text);
                 }
@@ -950,10 +946,10 @@ export default function MarketingProposal() {
                     .mp-row-summary { font-size: 1.5rem; }
                     .mp-points li { font-size: 1.3rem; }
                     .mp-nav a { font-size: 17px; padding: 12px 22px; }
-                    .mp-lists-grid { grid-template-columns: 440px 1fr; }
-                    .mp-tab { font-size: 20px; padding: 20px 24px; }
-                    .mp-table td { font-size: 20px; padding: 26px 32px; }
-                    .mp-table th { font-size: 14px; padding: 24px 32px; }
+                    .mp-lists-grid { gap: 48px; }
+                    .mp-list-heading { font-size: 1.6rem; padding: 30px 32px; }
+                    .mp-table td { font-size: 20px; padding: 20px 32px; }
+                    .mp-table th { font-size: 14px; padding: 18px 32px; }
                     .mp-btn-primary { font-size: 16px; padding: 22px 52px; border-radius: 18px; }
                     .mp-btn-ghost { font-size: 16px; }
                     .mp-cta h2 { font-size: 7rem; }
@@ -968,7 +964,7 @@ export default function MarketingProposal() {
                     .mp { --mp-media-max-h: 720px; }
                     .mp-hero-grid { padding-top: 160px; padding-bottom: 160px; gap: 110px; }
                     .mp-row { gap: 120px; padding: 72px 0; }
-                    .mp-lists-grid { grid-template-columns: 360px 1fr; }
+                    .mp-lists-grid { gap: 40px; }
                     .mp-btn-primary { font-size: 14px; padding: 20px 44px; border-radius: 16px; }
                     .mp-btn-ghost { font-size: 14px; }
                 }
@@ -988,7 +984,8 @@ export default function MarketingProposal() {
                     .mp-inner { padding: 0 48px; }
                     .mp-hero-grid { gap: 48px; padding-top: 96px; padding-bottom: 96px; }
                     .mp-intro-grid, .mp-row { gap: 56px; }
-                    .mp-lists-grid { grid-template-columns: 240px 1fr; gap: 40px; }
+                    .mp-lists-grid { gap: 24px; }
+                    .mp-table td, .mp-table th { padding-left: 18px; padding-right: 18px; }
                 }
 
                 /* ═══════════════════════════════════════
@@ -1017,28 +1014,8 @@ export default function MarketingProposal() {
                     .mp-strategies-head { margin-bottom: 40px; }
                     .mp-lists { padding: 80px 0; }
 
-                    /* Tabs become a horizontal scroller */
+                    /* Genres stack in one column */
                     .mp-lists-grid { grid-template-columns: 1fr; gap: 24px; }
-                    .mp-tabs {
-                        flex-direction: row;
-                        overflow-x: auto;
-                        scrollbar-width: none;
-                        gap: 8px;
-                    }
-                    .mp-tabs::-webkit-scrollbar { display: none; }
-                    .mp-tab {
-                        flex-shrink: 0;
-                        border-left: 0;
-                        border: 1px solid var(--mp-line);
-                        border-radius: 999px;
-                        padding: 10px 18px;
-                        font-size: 14px;
-                    }
-                    .mp-tab[aria-selected="true"] {
-                        background: var(--mp-ink);
-                        color: #fff;
-                        border-color: var(--mp-ink);
-                    }
                     .mp-cta { padding: 80px 0; }
                 }
 
@@ -1069,9 +1046,9 @@ export default function MarketingProposal() {
                     .mp-nav a { font-size: 12px; padding: 8px 14px; }
                     .mp-row-media { border-radius: 16px; }
                     .mp-points li { gap: 12px; }
-                    .mp-table td, .mp-table th { padding: 14px 16px; }
+                    .mp-table td, .mp-table th { padding: 12px 16px; }
                     .mp-table td { font-size: 14px; }
-                    .mp-table { min-width: 400px; }
+                    .mp-list-heading { padding: 18px 16px; }
                     .mp-lists { padding: 64px 0; }
                     .mp-cta { padding: 64px 0; }
                 }
@@ -1088,6 +1065,20 @@ export default function MarketingProposal() {
                     .mp-points li { font-size: 0.85rem; }
                 }
 
+                /* ═══════════════════════════════════════
+                   PRINT / PDF
+                ═══════════════════════════════════════ */
+                @media print {
+                    .mp-nav-wrap, .mp-vtabs { display: none !important; }
+                    .mp-lists { padding: 24px 0; }
+                    .mp-lists-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+                    .mp-list-card { box-shadow: none; border: 1px solid #ddd; }
+                    .mp-table th {
+                        -webkit-print-color-adjust: exact;
+                        print-color-adjust: exact;
+                    }
+                }
+
                 @media (prefers-reduced-motion: reduce) {
                     .mp *, .mp *::before, .mp *::after {
                         transition-duration: 0.01ms !important;
@@ -1097,6 +1088,7 @@ export default function MarketingProposal() {
             `}</style>
 
             <main className="mp">
+                {/* ════════════ HERO ════════════ */}
                 <section className="mp-hero" ref={heroRef}>
                     <motion.div
                         initial={reduce ? false : { width: "0%" }}
@@ -1162,6 +1154,7 @@ export default function MarketingProposal() {
                     </div>
                 </section>
 
+                {/* ════════════ INTRO ════════════ */}
                 <section className="mp-intro" ref={introRef}>
                     <div className="mp-inner mp-intro-grid">
                         <motion.div
@@ -1205,6 +1198,7 @@ export default function MarketingProposal() {
                     </div>
                 </section>
 
+                {/* ════════════ STICKY NAV ════════════ */}
                 <nav className="mp-nav-wrap" aria-label="Marketing strategies">
                     <div className="mp-inner mp-nav">
                         {STRATEGIES.map((s) => (
@@ -1223,6 +1217,7 @@ export default function MarketingProposal() {
                     </div>
                 </nav>
 
+                {/* ════════════ STRATEGIES ════════════ */}
                 <section className="mp-strategies">
                     <div className="mp-inner">
                         <div className="mp-strategies-head">
@@ -1246,6 +1241,7 @@ export default function MarketingProposal() {
                     </div>
                 </section>
 
+                {/* ════════════ MAILING LIST ════════════ */}
                 <section id="mailing-list" className="mp-lists">
                     <div className="mp-inner">
                         <div className="mp-label">
@@ -1257,66 +1253,52 @@ export default function MarketingProposal() {
                             <span className="accent">our mail list.</span>
                         </h2>
                         <p className="mp-body" style={{ marginBottom: 48 }}>
-                            Choose a genre to see the size of each subscriber list.
+                            Subscriber lists by genre, so your book reaches readers who already
+                            love books like yours.
                         </p>
 
                         <div className="mp-lists-grid">
-                            <div className="mp-tabs" role="tablist" aria-label="Genres">
-                                {MAIL_LISTS.map((l) => (
-                                    <button
+                            {MAIL_LISTS.map((l) => {
+                                const hasPrice = l.rows.some((r) => r.price);
+                                return (
+                                    <article
                                         key={l.id}
-                                        type="button"
-                                        role="tab"
-                                        id={`tab-${l.id}`}
-                                        aria-selected={activeList === l.id}
-                                        aria-controls="mp-list-panel"
-                                        className="mp-tab"
-                                        onClick={() => setActiveList(l.id)}
+                                        id={`mailing-list-${l.id}`}
+                                        className="mp-list-card"
+                                        aria-labelledby={`list-title-${l.id}`}
                                     >
-                                        {l.label}
-                                    </button>
-                                ))}
-                            </div>
-
-                            <div
-                                id="mp-list-panel"
-                                role="tabpanel"
-                                aria-labelledby={`tab-${activeList}`}
-                            >
-                                <div className="mp-table-wrap">
-                                    <AnimatePresence mode="wait" initial={false}>
-                                        <motion.table
-                                            key={activeList}
-                                            className="mp-table"
-                                            initial={reduce ? false : { opacity: 0, y: 12 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            exit={reduce ? undefined : { opacity: 0, y: -8 }}
-                                            transition={{ duration: 0.3, ease: smoothEase }}
-                                        >
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">Genre</th>
-                                                    <th scope="col">List size</th>
-                                                    {hasPrice && <th scope="col">Price</th>}
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {currentList.rows.map((r) => (
-                                                    <tr key={r.genre}>
-                                                        <td>{r.genre}</td>
-                                                        <td>{r.size}</td>
-                                                        {hasPrice && <td>{r.price ?? "—"}</td>}
+                                        <h3 id={`list-title-${l.id}`} className="mp-list-heading">
+                                            {l.label}
+                                        </h3>
+                                        <div className="mp-table-wrap">
+                                            <table className="mp-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Genre</th>
+                                                        <th scope="col">List size</th>
+                                                        {hasPrice && <th scope="col">Price</th>}
                                                     </tr>
-                                                ))}
-                                            </tbody>
-                                        </motion.table>
-                                    </AnimatePresence>
-                                </div>
-                                <p className="mp-note">
-                                    Contact us for pricing on lists without a listed price.
-                                </p>
-                            </div>
+                                                </thead>
+                                                <tbody>
+                                                    {l.rows.map((r) => (
+                                                        <tr key={r.genre}>
+                                                            <td>{r.genre}</td>
+                                                            <td className="mp-size">{r.size}</td>
+                                                            {hasPrice && (
+                                                                <td className="mp-price">{r.price ?? "—"}</td>
+                                                            )}
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </article>
+                                );
+                            })}
                         </div>
+                        <p className="mp-note">
+                            Contact us for pricing on lists without a listed price.
+                        </p>
                     </div>
                 </section>
 

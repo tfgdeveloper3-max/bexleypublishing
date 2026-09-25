@@ -10,10 +10,8 @@ import {
 import HeroButtons from "../HeroButton";
 import QuoteModal from "../Quotemodal";
 
-// Safe TS Easing
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
-// --- Animation Variants ---
 const maskReveal: Variants = {
     hidden: { clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)", y: 40 },
     visible: { clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)", y: 0, transition: { duration: 1, ease: smoothEase } },
@@ -29,7 +27,6 @@ const staggerContainer: Variants = {
     visible: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
 };
 
-// --- Data ---
 const eras = [
     { icon: Landmark, title: "ANCIENT WORLD WRITING", desc: "Professionally written narratives inspired by Egyptian dynasties, Roman empires, and Greek school of thought.", period: "3000 BC – 500 AD" },
     { icon: Crown, title: "MEDIEVAL & RENAISSANCE WRITING", desc: "History-based content covering kingdoms, plagues, warfare, and the revival of art and science.", period: "500 AD – 1600 AD" },
@@ -69,9 +66,6 @@ export default function HistoricalWritingPage() {
     return (
         <main className="w-full overflow-hidden" style={{ fontFamily: "'Raleway', Arial, sans-serif" }}>
 
-            {/* ════════════════════════════════════════════
-                SECTION 1: CINEMATIC HISTORICAL HERO
-            ════════════════════════════════════════════ */}
             <section className="relative w-full min-h-screen flex items-center justify-center bg-[#05070f] overflow-hidden pt-28 pb-12">
                 <div className="absolute inset-0 opacity-[0.04] pointer-events-none" style={{ backgroundImage: `url('/images/Left-Section_bg.webp')`, backgroundSize: "40px 40px" }} />
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-[#e8391d] opacity-10 rounded-full blur-[200px] pointer-events-none" />
@@ -94,9 +88,6 @@ export default function HistoricalWritingPage() {
                 </div>
             </section>
 
-            {/* ════════════════════════════════════════════
-                SECTION 2: SERVICE OVERVIEW
-            ════════════════════════════════════════════ */}
             <section id="overview" ref={overviewRef} className="relative w-full bg-[#faf9f7] py-32 overflow-hidden">
                 <motion.div initial={{ width: "0%" }} animate={overviewInView ? { width: "100%" } : {}} transition={{ duration: 1.5, ease: smoothEase }} className="absolute top-0 left-0 h-1 bg-[#e8391d] origin-left" />
 
@@ -138,9 +129,6 @@ export default function HistoricalWritingPage() {
                 </div>
             </section>
 
-            {/* ════════════════════════════════════════════
-                SECTION 3: UNIQUE - ERAS WE WRITE (Museum Timeline)
-            ════════════════════════════════════════════ */}
             <section className="relative w-full bg-[#05070f] py-32 overflow-hidden">
                 <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: `radial-gradient(#fff 1px, transparent 1px)`, backgroundSize: "30px 30px" }} />
 
@@ -155,14 +143,11 @@ export default function HistoricalWritingPage() {
                         </motion.h2>
                     </div>
 
-                    {/* Museum Placard Style Layout */}
                     <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid grid-cols-1 md:grid-cols-2 gap-6 relative">
-                        {/* Vertical Connecting Line */}
                         <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-[1px] bg-white/10 -translate-x-1/2" />
 
                         {eras.map(({ icon: Icon, title, desc, period }, i) => (
                             <motion.div key={title} variants={fadeUp} className={`relative bg-white/[0.03] border border-white/10 rounded-2xl p-8 hover:border-[#e8391d]/50 transition-all duration-500 group cursor-default flex gap-6 items-start ${i % 2 !== 0 ? 'lg:translate-x-[20px]' : 'lg:translate-x-[-20px]'}`}>
-                                {/* Era Node Dot */}
                                 <div className="hidden lg:block absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-[#e8391d] border-4 border-[#05070f] z-10" style={{ left: i % 2 === 0 ? 'calc(50% + 20px)' : 'calc(50% - 20px)' }}></div>
 
                                 <div className="w-14 h-14 rounded-xl bg-[#e8391d]/10 flex items-center justify-center shrink-0 group-hover:bg-[#e8391d] transition-colors duration-300">
@@ -179,9 +164,6 @@ export default function HistoricalWritingPage() {
                 </div>
             </section>
 
-            {/* ════════════════════════════════════════════
-                SECTION 4: THE RESEARCH PROTOCOL
-            ════════════════════════════════════════════ */}
             <section className="relative w-full bg-[#faf9f7] py-32 overflow-hidden">
                 <div className="max-w-[1200px] mx-auto px-8 lg:px-16">
                     <div className="text-center mb-20">
@@ -207,9 +189,6 @@ export default function HistoricalWritingPage() {
                 </div>
             </section>
 
-            {/* ════════════════════════════════════════════
-                SECTION 5: SUB-GENRES
-            ════════════════════════════════════════════ */}
             <section className="relative w-full bg-[#111] py-32 overflow-hidden">
                 <div className="max-w-[1200px] mx-auto px-8 lg:px-16 relative z-10">
                     <div className="text-center mb-16 overflow-hidden">
@@ -238,9 +217,6 @@ export default function HistoricalWritingPage() {
                 </div>
             </section>
 
-            {/* ════════════════════════════════════════════
-                SECTION 6: WHY CHOOSE OUR HISTORIANS
-            ════════════════════════════════════════════ */}
             <section className="relative w-full bg-[#05070f] py-32 overflow-hidden">
                 <div className="max-w-[1200px] mx-auto px-8 lg:px-16 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                     <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="relative">
@@ -281,9 +257,6 @@ export default function HistoricalWritingPage() {
                 </div>
             </section>
 
-            {/* ════════════════════════════════════════════
-                SECTION 7: SERVICE FAQS
-            ════════════════════════════════════════════ */}
             <section className="relative w-full bg-[#faf9f7] py-32 overflow-hidden">
                 <div className="max-w-[900px] mx-auto px-8 relative z-10">
                     <div className="text-center mb-16">
@@ -316,9 +289,6 @@ export default function HistoricalWritingPage() {
                 </div>
             </section>
 
-            {/* ════════════════════════════════════════════
-                SECTION 8: MASSIVE CTA
-            ════════════════════════════════════════════ */}
             <section className="relative w-full bg-[#e8391d] py-28 overflow-hidden">
                 <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: `url('/images/Left-Section_bg.webp')`, backgroundSize: "40px 40px" }} />
 

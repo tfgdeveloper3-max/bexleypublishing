@@ -48,12 +48,12 @@ const servicesMenu = [
     },
 ];
 
-// ── Top-level nav items with Routes ───────────────────────────────────────────
 const navItems = [
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
     { label: "Services", href: "/services" },
     { label: "Portfolio", href: "/portfolio" },
+    { label: "Reviews", href: "/reviews" },
     { label: "Blogs", href: "/Blogs" },
     { label: "Contact", href: "/contact" },
 ];
@@ -64,7 +64,6 @@ const dropdownVariants = {
     exit: { opacity: 0, y: -6, transition: { duration: 0.15 } },
 };
 
-// Slugify function to convert names like "Book Writing" to "book-writing"
 const slugify = (str: string) =>
     str.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "");
 
@@ -99,7 +98,6 @@ export default function Navbar() {
         servicesCloseTimer.current = setTimeout(() => setServicesOpen(false), 100);
     };
 
-    // ── Color logic ──
     const navTextColor = scrolled ? "text-white" : "text-white";
     const navHoverColor = scrolled ? "hover:text-black/80" : "hover:text-[#e8391d]";
     const contactColor = scrolled ? "text-white/90" : "text-white";
@@ -140,10 +138,8 @@ export default function Navbar() {
                 </a>
             </div>
 
-            {/* ── Main nav row ── */}
             <nav className="flex items-center justify-between px-4 sm:px-8 h-[72px]">
 
-                {/* Logo */}
                 <a href="/" className="shrink-0 flex items-center h-full">
                     <Image
                         src="/images/Bexley-Publishing-02.png"
@@ -155,7 +151,6 @@ export default function Navbar() {
                     />
                 </a>
 
-                {/* Desktop nav links */}
                 <ul className="hidden lg:flex items-center">
                     {navItems.map((item) => {
                         if (item.label === "Services") {

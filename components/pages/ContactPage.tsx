@@ -37,8 +37,6 @@ const MAX_ATTEMPTS = 3;
 
 const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-/* Retries the request if the connection fails (e.g. ERR_QUIC_PROTOCOL_ERROR)
-   or the server has a temporary error (5xx), so visitors don't have to click twice. */
 async function postWithRetry(url: string, body: unknown): Promise<Response> {
     let lastError: unknown;
 
@@ -89,8 +87,6 @@ export default function ContactPage() {
         setStatus("loading");
         setErrorMsg("");
 
-        /* The API has no service field, so the selected service
-           is added to the top of the message instead. */
         const fullMessage = formData.service
             ? `Service: ${formData.service}\n\n${formData.message}`
             : formData.message;
@@ -103,7 +99,6 @@ export default function ContactPage() {
                 Message: fullMessage,
             });
 
-            // 409 = duplicate entry, treat as success and redirect
             if (!res.ok && res.status !== 409) throw new Error(`Server error ${res.status}`);
 
             router.push("/thank-you");
@@ -120,17 +115,11 @@ export default function ContactPage() {
     return (
         <main className="w-full overflow-hidden" style={{ fontFamily: "'Raleway', Arial, sans-serif" }}>
 
-            {/* ════════════════════════════════════════════
-                SECTION 1: CINEMATIC CONTACT HERO
-            ════════════════════════════════════════════ */}
             <section className="relative w-full h-screen flex items-center justify-center bg-[#05070f] overflow-hidden">
-                {/* Grid Pattern */}
                 <div className="absolute inset-0 opacity-[0.04] pointer-events-none" style={{ backgroundImage: `url('/images/Left-Section_bg.webp')`, backgroundSize: "40px 40px" }} />
 
-                {/* Glowing Orb */}
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-[#e8391d] opacity-15 rounded-full blur-[200px] pointer-events-none" />
 
-                {/* Floating Icons */}
                 <motion.div variants={floatingIcon} initial="initial" animate="animate" className="absolute top-[20%] left-[15%] text-white/10 hidden lg:block">
                     <Phone size={60} />
                 </motion.div>
@@ -174,7 +163,6 @@ export default function ContactPage() {
                         designed to captivate readers and maximize its potential.
                     </motion.p>
 
-                    {/* Live Response Time Indicator */}
                     <motion.div
                         variants={fadeUp}
                         initial="hidden"
@@ -192,9 +180,6 @@ export default function ContactPage() {
                 </div>
             </section>
 
-            {/* ════════════════════════════════════════════
-                SECTION 2: FORM & CONTACT INFO
-            ════════════════════════════════════════════ */}
             <section ref={formRef} className="relative w-full bg-[#05070f] py-32 overflow-hidden">
                 <div
                     className="absolute inset-0 opacity-[0.02] pointer-events-none"
@@ -404,9 +389,6 @@ export default function ContactPage() {
                 </div>
             </section>
 
-            {/* ════════════════════════════════════════════
-                SECTION 4: MASSIVE CTA
-            ════════════════════════════════════════════ */}
             <section className="relative w-full bg-[#e8391d] py-28 overflow-hidden">
                 <div
                     className="absolute inset-0 opacity-10 pointer-events-none"

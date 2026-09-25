@@ -9,9 +9,6 @@ import {
 import { ArrowRight, Edit, Phone, Mail, ExternalLink, Check, PlayCircle } from "lucide-react";
 import QuoteModal from "@/components/Quotemodal";
 
-/* ═══════════════════════════════════════
-   CONFIG — replace with your real details
-═══════════════════════════════════════ */
 const CONTACT = {
     phone: "(279) 777-0380",
     phoneHref: "tel:2797770380",
@@ -35,9 +32,6 @@ const fadeUp: Variants = {
     },
 };
 
-/* ═══════════════════════════════════════
-   CONTENT
-═══════════════════════════════════════ */
 type Point = { title?: string; text: string };
 type LinkItem = { label: string; href: string };
 type VideoItem = { label: string; src: string; poster: string };
@@ -49,7 +43,6 @@ type Strategy = {
     summary?: string;
     image?: string;
     alt: string;
-    /* Natural width / height of the image or video, so nothing gets cropped */
     ratio: string;
     points: Point[];
     link?: LinkItem;
@@ -100,7 +93,6 @@ const STRATEGIES: Strategy[] = [
             { text: "Turn everyday interactions into opportunities to showcase your author identity and keep your book in the minds of potential readers." },
             { text: "Create polished, memorable stationery that reinforces your professionalism, supports networking, and helps you build meaningful connections with readers and industry professionals." },
         ],
-        // TODO: add collaborator link when available
     },
     {
         id: "times-square",
@@ -133,7 +125,6 @@ const STRATEGIES: Strategy[] = [
             { text: "Utilize influencer-driven content, recommendations, and promotional features to showcase your book's unique message and connect with new audiences." },
             { text: "Extend your visibility beyond traditional marketing channels through strategic influencer exposure, helping you build awareness and strengthen your presence in the literary marketplace." },
         ],
-        // TODO: add collaborator link when available
     },
     {
         id: "author-of-the-month",
@@ -180,11 +171,9 @@ const STRATEGIES: Strategy[] = [
             { text: "Create opportunities to interact with readers, answer questions, and build meaningful connections around your book and its message." },
             { text: "Use book talks as a platform to strengthen your public presence, showcase your expertise, and establish a recognizable identity within literary communities." },
         ],
-        // TODO: add collaborator link when available
     },
 ];
 
-/* Mailing list data (from the proposal document) */
 type ListRow = { genre: string; size: string; price?: string };
 type ListGroup = { id: string; label: string; rows: ListRow[] };
 
@@ -1088,7 +1077,6 @@ export default function MarketingProposal() {
             `}</style>
 
             <main className="mp">
-                {/* ════════════ HERO ════════════ */}
                 <section className="mp-hero" ref={heroRef}>
                     <motion.div
                         initial={reduce ? false : { width: "0%" }}
@@ -1154,7 +1142,6 @@ export default function MarketingProposal() {
                     </div>
                 </section>
 
-                {/* ════════════ INTRO ════════════ */}
                 <section className="mp-intro" ref={introRef}>
                     <div className="mp-inner mp-intro-grid">
                         <motion.div
@@ -1198,7 +1185,6 @@ export default function MarketingProposal() {
                     </div>
                 </section>
 
-                {/* ════════════ STICKY NAV ════════════ */}
                 <nav className="mp-nav-wrap" aria-label="Marketing strategies">
                     <div className="mp-inner mp-nav">
                         {STRATEGIES.map((s) => (
@@ -1217,7 +1203,6 @@ export default function MarketingProposal() {
                     </div>
                 </nav>
 
-                {/* ════════════ STRATEGIES ════════════ */}
                 <section className="mp-strategies">
                     <div className="mp-inner">
                         <div className="mp-strategies-head">
@@ -1241,7 +1226,6 @@ export default function MarketingProposal() {
                     </div>
                 </section>
 
-                {/* ════════════ MAILING LIST ════════════ */}
                 <section id="mailing-list" className="mp-lists">
                     <div className="mp-inner">
                         <div className="mp-label">

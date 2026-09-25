@@ -11,10 +11,8 @@ import {
 import HeroButtons from "../HeroButton";
 import QuoteModal from "../Quotemodal";
 
-// Safe TS Easing
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
-// --- Animation Variants ---
 const maskReveal: Variants = {
     hidden: { clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)", y: 40 },
     visible: { clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)", y: 0, transition: { duration: 1, ease: smoothEase } },
@@ -30,7 +28,6 @@ const staggerContainer: Variants = {
     visible: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
 };
 
-// --- Data ---
 const platforms = [
     { icon: Monitor, title: "Kindle-Ready Formats", desc: "Optimized formatting designed to provide a seamless reading experience across Kindle devices and apps worldwide.", format: "MOBI / KFX" },
     { icon: Smartphone, title: "Interactive ePub Files", desc: "Professionally formatted ePub editions built for Apple Books across iPhone, iPad, and Mac devices.", format: "ePub 3" },
@@ -73,9 +70,6 @@ export default function EbookCreationPage() {
     return (
         <main className="w-full overflow-hidden" style={{ fontFamily: "'Raleway', Arial, sans-serif" }}>
 
-            {/* ════════════════════════════════════════════
-                SECTION 1: CINEMATIC SERVICE HERO
-            ════════════════════════════════════════════ */}
             <section className="relative w-full h-screen flex items-center justify-center bg-[#05070f] overflow-hidden">
                 <div className="absolute inset-0 opacity-[0.04] pointer-events-none" style={{ backgroundImage: `url('/images/Left-Section_bg.webp')`, backgroundSize: "40px 40px" }} />
                 <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-[#e8391d] opacity-10 rounded-full blur-[180px] pointer-events-none" />
@@ -98,9 +92,6 @@ export default function EbookCreationPage() {
                 </div>
             </section>
 
-            {/* ════════════════════════════════════════════
-                SECTION 2: SERVICE OVERVIEW
-            ════════════════════════════════════════════ */}
             <section id="overview" ref={overviewRef} className="relative w-full bg-[#faf9f7] py-32 overflow-hidden">
                 <motion.div initial={{ width: "0%" }} animate={overviewInView ? { width: "100%" } : {}} transition={{ duration: 1.5, ease: smoothEase }} className="absolute top-0 left-0 h-1 bg-[#e8391d] origin-left" />
 
@@ -142,9 +133,6 @@ export default function EbookCreationPage() {
                 </div>
             </section>
 
-            {/* ════════════════════════════════════════════
-                SECTION 3: THE DIGITAL ECOSYSTEM (UNIQUE)
-            ════════════════════════════════════════════ */}
             <section className="relative w-full bg-[#05070f] py-32 overflow-hidden">
                 <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: `radial-gradient(#fff 1px, transparent 1px)`, backgroundSize: "30px 30px" }} />
 
@@ -182,7 +170,6 @@ export default function EbookCreationPage() {
                         ))}
                     </motion.div>
 
-                    {/* Additional Format Badges */}
                     <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.5 }} className="flex flex-wrap justify-center gap-3 mt-10">
                         {["ePub 2", "ePub 3", "KF8", "KFX", "MOBI", "PDF/X", "Fixed-Layout", "Reflowable"].map((tag) => (
                             <span key={tag} className="bg-white/[0.05] border border-white/10 text-white/40 text-[11px] font-bold uppercase tracking-widest px-4 py-2 rounded-full">
@@ -193,9 +180,6 @@ export default function EbookCreationPage() {
                 </div>
             </section>
 
-            {/* ════════════════════════════════════════════
-                SECTION 4: INTERACTIVE EBOOK FEATURES (UNIQUE)
-            ════════════════════════════════════════════ */}
             <section className="relative w-full bg-[#faf9f7] py-32 overflow-hidden">
                 <div className="max-w-[1200px] mx-auto px-8 lg:px-16">
                     <div className="text-center mb-16">
@@ -225,9 +209,6 @@ export default function EbookCreationPage() {
                 </div>
             </section>
 
-            {/* ════════════════════════════════════════════
-                SECTION 5: THE EBOOK CREATION PROCESS
-            ════════════════════════════════════════════ */}
             <section className="relative w-full bg-[#05070f] py-32 overflow-hidden">
                 <div className="max-w-[1200px] mx-auto px-8 lg:px-16 relative z-10">
                     <div className="text-center mb-20">
@@ -237,7 +218,6 @@ export default function EbookCreationPage() {
                     </div>
 
                     <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
-                        {/* Connecting line */}
                         <div className="hidden lg:block absolute top-8 left-[12%] right-[12%] h-[2px] bg-white/10 z-0" />
 
                         {processSteps.map(({ step, title, desc, icon: Icon }) => (
@@ -254,9 +234,6 @@ export default function EbookCreationPage() {
                 </div>
             </section>
 
-            {/* ════════════════════════════════════════════
-                SECTION 6: WHY CHOOSE OUR EBOOK TEAM
-            ════════════════════════════════════════════ */}
             <section className="relative w-full bg-[#111] py-32 overflow-hidden">
                 <div className="max-w-[1200px] mx-auto px-8 lg:px-16 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                     <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="relative">
@@ -297,9 +274,6 @@ export default function EbookCreationPage() {
                 </div>
             </section>
 
-            {/* ════════════════════════════════════════════
-                SECTION 7: SERVICE FAQS
-            ════════════════════════════════════════════ */}
             <section className="relative w-full bg-[#faf9f7] py-32 overflow-hidden">
                 <div className="max-w-[900px] mx-auto px-8 relative z-10">
                     <div className="text-center mb-16">
@@ -332,9 +306,6 @@ export default function EbookCreationPage() {
                 </div>
             </section>
 
-            {/* ════════════════════════════════════════════
-                SECTION 8: MASSIVE CTA
-            ════════════════════════════════════════════ */}
             <section className="relative w-full bg-[#e8391d] py-28 overflow-hidden">
                 <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: `url('/images/Left-Section_bg.webp')`, backgroundSize: "40px 40px" }} />
 

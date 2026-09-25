@@ -10,10 +10,8 @@ import {
 import HeroButtons from "../HeroButton";
 import QuoteModal from "../Quotemodal";
 
-// Safe TS Easing
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
-// --- Animation Variants ---
 const maskReveal: Variants = {
     hidden: { clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)", y: 40 },
     visible: { clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)", y: 0, transition: { duration: 1, ease: smoothEase } },
@@ -29,7 +27,6 @@ const staggerContainer: Variants = {
     visible: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
 };
 
-// --- Data ---
 const subGenres = [
     { icon: Ghost, title: "PSYCHOLOGICAL HORROR", desc: "Focusing on the mental, emotional, and psychological states to frighten, disturb, or unsettle readers." },
     { icon: Brain, title: "SUPERNATURAL HORROR", desc: "Including stories that have elements beyond scientific understanding, often involving gods, demons, or ghosts." },
@@ -68,9 +65,6 @@ export default function HorrorWritingPage() {
     return (
         <main className="w-full overflow-hidden" style={{ fontFamily: "'Raleway', Arial, sans-serif" }}>
 
-            {/* ════════════════════════════════════════════
-                SECTION 1: CINEMATIC HORROR HERO
-            ════════════════════════════════════════════ */}
             <section className="relative w-full min-h-screen flex items-center justify-center bg-[#05070f] overflow-hidden pt-28 pb-12">
                 <div className="absolute inset-0 opacity-[0.04] pointer-events-none" style={{ backgroundImage: `url('/images/Left-Section_bg.webp')`, backgroundSize: "40px 40px" }} />
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-[#e8391d] opacity-10 rounded-full blur-[200px] pointer-events-none" />
@@ -93,9 +87,6 @@ export default function HorrorWritingPage() {
                 </div>
             </section>
 
-            {/* ════════════════════════════════════════════
-                SECTION 2: SERVICE OVERVIEW
-            ════════════════════════════════════════════ */}
             <section id="overview" ref={overviewRef} className="relative w-full bg-[#faf9f7] py-32 overflow-hidden">
                 <motion.div initial={{ width: "0%" }} animate={overviewInView ? { width: "100%" } : {}} transition={{ duration: 1.5, ease: smoothEase }} className="absolute top-0 left-0 h-1 bg-[#e8391d] origin-left" />
 
@@ -137,9 +128,6 @@ export default function HorrorWritingPage() {
                 </div>
             </section>
 
-            {/* ════════════════════════════════════════════
-                SECTION 3: UNIQUE - ANATOMY OF DREAD
-            ════════════════════════════════════════════ */}
             <section className="relative w-full bg-[#05070f] py-32 overflow-hidden">
                 <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: `radial-gradient(#fff 1px, transparent 1px)`, backgroundSize: "30px 30px" }} />
 
@@ -155,9 +143,7 @@ export default function HorrorWritingPage() {
                         <p className="text-white/40 max-w-lg mx-auto mt-4 text-[14px] leading-relaxed">We write in a way that keeps readers disturbed long after every chapter ends by crafting suspense, tension, atmosphere, and psychological terror.</p>
                     </div>
 
-                    {/* Zig-Zag Layout */}
                     <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="flex flex-col gap-12 relative">
-                        {/* Vertical Connecting Line */}
                         <div className="absolute left-6 lg:left-1/2 top-0 bottom-0 w-[1px] bg-white/10 -translate-x-1/2 hidden md:block" />
 
                         {dreadSteps.map(({ num, title, desc, icon: Icon, color }, i) => (
@@ -167,7 +153,6 @@ export default function HorrorWritingPage() {
                                     <p className="text-white/50 text-[14px] leading-relaxed">{desc}</p>
                                 </div>
 
-                                {/* Center Icon Node */}
                                 <div className="relative z-10 w-12 h-12 rounded-full flex items-center justify-center shrink-0 border-4 border-[#05070f]" style={{ backgroundColor: color, boxShadow: `0 0 20px ${color}40` }}>
                                     <Icon size={20} className="text-white" />
                                 </div>
@@ -184,9 +169,6 @@ export default function HorrorWritingPage() {
                 </div>
             </section>
 
-            {/* ════════════════════════════════════════════
-                SECTION 4: HORROR SUB-GENRES
-            ════════════════════════════════════════════ */}
             <section className="relative w-full bg-[#faf9f7] py-32 overflow-hidden">
                 <div className="max-w-[1200px] mx-auto px-8 lg:px-16">
                     <div className="text-center mb-16 overflow-hidden">
@@ -211,9 +193,6 @@ export default function HorrorWritingPage() {
                 </div>
             </section>
 
-            {/* ════════════════════════════════════════════
-                SECTION 5: THE WRITING PROCESS
-            ════════════════════════════════════════════ */}
             <section className="relative w-full bg-[#111] py-32 overflow-hidden">
                 <div className="max-w-[1200px] mx-auto px-8 lg:px-16 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                     <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
@@ -255,9 +234,6 @@ export default function HorrorWritingPage() {
                 </div>
             </section>
 
-            {/* ════════════════════════════════════════════
-                SECTION 6: WHY CHOOSE OUR HORROR WRITERS
-            ════════════════════════════════════════════ */}
             <section className="relative w-full bg-[#05070f] py-32 overflow-hidden">
                 <div className="max-w-[1200px] mx-auto px-8 lg:px-16 relative z-10">
                     <div className="text-center mb-16">
@@ -281,9 +257,6 @@ export default function HorrorWritingPage() {
                 </div>
             </section>
 
-            {/* ════════════════════════════════════════════
-                SECTION 7: SERVICE FAQS
-            ════════════════════════════════════════════ */}
             <section className="relative w-full bg-[#faf9f7] py-32 overflow-hidden">
                 <div className="max-w-[900px] mx-auto px-8 relative z-10">
                     <div className="text-center mb-16">
@@ -316,9 +289,6 @@ export default function HorrorWritingPage() {
                 </div>
             </section>
 
-            {/* ════════════════════════════════════════════
-                SECTION 8: MASSIVE CTA
-            ════════════════════════════════════════════ */}
             <section className="relative w-full bg-[#e8391d] py-28 overflow-hidden">
                 <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: `url('/images/Left-Section_bg.webp')`, backgroundSize: "40px 40px" }} />
 

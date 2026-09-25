@@ -420,7 +420,6 @@ export default function FictionWritingPage() {
 
             <main className="fw-main">
 
-                {/* S1 HERO */}
                 <section className="fw-hero">
                     <div className="absolute inset-0 opacity-[0.04] pointer-events-none" style={{ backgroundImage: "url('/images/Left-Section_bg.webp')", backgroundSize: "40px 40px" }} />
                     <div className="absolute pointer-events-none" style={{ top: "33%", left: "25%", width: 900, height: 600, background: "rgba(232,57,29,0.1)", borderRadius: "50%", filter: "blur(180px)" }} />
@@ -440,7 +439,6 @@ export default function FictionWritingPage() {
                     </div>
                 </section>
 
-                {/* S2 OVERVIEW */}
                 <section id="overview" ref={overviewRef} className="fw-overview">
                     <motion.div initial={{ width: "0%" }} animate={overviewInView ? { width: "100%" } : {}} transition={{ duration: 1.5, ease: smoothEase }} className="absolute top-0 left-0 h-1 bg-[#e8391d] origin-left" />
                     <motion.div variants={staggerContainer} initial="hidden" animate={overviewInView ? "visible" : "hidden"} className="fw-overview-inner">
@@ -475,7 +473,6 @@ export default function FictionWritingPage() {
                     </motion.div>
                 </section>
 
-                {/* S3 GENRES */}
                 <section className="fw-genres">
                     <div className="absolute inset-0 pointer-events-none" style={{ opacity: 0.03, backgroundImage: "radial-gradient(#fff 1px, transparent 1px)", backgroundSize: "30px 30px" }} />
                     <div className="fw-genres-inner">
@@ -501,7 +498,6 @@ export default function FictionWritingPage() {
                     </div>
                 </section>
 
-                {/* S4 PROCESS */}
                 <section className="fw-process">
                     <div className="fw-process-inner">
                         <div className="fw-process-header">
@@ -523,7 +519,6 @@ export default function FictionWritingPage() {
                     </div>
                 </section>
 
-                {/* S5 WHY CHOOSE */}
                 <section className="fw-why">
                     <div className="fw-why-inner">
                         <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="fw-why-img-wrap" style={{ position: "relative" }}>
@@ -551,7 +546,6 @@ export default function FictionWritingPage() {
                     </div>
                 </section>
 
-                {/* S6 FAQS */}
                 <section className="fw-faqs">
                     <div className="fw-faqs-inner">
                         <div className="fw-faqs-header">
@@ -581,7 +575,6 @@ export default function FictionWritingPage() {
                     </div>
                 </section>
 
-                {/* S7 CTA */}
                 <section className="fw-cta">
                     <div className="absolute inset-0 pointer-events-none" style={{ opacity: 0.1, backgroundImage: "url('/images/Left-Section_bg.webp')", backgroundSize: "40px 40px" }} />
                     <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="fw-cta-inner">

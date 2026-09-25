@@ -356,9 +356,6 @@ function StrategyRow({ s, reduce }: { s: Strategy; reduce: boolean }) {
     );
 }
 
-/* ═══════════════════════════════════════
-   PAGE
-═══════════════════════════════════════ */
 export default function MarketingProposal() {
     const reduce = useReducedMotion() ?? false;
     const [quoteModal, setQuoteModal] = useState(false);
@@ -371,7 +368,6 @@ export default function MarketingProposal() {
     const introRef = useRef<HTMLDivElement>(null);
     const introInView = useInView(introRef, { once: true, margin: "-80px" });
 
-    /* Footer genre links: #mailing-list-romance → open that tab and scroll to the table */
     useEffect(() => {
         const openFromHash = () => {
             const match = window.location.hash.match(/^#mailing-list-(.+)$/);
@@ -388,7 +384,6 @@ export default function MarketingProposal() {
         return () => window.removeEventListener("hashchange", openFromHash);
     }, [reduce]);
 
-    /* Highlight the strategy currently on screen in the sticky nav */
     useEffect(() => {
         const observer = new IntersectionObserver(
             (entries) => {
@@ -405,7 +400,6 @@ export default function MarketingProposal() {
         return () => observer.disconnect();
     }, []);
 
-    /* Keep the active nav pill visible on small screens */
     useEffect(() => {
         const nav = document.querySelector<HTMLDivElement>(".mp-nav");
         const pill = nav?.querySelector<HTMLAnchorElement>(`a[data-id="${activeNav}"]`);
@@ -414,7 +408,6 @@ export default function MarketingProposal() {
         const pillRect = pill.getBoundingClientRect();
         const left =
             nav.scrollLeft + (pillRect.left - navRect.left) - nav.clientWidth / 2 + pillRect.width / 2;
-        // Scroll the pill bar sideways only — never the page itself
         nav.scrollTo({ left, behavior: reduce ? "auto" : "smooth" });
     }, [activeNav, reduce]);
 

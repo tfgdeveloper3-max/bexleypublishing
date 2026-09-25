@@ -610,17 +610,14 @@ export default function MysteryWritingPage() {
                                 {anatomySteps.map(({ num, title, desc, icon: Icon }, i) => (
                                     <motion.div key={num} variants={fadeUp} className="mys-anatomy-step">
 
-                                        {/* Desktop: left side text (even rows get text here) */}
                                         <div className="mys-anatomy-desktop-left">
                                             {i % 2 === 0
                                                 ? <><h3>{title}</h3><p>{desc}</p></>
                                                 : null}
                                         </div>
 
-                                        {/* Desktop: empty spacer (odd rows — text is on right) */}
                                         <div className="mys-anatomy-desktop-empty" style={{ display: i % 2 !== 0 ? undefined : "none" }} />
 
-                                        {/* Center icon node — always visible */}
                                         <div className="mys-anatomy-node">
                                             <Icon size={20} style={{ color: "white" }} />
                                         </div>

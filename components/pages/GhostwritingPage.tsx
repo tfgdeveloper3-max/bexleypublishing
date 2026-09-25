@@ -421,7 +421,6 @@ export default function GhostwritingPage() {
 
             <main className="gw-main">
 
-                {/* S1 HERO */}
                 <section className="gw-hero">
                     <div className="absolute inset-0 opacity-[0.04] pointer-events-none" style={{ backgroundImage: "url('/images/Left-Section_bg.webp')", backgroundSize: "40px 40px" }} />
                     <div className="absolute pointer-events-none" style={{ top: "50%", left: "25%", width: 900, height: 600, background: "rgba(232,57,29,0.1)", borderRadius: "50%", filter: "blur(180px)", transform: "translateY(-50%)" }} />
@@ -441,7 +440,6 @@ export default function GhostwritingPage() {
                     </div>
                 </section>
 
-                {/* S2 OVERVIEW */}
                 <section id="overview" ref={overviewRef} className="gw-overview">
                     <motion.div initial={{ width: "0%" }} animate={overviewInView ? { width: "100%" } : {}} transition={{ duration: 1.5, ease: smoothEase }} className="absolute top-0 left-0 h-1 bg-[#e8391d] origin-left" />
                     <motion.div variants={staggerContainer} initial="hidden" animate={overviewInView ? "visible" : "hidden"} className="gw-overview-inner">
@@ -476,7 +474,6 @@ export default function GhostwritingPage() {
                     </motion.div>
                 </section>
 
-                {/* S3 CATEGORIES */}
                 <section className="gw-cats">
                     <div className="absolute inset-0 pointer-events-none" style={{ opacity: 0.03, backgroundImage: "radial-gradient(#fff 1px, transparent 1px)", backgroundSize: "30px 30px" }} />
                     <div className="gw-cats-inner">
@@ -502,7 +499,6 @@ export default function GhostwritingPage() {
                     </div>
                 </section>
 
-                {/* S4 PROCESS */}
                 <section className="gw-process">
                     <div className="gw-process-inner">
                         <div className="gw-process-header">
@@ -524,7 +520,6 @@ export default function GhostwritingPage() {
                     </div>
                 </section>
 
-                {/* S5 WHY CHOOSE */}
                 <section className="gw-why">
                     <div className="gw-why-inner">
                         <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="gw-why-img-wrap" style={{ position: "relative", order: 1 }}>
@@ -552,7 +547,6 @@ export default function GhostwritingPage() {
                     </div>
                 </section>
 
-                {/* S6 FAQS */}
                 <section className="gw-faqs">
                     <div className="gw-faqs-inner">
                         <div className="gw-faqs-header">
@@ -582,7 +576,6 @@ export default function GhostwritingPage() {
                     </div>
                 </section>
 
-                {/* S7 CTA */}
                 <section className="gw-cta">
                     <div className="absolute inset-0 pointer-events-none" style={{ opacity: 0.1, backgroundImage: "url('/images/Left-Section_bg.webp')", backgroundSize: "40px 40px" }} />
                     <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="gw-cta-inner">

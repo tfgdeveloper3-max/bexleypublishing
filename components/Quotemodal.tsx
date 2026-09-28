@@ -4,6 +4,7 @@ import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Loader2, Tag, ArrowRight } from "lucide-react";
+import ContactForm from "./Contact-form";
 
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 type Status = "idle" | "loading" | "error";
@@ -13,9 +14,6 @@ const MAX_ATTEMPTS = 3;
 
 const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-/* Retries the request if the connection itself fails (e.g. ERR_QUIC_PROTOCOL_ERROR)
-   or the server has a temporary error (5xx). The browser usually falls back to a
-   working connection on the second try, so the visitor never sees the error. */
 async function postWithRetry(url: string, body: unknown): Promise<Response> {
     let lastError: unknown;
 
@@ -75,8 +73,6 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
         setStatus("loading");
         setErrorMsg("");
 
-        /* The API has no service field, so the selected service
-           is added to the top of the message instead. */
         const fullMessage = form.service
             ? `Service: ${form.service}\n\n${form.message}`
             : form.message;
@@ -226,7 +222,7 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
                                     Fill out the form below and our publishing consultant will reach out within 24 hours with your custom quote.
                                 </p>
 
-                                <form onSubmit={submit} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+                                {/* <form onSubmit={submit} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
 
                                     <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                                         <label className="qm-label">Full Name *</label>
@@ -288,7 +284,9 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
                                         100% confidential &amp; NDA protected. No spam, ever.
                                     </p>
 
-                                </form>
+                                </form> */}
+
+                                <ContactForm />
                             </div>
                         </motion.div>
                     </motion.div>

@@ -1,8 +1,8 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion, useInView, Variants } from "framer-motion";
-import { CheckCircle, ArrowRight, Phone, Mail, BookOpen, Edit3, Globe, Palette, Megaphone, HelpCircle } from "lucide-react";
+import { CheckCircle, ArrowRight, ArrowLeft, Phone, Mail, BookOpen, Edit3, Globe, Palette, Megaphone, HelpCircle } from "lucide-react";
 
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -28,11 +28,36 @@ const services = [
     { icon: HelpCircle, label: "Other" },
 ];
 
+const LAST_PAGE_KEY = "bexley:lastPage";
+
+function isSafePath(p: string | null): p is string {
+    if (!p) return false;
+    if (!p.startsWith("/") || p.startsWith("//") || p.startsWith("/\\")) return false;
+    if (p.startsWith("/thank-you")) return false;
+    return true;
+}
+
+function getSafeReturnPath(): string | null {
+    if (typeof window === "undefined") return null;
+    const fromParam = new URLSearchParams(window.location.search).get("from");
+    if (isSafePath(fromParam)) return fromParam;
+    try {
+        const stored = sessionStorage.getItem(LAST_PAGE_KEY);
+        if (isSafePath(stored)) return stored;
+    } catch {
+    }
+    return null;
+}
+
 export default function ThankYouPage() {
     const containerRef = useRef<HTMLDivElement>(null);
     const isInView = useInView(containerRef, { once: true, margin: "-80px" });
+    const [returnPath, setReturnPath] = useState<string | null>(null);
 
-    /* Confetti burst on mount */
+    useEffect(() => {
+        setReturnPath(getSafeReturnPath());
+    }, []);
+
     useEffect(() => {
         const colors = ["#e8391d", "#ffffff", "#ff6b4a", "#c0271a", "#ffaa99"];
         const pieces: HTMLDivElement[] = [];
@@ -492,9 +517,15 @@ export default function ThankYouPage() {
                         animate={isInView ? "visible" : "hidden"}
                         className="ty-actions"
                     >
-                        <Link href="/" className="ty-btn-primary">
-                            Back to Home <ArrowRight size={15} />
-                        </Link>
+                        {returnPath ? (
+                            <Link href={returnPath} className="ty-btn-primary">
+                                <ArrowLeft size={15} /> Back to Previous Page
+                            </Link>
+                        ) : (
+                            <Link href="/" className="ty-btn-primary">
+                                Back to Home <ArrowRight size={15} />
+                            </Link>
+                        )}
                         <Link href="/services" className="ty-btn-ghost">
                             Explore Services
                         </Link>

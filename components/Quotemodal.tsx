@@ -195,7 +195,6 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
                                 fontFamily: "'Raleway', Arial, sans-serif",
                             }}
                         >
-                            {/* Banner */}
                             <div style={{
                                 background: "linear-gradient(135deg, #e8391d 0%, #c0271a 100%)",
                                 borderRadius: "24px 24px 0 0",

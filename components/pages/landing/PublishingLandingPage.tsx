@@ -14,7 +14,8 @@ import { publishingHeroTheme, publishingFooterTheme, landingPopupTheme } from "@
 const BRAND = {
     name: "Bexley Publishing",
     phone: "(279) 777-0380",
-    phoneHref: "tel:2797770380",
+    tollFree: "(279) 777-0380",
+    phoneHref: "tel:+12797770380",
     email: "info@bexleypublishing.com",
     headOffice: "2390 Fruitridge Rd Sacramento, CA 95822",
 };
@@ -30,9 +31,6 @@ const COVER_COUNT = 25;
 const cover = (n: number) => `/images/books/${String(((n - 1) % COVER_COUNT) + 1).padStart(2, "0")}.png`;
 
 const POPUP_COVERS = [20, 21, 22];
-
-/* Lead forms use the shared <ContactForm /> component (sends to the CRM,
-   then redirects to /thank-you). Styles live in contactFormThemes.ts. */
 
 const LEGAL_LINKS = [
     { label: "Terms & Conditions", href: "/terms-of-use" },
@@ -161,11 +159,12 @@ const heroBooks = Array.from({ length: 7 }, (_, i) => cover(i + 1));
 const retailers = ["Amazon Kindle", "Barnes & Noble", "Kobo", "Apple Books", "Google Play Books", "Draft2Digital", "IngramSpark", "Smashwords"];
 const reviewSites = ["Trustpilot", "Reviews.io", "Bark", "Sitejabber", "GoodFirms", "Clutch"];
 
+/* Service tags from the content doc: Cover Design, eBook, Editing, Interior Formatting, Illustrations, Marketing */
 const genres = [
-    { title: "Biography", items: ["Cover Design", "eBook", "Illustrations", "Interior Formatting", "Hardcover Printing"] },
+    { title: "Biography", items: ["Cover Design", "eBook", "Editing", "Interior Formatting", "Illustrations"] },
     { title: "Novels", items: ["Cover Design", "Editing", "Interior Formatting", "Illustrations", "Marketing"] },
-    { title: "Fantasy", items: ["Cover Design", "Editing", "Interior Formatting", "Printing"] },
-    { title: "Romance", items: ["Cover Design", "Editing", "Interior Formatting", "Hardcover Printing"] },
+    { title: "Fantasy", items: ["Cover Design", "Editing", "Interior Formatting", "Illustrations"] },
+    { title: "Romance", items: ["Cover Design", "eBook", "Editing", "Interior Formatting"] },
     { title: "Fiction", items: ["Cover Design", "eBook", "Editing", "Interior Formatting"] },
     { title: "Non-Fiction", items: ["Cover Design", "eBook", "Editing", "Interior Formatting", "Marketing"] },
 ].map((g, i) => ({ ...g, src: cover(8 + i) }));
@@ -182,56 +181,54 @@ const awards = [
 ];
 
 const services = [
-    { icon: PenTool, title: "Ghostwriting", desc: "Professional writers turn your ideas, notes or recordings into a complete manuscript in your voice." },
-    { icon: SpellCheck, title: "Editing & Proofreading", desc: "Developmental, line and copy editing that tightens structure and removes every error." },
-    { icon: Palette, title: "Cover Design", desc: "Genre-aware covers designed to stand out as a thumbnail and on a bookstore shelf." },
-    { icon: LayoutTemplate, title: "Formatting & Typesetting", desc: "Clean interior layouts for eBook, paperback and hardcover that meet every platform's specs." },
-    { icon: Globe, title: "Publishing & Distribution", desc: "We publish your book on Amazon, Barnes & Noble, Kobo, Apple Books and 40,000+ outlets." },
-    { icon: Megaphone, title: "Book Marketing", desc: "Launch plans, Amazon ads, social media and review campaigns that put your book in front of readers." },
-    { icon: Headphones, title: "Audiobook Production", desc: "Professional narration, editing and mastering, published on Audible, Apple and Google." },
-    { icon: MonitorSmartphone, title: "Author Website", desc: "A fast, professional author website that grows your readership and sells your books." },
+    { icon: PenTool, title: "Ghostwriting", desc: "Turn your ideas, notes, or unfinished drafts into a professionally written manuscript that reflects your voice and vision." },
+    { icon: SpellCheck, title: "Editing & Proofreading", desc: "Improve clarity, grammar, flow, consistency, and readability while preserving the style and personality of your writing." },
+    { icon: Palette, title: "Cover Design", desc: "Create a professional, genre-appropriate cover designed to make a strong first impression and attract the right readers." },
+    { icon: LayoutTemplate, title: "Formatting & Typesetting", desc: "Prepare clean, polished interior layouts for paperback, hardcover, and digital editions across major platforms." },
+    { icon: Globe, title: "Publishing & Distribution", desc: "Prepare your title for release across major online retailers, eBook platforms, and distribution networks." },
+    { icon: Megaphone, title: "Book Marketing", desc: "Build visibility with tailored promotional strategies designed to help your title reach and engage its target audience." },
+    { icon: Headphones, title: "Audiobook Production", desc: "Transform your manuscript into a professionally produced audiobook with narration, editing, and mastering support." },
+    { icon: MonitorSmartphone, title: "Author Website", desc: "Build a professional online presence where readers can discover your books, learn about you, and stay connected." },
 ];
 
 const processSteps = [
-    { icon: Handshake, title: "Connect With Us", desc: "Send us a message with details of your project. We'll get back to you and answer every question you have." },
-    { icon: FileText, title: "Draft Reviews", desc: "Submit your complete draft, or let us write it. Our experts review it and share how they'll help." },
-    { icon: Search, title: "Editing & Formatting", desc: "Our editors proofread, edit and format your manuscript to industry standards." },
-    { icon: Palette, title: "Cover Design", desc: "Our designers create a front and back cover that makes readers pick your book up." },
-    { icon: Rocket, title: "Book Publishing", desc: "We publish your book in print, digital and on-demand formats across every major platform." },
+    { icon: Handshake, title: "Connect With Us", desc: "Tell us about your manuscript, goals, preferred format, and the support you need to get started." },
+    { icon: FileText, title: "Draft Review", desc: "Our team reviews your manuscript and identifies the editing, design, formatting, and production requirements." },
+    { icon: Search, title: "Editing & Formatting", desc: "We refine your content and prepare the interior layout for a polished, professional reading experience." },
+    { icon: Palette, title: "Cover Design", desc: "Our designers create a cover that reflects your genre, message, and target audience." },
+    { icon: Rocket, title: "Book Publishing", desc: "Once approved, your final files are prepared for release and distribution across selected publishing platforms." },
 ];
 
 const stats = [
     { icon: BookOpen, num: "500+", label: "Books published" },
     { icon: Users, num: "300+", label: "Happy authors" },
     { icon: Crown, num: "12+", label: "Years of experience" },
-    { icon: Percent, num: "100%", label: "Royalties kept by you" },
+    { icon: Percent, num: "100%", label: "Rights & royalties yours" },
 ];
 
 const whyPoints = [
-    "A dedicated consultant and project manager from first call to launch day",
-    "You keep 100% of your rights and 100% of your royalties",
-    "Editors, designers and marketers all under one roof",
-    "Clear pricing, organized timelines and no hidden fees",
-    "Global distribution in print, eBook and audiobook formats",
+    "A dedicated consultant and project manager from start to finish.",
+    "You keep full creative control over your book.",
+    "Editing, design, formatting, and publishing support in one place.",
+    "Clear pricing, organized timelines, and no hidden fees.",
+    "Distribution support across major online platforms and retailers.",
 ];
 
 const TRUST = { score: "4.9", label: "Excellent", reviews: "300+" };
 
 const testimonials = [
-    { name: "Kevin Stock", location: "US", date: "Aug 18, 2026", rating: 5, title: "Exceeded every expectation", quote: "On my wife's recommendation I ordered a book I'd been putting off for four years. The writing quality surprised me, and readers are responding really well." },
-    { name: "Priya Nair", location: "GB", date: "Aug 02, 2026", rating: 5, title: "From cover to launch, handled", quote: "Cover design, formatting, publishing — they handled every technical detail with precision and kept me updated throughout." },
-    { name: "Samantha Thornhill", location: "US", date: "Jul 21, 2026", rating: 5, title: "Finally a team that gets it", quote: "After wasting time with inexperienced freelancers, Bexley understood my book idea straight away. Editing and design were outstanding." },
-    { name: "David Torres", location: "CA", date: "Jul 05, 2026", rating: 5, title: "My manuscript became a real book", quote: "They took my unfinished manuscript and turned it into a well-crafted book ready for publication. Highly recommended." },
-    { name: "Emily Rose", location: "AU", date: "Jun 14, 2026", rating: 5, title: "Marketing that actually worked", quote: "The launch plan got my book into the top 100 of its Amazon category in the first week. Great communication all along." },
+    { name: "Samantha Thornhill", location: "US", date: "Jul 21, 2026", rating: 5, title: "Finally, a team that gets it", quote: "After working with several inexperienced freelancers, Bexley understood my book idea straight away. Editing and design were outstanding." },
+    { name: "David Torres", location: "CA", date: "Jul 05, 2026", rating: 5, title: "My manuscript became a real book.", quote: "They took my unfinished manuscript and turned it into a polished, professional publication. Highly recommended." },
+    { name: "Emily Rose", location: "AU", date: "Jun 14, 2026", rating: 5, title: "Marketing that actually worked", quote: "The launch plan helped my book reach the top of its Amazon category in the first week. Great communication throughout." },
 ];
 
 const faqs = [
-    { q: "How long does it take to publish my book?", a: "Most books are published within 6–12 weeks, depending on length and which services you need. Your project manager gives you a clear timeline on day one." },
-    { q: "Do I keep the rights and royalties to my book?", a: "Yes. You keep 100% of the rights to your work and 100% of your royalties. We never take a share of your book sales." },
-    { q: "Where will my book be available?", a: "We publish on Amazon, Barnes & Noble, Kobo, Apple Books, Google Play Books and through wide distribution to thousands of retailers and libraries worldwide." },
-    { q: "I only have an idea. Can you still help?", a: "Absolutely. Our ghostwriters can take your idea, notes or voice recordings and turn them into a complete manuscript written in your voice." },
-    { q: "Can I publish in paperback, hardcover and eBook?", a: "Yes. We format and publish your book in every format you want, including audiobook." },
-    { q: "How much does it cost?", a: "Pricing depends on your book and the services you choose. Fill in the form for a free consultation and a custom quote with up to 50% off." },
+    { q: "How long does it take to publish my book?", a: "Timelines vary depending on manuscript length, editing needs, design requirements, revisions, and selected services. After reviewing your project, we can provide a more accurate schedule." },
+    { q: "Do I keep the rights and royalties to my book?", a: "Yes. When publishing a book with Bexley Publishing, you retain ownership of your work, along with your rights and royalties." },
+    { q: "Where will my book be available?", a: "Depending on your selected distribution plan, your book can be prepared for availability across major online retailers, eBook stores, and distribution networks." },
+    { q: "I only have an idea. Can you still help?", a: "Yes. Our team can help develop your idea into a structured manuscript through ghostwriting and manuscript development support." },
+    { q: "Can I publish in paperback, hardcover, and eBook?", a: "Yes. We can prepare your book for paperback, hardcover, and digital formats based on your project requirements." },
+    { q: "How much does it cost?", a: "Pricing depends on your manuscript length, condition, selected services, design needs, and publishing goals. Contact us for a customized quote." },
 ];
 
 function Eyebrow({ children, center = false, light = false }: { children: ReactNode; center?: boolean; light?: boolean }) {
@@ -249,7 +246,7 @@ function CtaButtons({ onDark = true }: { onDark?: boolean }) {
         <div className="pb-actions">
             <button type="button" className="pb-btn pb-btn-primary" onClick={getStarted}>Get A Quote <ArrowRight size={16} /></button>
             <button type="button" className={`pb-btn ${onDark ? "pb-btn-light" : "pb-btn-dark"}`} onClick={bookMeeting}><CalendarDays size={16} /> Book A Meeting</button>
-            <a href={BRAND.phoneHref} className={`pb-btn ${onDark ? "pb-btn-ghost" : "pb-btn-ghost-dark"}`}><PhoneCall size={16} /> Toll Free {BRAND.phone}</a>
+            <a href={BRAND.phoneHref} className={`pb-btn ${onDark ? "pb-btn-ghost" : "pb-btn-ghost-dark"}`}><PhoneCall size={16} /> Toll Free: {BRAND.tollFree}</a>
         </div>
     );
 }
@@ -329,14 +326,14 @@ function HeroForm() {
             transition={{ duration: 0.9, delay: 0.5, ease: smoothEase }}
         >
             <div className="pb-hero-form-offer">
-                <p>Discount{" "}<br />Reserved</p>
+                <p>LIMITED-TIME {" "}<br />OFFER</p>
                 <span className="pb-badge-50">50%<small>off</small></span>
             </div>
             <ContactForm
                 theme={publishingHeroTheme}
                 formLocation="Publishing Landing - Hero"
-                placeholders={{ name: "Full name *", email: "Email address *", phone: "Phone number *", message: "Tell us about your project" }}
-                labels={{ name: "Full name", email: "Email address", phone: "Phone number", message: "Tell us about your project" }}
+                placeholders={{ name: "Full Name *", email: "Email Address *", phone: "Phone Number *", message: "Tell us about your project." }}
+                labels={{ name: "Full Name", email: "Email Address", phone: "Phone Number", message: "Tell us about your project." }}
                 submitLabel={<>Talk To An Expert <Send size={15} /></>}
             />
         </motion.div>
@@ -350,13 +347,13 @@ function Hero() {
             <div className="pb-hero-glow" />
             <div className="pb-inner pb-hero-inner">
                 <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
-                    <Eyebrow center light>Your gateway to professional publishing</Eyebrow>
+                    <Eyebrow center light>Your Path To Professional Publishing</Eyebrow>
                 </motion.div>
                 <motion.h1 variants={maskReveal} initial="hidden" animate="visible" className="pb-hero-h1">
-                    Book Publishing Starts With <span className="accent">Bexley Publishing</span>
+                    Book Publishing Made <span className="accent">Simple with Bexley</span>
                 </motion.h1>
                 <motion.p variants={fadeUp} initial="hidden" animate="visible" className="pb-hero-sub">
-                    We help you bring your story to life exactly the way you imagine it. Keep full creative control, keep 100% of your royalties, and get expert guidance from a dedicated consultant and project manager at every step.
+                    Turn your manuscript into a professionally produced book with expert guidance at every stage. Keep full creative control, retain your rights and royalties, and work with a dedicated team committed to bringing your vision to life.
                 </motion.p>
                 <HeroForm />
             </div>
@@ -381,7 +378,7 @@ function Genres() {
     return (
         <section className="pb-genres">
             <div className="pb-inner">
-                <SectionHead eyebrow="What we publish" title="Publishing Solutions For" accent="Every Genre" sub="Whatever you're writing, we have editors, designers and marketers who specialize in it." />
+                <SectionHead eyebrow="Publishing support for every story" title="Publishing Solutions For" accent="Every Genre" sub="Whatever you write, our team provides the creative and professional support needed to prepare your book for readers." />
                 <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} className="pb-genre-grid">
                     {genres.map((g) => (
                         <motion.article key={g.title} variants={fadeUp} className="pb-genre-card">
@@ -425,7 +422,7 @@ function CtaBand({ eyebrow, title, text, covers, badge }: { eyebrow: string; tit
                     {badge && (
                         <div className="pb-band-chip">
                             <b>100%</b>
-                            <span>Royalties on<br />eBook sales</span>
+                            <span>Rights &amp; Royalties<br />Yours</span>
                         </div>
                     )}
                 </motion.div>
@@ -463,10 +460,10 @@ function Portfolio() {
         <section className="pb-portfolio">
             <div className="pb-inner">
                 <SectionHead
-                    eyebrow="Our portfolio"
-                    title="Recently We Published"
+                    eyebrow="Our published work"
+                    title="Recently We've Published"
                     accent="These Books"
-                    sub="Our portfolio is full of best-sellers. We've handed the copyrights of award-winning titles to their authors around the world, with 100% anonymity."
+                    sub="Explore a selection of books we've helped prepare for publication across a range of genres. Each project reflects a unique story, professionally presented for its intended audience."
                 />
 
                 <div className="pb-tabs" role="tablist" aria-label="Book categories">
@@ -517,7 +514,7 @@ function Services() {
     return (
         <section className="pb-services">
             <div className="pb-inner">
-                <SectionHead eyebrow="Our services" title="Everything Your Book Needs," accent="Under One Roof" sub="Pick one service or let us take care of the whole journey, from blank page to best-seller list." />
+                <SectionHead eyebrow="Complete author support" title="Everything Your Book Needs," accent="Under One Roof" sub="Choose the services your manuscript needs or let our team guide you through the complete process from first draft to final release." />
                 <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} className="pb-service-grid">
                     {services.map(({ icon: Icon, title, desc }) => (
                         <motion.article key={title} variants={fadeUp} className="pb-service-card">
@@ -537,7 +534,7 @@ function Process() {
     return (
         <section className="pb-process">
             <div className="pb-inner">
-                <SectionHead eyebrow="How it works" title="Our Book" accent="Publishing Process" sub="Five clear steps from your first message to your book on the shelves." />
+                <SectionHead eyebrow="Simple. Clear. Author-focused." title="Our Book" accent="Publishing Process" sub="Five straightforward steps take your manuscript from initial review to a professionally prepared book ready for readers." />
                 <motion.ol variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} className="pb-process-row">
                     {processSteps.map(({ icon: Icon, title, desc }, i) => (
                         <motion.li key={title} variants={fadeUp} className="pb-process-step">
@@ -560,7 +557,7 @@ function WhyUs() {
         <section className="pb-why">
             <div className="pb-inner pb-why-grid">
                 <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}>
-                    <motion.div variants={fadeUp}><Eyebrow>Why Bexley</Eyebrow></motion.div>
+                    <motion.div variants={fadeUp}><Eyebrow>Why authors choose us</Eyebrow></motion.div>
                     <motion.h2 variants={maskReveal} className="pb-h2 left">
                         Authors Rely On <span className="accent">Bexley Publishing For</span>
                     </motion.h2>
@@ -599,6 +596,7 @@ function Testimonials() {
     }, []);
     useEffect(() => { if (index > pages - 1) setIndex(0); }, [pages, index]);
     useEffect(() => {
+        if (pages <= 1) return;
         const t = setInterval(() => setIndex((i) => (i + 1) % pages), 5000);
         return () => clearInterval(t);
     }, [pages]);
@@ -606,7 +604,13 @@ function Testimonials() {
     return (
         <section className="pb-testimonials">
             <div className="pb-inner">
-                <SectionHead eyebrow="Testimonials" title="Reviews From" accent="Satisfied Authors" light />
+                <SectionHead
+                    eyebrow="What our authors say"
+                    title="Reviews From"
+                    accent="Satisfied Authors"
+                    sub="Real experiences from authors who trusted Bexley Publishing to help bring their books to life."
+                    light
+                />
 
                 <motion.div className="pb-tp-summary" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
                     <span className="pb-tp-label">{TRUST.label}</span>
@@ -624,7 +628,7 @@ function Testimonials() {
                                         <span className="pb-tp-avatar" aria-hidden="true">{name.split(" ").map((n) => n[0]).join("").slice(0, 2)}</span>
                                         <div>
                                             <p className="pb-tp-name">{name}</p>
-                                            <p className="pb-tp-loc">{location} · 1 review</p>
+                                            
                                         </div>
                                     </header>
                                     <div className="pb-tp-rowline">
@@ -633,27 +637,22 @@ function Testimonials() {
                                     </div>
                                     <h3 className="pb-tp-title">{title}</h3>
                                     <p className="pb-tp-text">{quote}</p>
-                                    <p className="pb-tp-date"><strong>Date of experience:</strong> {date}</p>
+                                   
                                 </article>
                             </div>
                         ))}
                     </div>
                 </div>
 
-                <div className="pb-dots">
-                    {Array.from({ length: pages }).map((_, i) => (
-                        <button key={i} type="button" aria-label={`Show reviews ${i + 1}`} className={`pb-dot ${i === index ? "active" : ""}`} onClick={() => setIndex(i)} />
-                    ))}
-                </div>
+                {pages > 1 && (
+                    <div className="pb-dots">
+                        {Array.from({ length: pages }).map((_, i) => (
+                            <button key={i} type="button" aria-label={`Show reviews ${i + 1}`} className={`pb-dot ${i === index ? "active" : ""}`} onClick={() => setIndex(i)} />
+                        ))}
+                    </div>
+                )}
 
-                <div className="pb-review-sites">
-                    {reviewSites.map((s) => (
-                        <div key={s} className="pb-review-site">
-                            <LogoMark src={`/images/publishing/platforms/${slug(s)}.png`} name={s} />
-                            <span className="pb-review-stars" aria-hidden="true">{Array.from({ length: 5 }).map((_, i) => <Star key={i} size={11} fill="#03D389" stroke="#03D389" />)}</span>
-                        </div>
-                    ))}
-                </div>
+                
             </div>
         </section>
     );
@@ -665,12 +664,12 @@ function Faq() {
         <section className="pb-faq">
             <div className="pb-inner pb-faq-grid">
                 <div className="pb-faq-intro">
-                    <Eyebrow>FAQ</Eyebrow>
+                    <Eyebrow>Need help?</Eyebrow>
                     <motion.h2 variants={maskReveal} initial="hidden" whileInView="visible" viewport={{ once: true }} className="pb-h2 left">
                         Questions Authors <span className="accent">Ask Us</span>
                     </motion.h2>
-                    <p className="pb-sub left">Can't find your answer? Talk to a publishing consultant — it's free.</p>
-                    <a href={BRAND.phoneHref} className="pb-faq-call"><span><Phone size={18} /></span><div><small>Call us now</small>{BRAND.phone}</div></a>
+                    <p className="pb-sub left">Have questions about your manuscript, timeline, pricing, or distribution? Our team is here to help you understand the process and choose the right support for your book.</p>
+                    <a href={BRAND.phoneHref} className="pb-faq-call"><span><Phone size={18} /></span><div><small>Call us</small>{BRAND.phone}</div></a>
                 </div>
                 <div className="pb-faq-list">
                     {faqs.map(({ q, a }, i) => {
@@ -788,23 +787,23 @@ function Footer() {
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={IMG.footerLogo} alt={BRAND.name} className="pb-logo-img footer" />
                     </a>
-                    <p>We have a proven record of turning thoughts, ideas and feelings into carefully written books. With our out-of-the-box thinking, we give authors' ideas life and help them leave their legacy in the literary world.</p>
+                    <p>Bexley Publishing helps authors move from manuscript to market with professional editing, design, formatting, distribution, and marketing support. Our team is committed to making the publishing journey clear, collaborative, and author-focused.</p>
                     <div className="pb-footer-contact">
                         <a href={BRAND.phoneHref}><Phone size={16} /><span><small>Call us</small>{BRAND.phone}</span></a>
-                        <a href={`mailto:${BRAND.email}`}><Mail size={16} /><span><small>Discuss your ideas</small>{BRAND.email}</span></a>
+                        <a href={`mailto:${BRAND.email}`}><Mail size={16} /><span><small>Email</small>{BRAND.email}</span></a>
                         <p><MapPin size={16} /><span><small>Address</small>{BRAND.headOffice}</span></p>
                     </div>
                 </div>
 
                 <div className="pb-footer-card">
                     <span className="pb-badge-50 corner">50%<small>off</small></span>
-                    <p className="pb-footer-card-h">Ready To Become A Best-Seller?</p>
-                    <p className="pb-footer-card-sub">Let's get started on your book.</p>
+                    <p className="pb-footer-card-h">Ready To Bring Your Book To Readers?</p>
+                    <p className="pb-footer-card-sub">Tell us about your project, and our publishing team will get in touch to discuss the next steps.</p>
                     <ContactForm
                         theme={publishingFooterTheme}
                         formLocation="Publishing Landing - Footer"
-                        placeholders={{ name: "Full name *", email: "Email address *", phone: "Phone number *", message: "Tell us about your project" }}
-                        labels={{ name: "Full name", email: "Email address", phone: "Phone number", message: "Tell us about your project" }}
+                        placeholders={{ name: "Full Name *", email: "Email Address *", phone: "Phone Number *", message: "Tell us about your project." }}
+                        labels={{ name: "Full Name", email: "Email Address", phone: "Phone Number", message: "Tell us about your project." }}
                         submitLabel={<>Get In Touch <Send size={15} /></>}
                     />
                 </div>
@@ -949,7 +948,7 @@ export default function PublishingLandingPage() {
                 .pb-band-bg { position: absolute; inset: 0; opacity: 0.06; background-image: radial-gradient(#fff 1.5px, transparent 1.5px); background-size: 26px 26px; }
                 .pb-band-inner { display: grid; grid-template-columns: 1.25fr 1fr; gap: 48px; align-items: center; min-height: 440px; }
                 .pb-band-copy { padding: 80px 0; }
-                .pb-band-eyebrow { color: var(--sun); font-weight: 900; font-size: 14px; margin-bottom: 10px; }
+                .pb-band-eyebrow { color: var(--sun); font-weight: 900; font-size: 14px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.12em; }
                 .pb-band-h2 { color: white; font-weight: 900; text-transform: uppercase; line-height: 1.05; font-size: clamp(2rem, 3.2vw, 2.9rem); margin-bottom: 18px; }
                 .pb-band-h2 .accent { color: var(--red); }
                 .pb-band-text { color: rgba(255,255,255,0.65); font-size: 15px; line-height: 1.8; max-width: 560px; margin-bottom: 32px; }
@@ -961,7 +960,7 @@ export default function PublishingLandingPage() {
                 .pb-band-stack .s3 { left: 215px; top: 65px; transform: rotate(8deg); }
                 .pb-band-chip { position: absolute; left: 4%; bottom: 14%; z-index: 3; display: flex; align-items: center; gap: 10px; background: white; border-radius: 14px; padding: 12px 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.35); }
                 .pb-band-chip b { color: var(--red); font-weight: 900; font-size: 30px; line-height: 1; }
-                .pb-band-chip span { font-size: 11px; font-weight: 700; line-height: 1.3; color: var(--ink); }
+                .pb-band-chip span { font-size: 11px; font-weight: 700; line-height: 1.3; color: var(--ink); text-transform: uppercase; }
 
                 /* ═══ AWARDS ═══ */
                 .pb-awards { background: white; border-bottom: 1px solid var(--line); }
@@ -1266,19 +1265,19 @@ export default function PublishingLandingPage() {
                 <Marquee items={retailers} label="Platforms we publish on" />
                 <Genres />
                 <CtaBand
-                    eyebrow="Share your legacy with"
-                    title={<>Proficient Self Book <span className="accent">Publishing Services!</span></>}
-                    text="We offer editing, design, marketing and distribution to help you create a beautiful, high-quality book — and get it into readers' hands."
+                    eyebrow="Bring your story to life"
+                    title={<>Professional Self-Publishing <span className="accent">Book Publishing Services</span></>}
+                    text="From editing and design to formatting, distribution, and marketing, our team provides everything you need to prepare your manuscript for readers with confidence."
                     covers={[14, 15, 16]}
                     badge
                 />
-                <AwardsStrip />
+                
                 <Portfolio />
                 <Services />
                 <CtaBand
                     eyebrow="Your story deserves readers"
                     title={<>Start Your Publishing <span className="accent">Journey Today!</span></>}
-                    text="Get complete publishing services under one roof. Our distribution network and marketing expertise put your book in the hands of readers worldwide."
+                    text="Get expert support from manuscript preparation to worldwide distribution. Our team helps you move forward with a clear process, professional guidance, and complete creative control."
                     covers={[17, 18, 19]}
                 />
                 <Marquee items={[...retailers].reverse()} dark label="Distribution partners" />

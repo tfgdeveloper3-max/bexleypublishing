@@ -35,7 +35,6 @@ export default function MarketingNavbar() {
             }}
         >
             <nav className="flex items-center justify-between gap-4 px-4 sm:px-8 h-[72px] lg:h-[88px]">
-                {/* Logo */}
                 <Link href="/" className="shrink-0 flex items-center h-full">
                     <Image
                         src={scrolled ? "/images/Bexley-Publishing-02.png" : "/images/Bexley-Publishing-03.png"}
@@ -47,7 +46,6 @@ export default function MarketingNavbar() {
                     />
                 </Link>
 
-                {/* Contact */}
                 <div className="flex items-center gap-3 sm:gap-6 lg:gap-10">
                     <a href={PHONE_HREF} className={linkClass} aria-label={`Call us at ${PHONE_LABEL}`}>
                         <span className={iconClass}>

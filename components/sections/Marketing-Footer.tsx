@@ -285,7 +285,6 @@ export default function MarketingFooter() {
                     className="mf-body"
                 >
                     <div className="mf-grid">
-                        {/* Brand */}
                         <motion.div variants={staggerContainer} className="mf-brand">
                             <motion.div variants={fadeUp} className="mf-logo-wrap">
                                 <Link href="/">
@@ -337,7 +336,6 @@ export default function MarketingFooter() {
                             </motion.div>
                         </motion.div>
 
-                        {/* Columns */}
                         <motion.div variants={staggerContainer} className="mf-cols">
                             <Column heading="Marketing Strategies" links={strategyLinks} />
                             <Column heading="Promotion & Recognition" links={recognitionLinks} />
@@ -365,7 +363,6 @@ export default function MarketingFooter() {
                     </div>
                 </motion.div>
 
-                {/* Bottom bar */}
                 <div className="mf-bottom">
                     <div className="mf-bottom-inner">
                         <p className="mf-copy">© 2026 Bexley Publishing LLC. All Rights Reserved.</p>
@@ -379,7 +376,6 @@ export default function MarketingFooter() {
                     </div>
                 </div>
 
-                {/* Scroll to top */}
                 <button
                     type="button"
                     onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}

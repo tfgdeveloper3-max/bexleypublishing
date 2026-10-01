@@ -173,7 +173,6 @@ export default function Navbar() {
                                         />
                                     </a>
 
-                                    {/* Services Mega Dropdown */}
                                     <AnimatePresence>
                                         {servicesOpen && (
                                             <motion.div
@@ -193,10 +192,8 @@ export default function Navbar() {
                                                     boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
                                                 }}
                                             >
-                                                {/* Red accent bar */}
                                                 <div className="absolute top-0 left-0 right-0 h-1 bg-[#e8391d]" />
 
-                                                {/* Left panel — sub-categories */}
                                                 <div className="w-[240px] shrink-0 pt-6 pb-4 border-r border-white/10">
                                                     {servicesMenu.map((srv) => (
                                                         <button
@@ -215,7 +212,6 @@ export default function Navbar() {
                                                     ))}
                                                 </div>
 
-                                                {/* Right panel — links grid */}
                                                 <div className="flex-1 pt-6 pb-4 px-5">
                                                     <p
                                                         className="text-[10px] font-black uppercase tracking-widest text-[#e8391d] mb-4"
@@ -254,7 +250,6 @@ export default function Navbar() {
                             );
                         }
 
-                        // Regular nav item
                         return (
                             <li key={item.label}>
                                 <a
@@ -269,7 +264,6 @@ export default function Navbar() {
                     })}
                 </ul>
 
-                {/* Mobile hamburger */}
                 <button
                     className="lg:hidden p-2 transition-colors text-white"
                     onClick={() => setMobileOpen((v) => !v)}
@@ -279,7 +273,6 @@ export default function Navbar() {
                 </button>
             </nav>
 
-            {/* ── Mobile menu ── */}
             <AnimatePresence>
                 {mobileOpen && (
                     <motion.div

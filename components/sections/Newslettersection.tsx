@@ -361,7 +361,6 @@ export default function NewsletterSection() {
                 <div className="nl-bg" />
 
                 <div className="nl-grid">
-                    {/* LEFT: dark panel */}
                     <motion.div
                         initial={{ clipPath: "inset(0 100% 0 0)" }}
                         animate={isInView ? { clipPath: "inset(0 0% 0 0)" } : {}}
@@ -398,7 +397,6 @@ export default function NewsletterSection() {
                         </motion.p>
                     </motion.div>
 
-                    {/* RIGHT: light panel */}
                     <motion.div
                         initial={{ clipPath: "inset(0 0 0 100%)" }}
                         animate={isInView ? { clipPath: "inset(0 0 0 0%)" } : {}}

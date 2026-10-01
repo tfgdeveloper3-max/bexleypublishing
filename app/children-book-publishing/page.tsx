@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import ChildLandingPage from "@/components/pages/landing/ChildLandingPage";
 
 export const metadata: Metadata = {
-    title: { absolute: "Children's Book Illustration Services | Bexley Publishing" },
+    title: { absolute: "Children's Book Publishing Services | Bexley Publishing" },
     description:
-        "Custom children's book illustrations with unlimited revisions, first sketches in 4–7 days and 100% ownership. Get up to 50% off with Bexley Publishing.",
+        "Professional children's book publishing services with expert support, high-quality production and 100% ownership. Publish your children's book with Bexley Publishing.",
     openGraph: {
-        title: "Children's Book Illustration Services | Bexley Publishing",
-        description: "Bright, memorable illustrations for picture books. Unlimited revisions, fast turnaround, 100% ownership.",
+        title: "Children's Book Publishing Services | Bexley Publishing",
+        description:
+            "Professional children's book publishing services with expert guidance, quality production and 100% ownership.",
         type: "website",
     },
 };

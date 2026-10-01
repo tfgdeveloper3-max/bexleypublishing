@@ -66,10 +66,9 @@ export default function HeroSection() {
             }
             if (headingRef.current) {
                 try {
-                    // Use "words" not "chars" — chars splits mid-word on reflow/refresh
                     const split = new SplitText(headingRef.current, {
                         type: "words",
-                        wordsClass: "split-word", // each word gets white-space:nowrap via CSS
+                        wordsClass: "split-word", 
                     });
                     gsap.set(headingRef.current, { perspective: 1000 });
 
@@ -87,8 +86,6 @@ export default function HeroSection() {
                         0.3
                     );
 
-                    // Revert split AFTER animation so the DOM is clean —
-                    // this prevents SplitText spans from causing line-break issues on resize/refresh
                     tl.call(() => { split.revert(); }, [], "+=0.1");
                 } catch (e) { console.error("SplitText Error:", e); }
             }
@@ -416,7 +413,6 @@ export default function HeroSection() {
             `}</style>
 
             <section className="hero-section">
-                {/* BG split */}
                 <div className="hero-bg-grid">
                     <div className="hero-left-bg">
                         <div
@@ -451,9 +447,7 @@ export default function HeroSection() {
                     </div>
                 </div>
 
-                {/* Content */}
                 <div className="hero-content-grid">
-                    {/* LEFT */}
                     <div
                         className="hero-left-content"
                         onMouseMove={handleLeftMouseMove}
@@ -463,7 +457,6 @@ export default function HeroSection() {
                             spotlightX.set(-1000);
                         }}
                     >
-                        {/* Spotlight glow */}
                         <motion.div
                             className="absolute inset-0 pointer-events-none"
                             style={{
@@ -481,7 +474,6 @@ export default function HeroSection() {
                             animate="visible"
                             style={{ position: "relative", zIndex: 10 }}
                         >
-                            {/* HEADING — no <br />, let CSS handle wrapping naturally */}
                             <motion.h1
                                 ref={headingRef}
                                 animate={{
@@ -506,7 +498,7 @@ export default function HeroSection() {
                                         className="hero-btn-primary"
                                         onClick={() => setQuoteModal(true)}
                                     >
-                                        Request Growth Strategy <ArrowRight size={15} />
+                                        Publish My Book Now <ArrowRight size={15} />
                                     </button>
                                 </motion.a>
                                 <motion.a

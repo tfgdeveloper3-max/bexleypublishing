@@ -34,20 +34,19 @@ async function postWithRetry(url: string, body: unknown): Promise<Response> {
 }
 
 export interface ContactFormProps {
-    /** Full theme, e.g. lightTheme or one made with createTheme(). Defaults to darkTheme. */
     theme?: ContactFormTheme;
-    /** Replace classes for single parts only, e.g. { input: "..." }. */
+
     classNames?: Partial<ContactFormTheme>;
-    /** Where the form sits on the page, e.g. "Home - Hero" or "Footer". Sent with the lead. */
+
     formLocation?: string;
-    /** Button content: text or JSX, e.g. <>Send <ArrowRight size={16} /></> */
+
     submitLabel?: ReactNode;
     redirectTo?: string;
-    /** Change label text per page, e.g. { name: "Full Name *" }. */
+ 
     labels?: Partial<Record<FieldName, string>>;
-    /** Change placeholder text per page, e.g. { message: "Tell Us About Your Book" }. */
+ 
     placeholders?: Partial<Record<FieldName, string>>;
-    /** Focus the name field when the form appears (useful in popups). */
+ 
     autoFocus?: boolean;
 }
 
@@ -97,10 +96,7 @@ export default function ContactForm({
         e.preventDefault();
         setStatus("loading");
         setErrorMsg("");
-
-        /* The CRM only accepts these 4 fields (exact names, lowercase).
-           Sending any extra field makes it save an empty lead, so the page
-           link and form location go at the END of the message instead. */
+ 
         const source = formLocation
             ? `${window.location.href} (${formLocation})`
             : window.location.href;
@@ -128,9 +124,6 @@ export default function ContactForm({
 
     return (
         <form onSubmit={submit} className={t.form}>
-            {/* Each input comes before its label text so floating-label themes
-                can use Tailwind's peer-* classes. Normal themes put the label
-                back on top with "order-first". */}
             <div className={t.row}>
                 <label className={t.field}>
                     <input name="name" type="text" required autoComplete="name" autoFocus={autoFocus}

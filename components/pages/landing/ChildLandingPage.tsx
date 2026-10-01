@@ -397,7 +397,7 @@ function Testimonials() {
                                         <span className="cb-tp-avatar" aria-hidden="true">{name.split(" ").map((n) => n[0]).join("").slice(0, 2)}</span>
                                         <div className="cb-tp-who">
                                             <p className="cb-tp-name">{name}</p>
-                                            <p className="cb-tp-loc">{location} · 1 review</p>
+                                            
                                         </div>
                                     </header>
                                     <div className="cb-tp-rowline">
@@ -406,7 +406,7 @@ function Testimonials() {
                                     </div>
                                     <h3 className="cb-tp-title">{title}</h3>
                                     <p className="cb-tp-text">{quote}</p>
-                                    <p className="cb-tp-date"><strong>Date of experience:</strong> {date}</p>
+                                    
                                 </article>
                             </div>
                         ))}

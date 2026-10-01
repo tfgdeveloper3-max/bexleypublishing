@@ -4,7 +4,6 @@ import { motion, AnimatePresence, useInView, Variants } from "framer-motion";
 import Image from "next/image";
 import { ArrowRight, TrendingUp } from "lucide-react";
 
-// Safe TS Easing
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 const stats = [
@@ -17,7 +16,6 @@ const stats = [
     { id: 7, percent: "300+", label: "Happy Authors Served", client: "First-Time to Bestsellers", image: "/images/07.jpg" },
 ];
 
-// --- Animation Variants ---
 const headerMask: Variants = {
     hidden: { clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)", y: 20 },
     visible: {
@@ -62,7 +60,6 @@ export default function MarketingSection() {
     const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
     const progressRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-    // Auto-play with Progress Bar
     useEffect(() => {
         setProgress(0);
         if (progressRef.current) clearInterval(progressRef.current);
@@ -70,7 +67,7 @@ export default function MarketingSection() {
         progressRef.current = setInterval(() => {
             setProgress(prev => {
                 if (prev >= 100) return 100;
-                return prev + (100 / (4000 / 50)); // Updates every 50ms for 4s total
+                return prev + (100 / (4000 / 50)); 
             });
         }, 50);
 
@@ -89,7 +86,6 @@ export default function MarketingSection() {
             className="relative w-full min-h-screen overflow-hidden"
             style={{ fontFamily: "'Raleway', Arial, sans-serif", background: "#0d0d0d" }}
         >
-            {/* BG image with Ken Burns Effect */}
             <div className="absolute inset-0">
                 <motion.div
                     animate={{ scale: 1.15 }}
@@ -101,7 +97,6 @@ export default function MarketingSection() {
                 <div className="absolute inset-0 bg-gradient-to-br from-[#0d0d0d]/95 via-[#0d0d0d]/80 to-[#0d0d0d]/60" />
             </div>
 
-            {/* Animated top accent */}
             <motion.div
                 initial={{ scaleX: 0 }}
                 animate={isInView ? { scaleX: 1 } : {}}
@@ -111,10 +106,8 @@ export default function MarketingSection() {
 
             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 min-h-screen">
 
-                {/* ── LEFT: heading + big stat ── */}
                 <div className="flex flex-col justify-center px-12 lg:px-20 py-24 border-r border-white/5">
 
-                    {/* label */}
                     <motion.div
                         initial={{ y: "100%" }}
                         animate={isInView ? { y: 0 } : {}}
@@ -136,7 +129,6 @@ export default function MarketingSection() {
                         <span className="text-[#e8391d]">REAL NUMBERS.</span>
                     </motion.h2>
 
-                    {/* Big animated stat - Explosive Materialization */}
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={s.id}
@@ -146,28 +138,24 @@ export default function MarketingSection() {
                             exit="exit"
                             className="mb-10"
                         >
-                            {/* number */}
                             <div
                                 className="font-black text-[#e8391d] leading-none mb-3"
                                 style={{ fontSize: "clamp(4.5rem, 10vw, 9rem)" }}
                             >
                                 {s.percent}
                             </div>
-                            {/* label */}
                             <p
                                 className="font-black text-white uppercase leading-tight mb-2"
                                 style={{ fontSize: "clamp(0.95rem, 1.4vw, 1.2rem)" }}
                             >
                                 {s.label}
                             </p>
-                            {/* sub */}
                             <p className="text-white/35 text-[12px] uppercase tracking-widest font-bold">
                                 — {s.client}
                             </p>
                         </motion.div>
                     </AnimatePresence>
 
-                    {/* dots + Auto-play Progress Bar */}
                     <div className="flex items-center gap-3 w-full max-w-[180px] mb-10">
                         <div className="relative flex items-center gap-2.5 flex-1">
                             {stats.map((_, i) => (
@@ -203,7 +191,6 @@ export default function MarketingSection() {
                     </motion.a>
                 </div>
 
-                {/* ── RIGHT: stat cards grid with Staggered Materialization ── */}
                 <motion.div
                     variants={cardStagger}
                     initial="hidden"
@@ -215,7 +202,7 @@ export default function MarketingSection() {
                             key={st.id}
                             variants={cardItem}
                             onClick={() => setCurrent(i)}
-                            whileHover={{ scale: 1.03, zIndex: 10 }} // Active hover lifts card
+                            whileHover={{ scale: 1.03, zIndex: 10 }} 
                             transition={{ duration: 0.2 }}
                             className={`relative flex flex-col justify-end p-7 text-left overflow-hidden transition-colors duration-300 ${i === current
                                 ? "bg-[#e8391d]/15"
@@ -223,12 +210,10 @@ export default function MarketingSection() {
                                 }`}
                             style={{ minHeight: "185px" }}
                         >
-                            {/* bg image */}
                             <div className="absolute inset-0 opacity-15">
                                 <Image src={st.image} alt="" fill className="object-cover" />
                             </div>
 
-                            {/* active top bar with spring layoutId */}
                             {i === current && (
                                 <motion.div
                                     layoutId="activeBar"
@@ -237,7 +222,6 @@ export default function MarketingSection() {
                                 />
                             )}
 
-                            {/* TrendingUp icon */}
                             <div className={`relative z-10 mb-3 w-8 h-8 rounded-lg flex items-center justify-center transition-colors duration-300 ${i === current ? "bg-[#e8391d]" : "bg-white/8"}`}>
                                 <TrendingUp size={15} className={i === current ? "text-white" : "text-white/40"} />
                             </div>

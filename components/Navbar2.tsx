@@ -5,7 +5,6 @@ import { Phone, Mail, Menu, ChevronDown, ChevronRight, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-// ── Services mega-menu data ───────────────────────────────────────────────────
 const servicesMenu = [
     {
         label: "Writing Services",
@@ -48,7 +47,6 @@ const servicesMenu = [
     },
 ];
 
-// ── Top-level nav items with Routes ───────────────────────────────────────────
 const navItems = [
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
@@ -71,7 +69,6 @@ const subVariants = {
     exit: { opacity: 0, x: -4, transition: { duration: 0.12 } },
 };
 
-// Slugify function to convert names like "Book Writing" to "book-writing"
 const slugify = (str: string) =>
     str.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "");
 
@@ -100,7 +97,6 @@ export default function Navbar2() {
         servicesCloseTimer.current = setTimeout(() => setServicesOpen(false), 100);
     };
 
-    // ── Color logic ──
     const navTextColor = scrolled ? "text-white" : "text-white";
     const navHoverColor = scrolled ? "hover:text-black/80" : "hover:text-[#e8391d]";
     const contactColor = scrolled ? "text-white/90" : "text-white";
@@ -117,7 +113,6 @@ export default function Navbar2() {
                 WebkitBackdropFilter: scrolled ? "blur(14px)" : "none",
             }}
         >
-            {/* ── Top bar ── */}
             <div className="flex items-center justify-end gap-4 sm:gap-8 px-4 sm:px-8 h-[34px]">
                 <a
                     href="tel:2797770380"
@@ -141,10 +136,8 @@ export default function Navbar2() {
                 </a>
             </div>
 
-            {/* ── Main nav row ── */}
             <nav className="flex items-center justify-between px-4 sm:px-8 h-[72px]">
 
-                {/* Logo - Changes based on Scroll State */}
                 <Link href="/" className="shrink-0 flex items-center h-full">
                     <Image
                         src={scrolled ? "/images/Bexley-Publishing-02.png" : "/images/Bexley-Publishing-03.png"}
@@ -156,7 +149,6 @@ export default function Navbar2() {
                     />
                 </Link>
 
-                {/* Desktop nav links */}
                 <ul className="hidden lg:flex items-center">
                     {navItems.map((item) => {
                         if (item.label === "Services") {
@@ -179,7 +171,6 @@ export default function Navbar2() {
                                         />
                                     </Link>
 
-                                    {/* Services Mega Dropdown */}
                                     <AnimatePresence>
                                         {servicesOpen && (
                                             <motion.div
@@ -199,10 +190,8 @@ export default function Navbar2() {
                                                     boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
                                                 }}
                                             >
-                                                {/* Red accent bar */}
                                                 <div className="absolute top-0 left-0 right-0 h-1 bg-[#e8391d]" />
 
-                                                {/* Left panel — sub-categories */}
                                                 <div className="w-[240px] shrink-0 pt-6 pb-4 border-r border-white/10">
                                                     {servicesMenu.map((srv) => (
                                                         <button
@@ -221,7 +210,6 @@ export default function Navbar2() {
                                                     ))}
                                                 </div>
 
-                                                {/* Right panel — links grid */}
                                                 <div className="flex-1 pt-6 pb-4 px-5">
                                                     <p
                                                         className="text-[10px] font-black uppercase tracking-widest text-[#e8391d] mb-4"
@@ -260,7 +248,6 @@ export default function Navbar2() {
                             );
                         }
 
-                        // Regular nav item with dynamic href
                         return (
                             <li key={item.label}>
                                 <Link
@@ -275,7 +262,6 @@ export default function Navbar2() {
                     })}
                 </ul>
 
-                {/* Mobile hamburger */}
                 <button
                     className="lg:hidden p-2 transition-colors text-white"
                     onClick={() => setMobileOpen((v) => !v)}
@@ -285,7 +271,6 @@ export default function Navbar2() {
                 </button>
             </nav>
 
-            {/* ── Mobile menu ── */}
             <AnimatePresence>
                 {mobileOpen && (
                     <motion.div

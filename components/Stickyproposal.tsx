@@ -22,7 +22,6 @@ export default function StickyProposal() {
                 Request Proposal
             </motion.a>
 
-            {/* Custom icon button */}
             <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}

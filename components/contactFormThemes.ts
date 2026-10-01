@@ -1,33 +1,19 @@
-/* ------------------------------------------------------------------
-   Contact form themes (Tailwind only)
-
-   Each theme is an object of Tailwind class strings, one per part of
-   the form. Import the one you need on a page, or build a new one
-   with createTheme().
-
-   Keep every class written out in full (no string building like
-   `bg-${color}`), otherwise Tailwind won't generate the CSS.
-------------------------------------------------------------------- */
-
 export interface ContactFormTheme {
-    form: string;       // <form> wrapper
-    row: string;        // wrapper around Name + Email (side by side)
-    field: string;      // wrapper around each label + input
-    phoneField?: string;   // optional: wrapper for phone only (falls back to field)
-    messageField?: string; // optional: wrapper for message only (falls back to field)
+    form: string;      
+    row: string;     
+    field: string;   
+    phoneField?: string;  
+    messageField?: string; 
     label: string;
-    input: string;      // text / email / tel inputs
+    input: string;      
     textarea: string;
     submit: string;
     spinner: string;
     error: string;
 }
 
-/* Font: keep this in globals.css
-   @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;900&display=swap'); */
 const FONT = "font-['Raleway',Arial,sans-serif]";
 
-/* ---------- Main theme (converted 1:1 from your qm-* CSS) ---------- */
 export const darkTheme: ContactFormTheme = {
     form: `flex flex-col gap-4 w-full ${FONT}`,
     row: "grid grid-cols-1 gap-4 sm:grid-cols-2",
@@ -55,7 +41,6 @@ export const darkTheme: ContactFormTheme = {
     error: `text-[13px] text-[#ff8a75] ${FONT}`,
 };
 
-/* ---------- Light theme (for white sections) ---------- */
 export const lightTheme: ContactFormTheme = {
     ...darkTheme,
     label: `order-first text-neutral-500 text-[10px] font-black uppercase tracking-[0.1em] ${FONT}`,
@@ -74,7 +59,6 @@ export const lightTheme: ContactFormTheme = {
     error: `text-[13px] text-[#c0271a] ${FONT}`,
 };
 
-/* ---------- Compact theme (footers, sidebars) ---------- */
 export const compactTheme: ContactFormTheme = {
     ...darkTheme,
     form: `flex flex-col gap-3 w-full ${FONT}`,
@@ -92,13 +76,6 @@ export const compactTheme: ContactFormTheme = {
         enabled:hover:bg-[#c0271a] disabled:opacity-60 disabled:cursor-not-allowed`,
 };
 
-/* ---------- Contact section theme (converted 1:1 from your ct-* CSS) ----------
-   Breakpoints match your media queries:
-   min-[2400px]            → 4K
-   min-[1800px]:max-[2399px] → Full HD
-   min-[1400px]:max-[1799px] → Large laptop
-   min-[901px]:max-[1199px]  → Small laptop
-   max-[640px] / max-[480px] / max-[380px] / max-[320px] → mobiles          */
 export const contactSectionTheme: ContactFormTheme = {
     form: `flex flex-col gap-4 w-full ${FONT}
         min-[2400px]:gap-6 min-[1800px]:max-[2399px]:gap-5
@@ -153,11 +130,6 @@ export const contactSectionTheme: ContactFormTheme = {
         border border-[rgba(239,68,68,0.25)] rounded-lg px-[14px] py-[10px] mt-1 ${FONT}`,
 };
 
-/* ---------- Contact page theme (glass card + floating labels) ----------
-   Label sits inside the input and slides up on focus or when filled.
-   Works because ContactForm renders the input BEFORE the label text:
-   the input has "peer", the label reacts with peer-focus / peer-[:not(:placeholder-shown)].
-   The placeholder is made transparent so only the floating label shows.   */
 const PAGE_FIELD = `peer w-full bg-white/[0.03] border border-white/10 text-white text-[14px] ${FONT}
         px-6 pt-6 pb-4 rounded-xl outline-none appearance-none placeholder:text-transparent
         transition-all duration-500
@@ -182,12 +154,6 @@ export const contactPageTheme: ContactFormTheme = {
     error: `text-red-300 text-[12px] text-center bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-3 ${FONT}`,
 };
 
-/* ══════════════════════════════════════════════════════════════
-   LANDING PAGE THEMES (children's illustration landing page)
-   These forms show placeholders only, so labels are "sr-only":
-   hidden on screen but still read by screen readers.
-══════════════════════════════════════════════════════════════ */
-
 const LANDING_BTN = `inline-flex items-center justify-center gap-[10px] border-2 border-transparent
         font-[inherit] font-black text-[12px] uppercase tracking-[0.1em] px-7 py-[15px] rounded-[12px] cursor-pointer
         bg-[#e8391d] text-white transition-all duration-200
@@ -198,7 +164,6 @@ const LANDING_BTN = `inline-flex items-center justify-center gap-[10px] border-2
 const LANDING_ERROR = `flex items-start gap-2 text-[13px] leading-[1.5] font-semibold text-[#b91c1c]
         bg-[#fef2f2] border border-[#fecaca] px-3 py-[10px] rounded-[10px]`;
 
-/* ---------- Hero form (white card, light inputs) ---------- */
 const HERO_FIELD = `w-full font-[inherit] text-[14px] px-4 py-[14px] rounded-[10px]
         border-[1.5px] border-[#ececec] bg-[#f7f7f7] text-[#05070f] placeholder:text-[#9ca3af]
         outline-none transition-[border-color,background-color] duration-200
@@ -216,7 +181,6 @@ export const landingHeroTheme: ContactFormTheme = {
     error: LANDING_ERROR,
 };
 
-/* ---------- Footer form (dark inputs on dark footer) ---------- */
 const FOOTER_FIELD = `w-full font-[inherit] text-[14px] px-4 py-[14px] rounded-[10px]
         border-[1.5px] border-white/[0.12] bg-white/5 text-white placeholder:text-white/40
         outline-none transition-[border-color,background-color] duration-200
@@ -235,7 +199,6 @@ export const landingFooterTheme: ContactFormTheme = {
         bg-[rgba(232,57,29,0.1)] border border-[rgba(232,57,29,0.35)] px-3 py-[10px] rounded-[10px]`,
 };
 
-/* ---------- Popup form (red box, white inputs, dark button) ---------- */
 const POPUP_FIELD = `w-full font-[inherit] text-[13px] px-[10px] py-3 rounded-[4px]
         border border-black/[0.08] bg-white text-[#05070f] placeholder:text-[#9ca3af]
         outline-none focus:outline focus:outline-[3px] focus:outline-[#ffc83d] focus:outline-offset-0
@@ -286,7 +249,6 @@ export const publishingHeroTheme: ContactFormTheme = {
     error: `col-span-full ${LANDING_ERROR}`,
 };
 
-/* ---------- Footer form (dark inputs inside the red-bordered card) ---------- */
 const PUB_FOOTER_FIELD = `w-full font-[inherit] text-[14px] px-[14px] py-[13px] rounded-[10px]
         border-[1.5px] border-white/[0.12] bg-white/[0.06] text-white placeholder:text-white/40
         outline-none transition-[border-color,background-color] duration-200
